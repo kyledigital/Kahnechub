@@ -13,7 +13,8 @@ window.KH_CONFIG = {
   contact: {
     email: 'kylehector12@gmail.com',
     // Digits only. No spaces or leading plus sign.
-    whatsappNumber: '18761234567',
+    // If you enter a 10-digit Jamaica number, the site will prepend country code 1.
+    whatsappNumber: '8768547105',
     instagramHandle: '@kahnec_withkyle',
     instagramUrl: 'https://www.instagram.com/kahnec_withkyle',
     linkedinUrl: 'https://www.linkedin.com/in/kyle-hector'

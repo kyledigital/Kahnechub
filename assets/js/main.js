@@ -54,7 +54,13 @@
   }
 
   function getWhatsAppHref(config) {
-    const digits = (config.contact.whatsappNumber || '').replace(/\D/g, '');
+    let digits = (config.contact.whatsappNumber || '').replace(/\D/g, '');
+
+    // WhatsApp requires international format; Jamaica numbers commonly need leading 1.
+    if (digits.length === 10) {
+      digits = `1${digits}`;
+    }
+
     return digits ? `https://wa.me/${digits}` : '#contact';
   }
 

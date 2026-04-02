@@ -17,10 +17,10 @@
   --muted:        #888888;
   --border:       rgba(0, 0, 0, 0.08);
   --border2:      rgba(0, 0, 0, 0.14);
-  --accent:       #FF5427;
-  --accent-h:     #E84318;
-  --accent-soft:  rgba(255, 84, 39, 0.09);
-  --accent-softer:rgba(255, 84, 39, 0.05);
+  --accent:       #5A63FF;
+  --accent-h:     #4852EA;
+  --accent-soft:  rgba(90, 99, 255, 0.12);
+  --accent-softer:rgba(90, 99, 255, 0.06);
   --radius:       10px;
   --radius-lg:    16px;
 }
@@ -72,8 +72,15 @@ body  {
   color: var(--text);
   text-decoration: none;
   letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
 }
-.logo span { color: var(--accent); }
+.logo-mark {
+  display: block;
+  width: 218px;
+  max-width: 100%;
+  height: auto;
+}
 
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
@@ -706,7 +713,12 @@ h2.sec-title em {
   font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem;
   color: #fff; text-decoration: none; letter-spacing: -0.02em; display: block; margin-bottom: 12px;
 }
-.footer-logo span { color: var(--accent); }
+.footer-logo-mark {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
 .footer-desc { font-size: 0.85rem; color: rgba(255, 255, 255, 0.4); line-height: 1.7; margin-bottom: 20px; }
 
 .footer-social { display: flex; gap: 10px; }
