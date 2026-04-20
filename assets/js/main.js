@@ -577,14 +577,14 @@
       const challenge = chatAnswers.challenge || '';
 
       if (budget.includes('Under') || budget.includes('Not sure')) {
-        return 'Based on this, our <strong>Starter package</strong> is a strong first step - build a solid social presence before investing more heavily in ads.';
+        return 'Based on this, a <strong>quick service</strong> is a strong first step. Start with an audit, walkthrough, or strategy call before investing in a larger package.';
       }
 
       if (challenge.includes('leads') || challenge.includes('Ads')) {
-        return 'You likely need paid media that converts - our <strong>Growth package</strong> is designed for businesses ready to turn traffic into enquiries.';
+        return 'You likely need paid media that converts. Our <strong>Growth package</strong> is designed for businesses ready to turn traffic into enquiries.';
       }
 
-      return 'Our <strong>Growth package</strong> looks like the best fit right now, with room to scale into a fuller service mix as results come in.';
+      return 'A <strong>strategy call</strong> looks like the best next step, with room to move into project based work or monthly support when the timing is right.';
     }
 
     function addChatMessage(text, role) {
