@@ -22,7 +22,7 @@
   ============================================================ -->
   <div class="announce">
     Quick services and strategy calls available this month.
-    <a href="#contact" class="js-book-call" data-track="click_book_call" data-track-location="announce">Book your strategy call &rarr;</a>
+    <a href="strategy-call.html#contact" class="js-book-call" data-track="click_book_call" data-track-location="announce">Book a Strategy Call &rarr;</a>
   </div>
 
 
@@ -45,8 +45,8 @@
       </ul>
 
       <div class="nav-right">
-        <a href="#audit" class="btn btn-ghost desk">Get a Free Audit</a>
-        <a href="#contact" class="btn btn-dark desk js-book-call" data-track="click_book_call" data-track-location="nav">Book a Strategy Call &rarr;</a>
+        <a href="#audit" class="btn btn-ghost desk">Start with an Audit</a>
+        <a href="strategy-call.html#contact" class="btn btn-dark desk js-book-call" data-track="click_book_call" data-track-location="nav">Book a Strategy Call &rarr;</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12h18M3 6h18M3 18h18"/>
@@ -67,7 +67,7 @@
       <div class="reveal">
         <div class="hero-badge">
           <span class="hero-badge-dot"></span>
-          Caribbean's Growth Agency
+          Digital Project Support
         </div>
 
         <h1>Turn attention into<br/>growth that people<br/>can <em>see.</em></h1>
@@ -77,8 +77,8 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-orange js-book-call" data-track="click_book_call" data-track-location="hero">Book a Strategy Call &rarr;</a>
-          <a href="#quick-services" class="btn btn-outline">See Quick Services</a>
+          <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="hero">Start Project Enquiry &rarr;</a>
+          <a href="#project-finder" class="btn btn-outline">Find the Right Service</a>
         </div>
 
         <div class="hero-note">Quick services available for one off projects or ongoing growth.</div>
@@ -147,6 +147,45 @@
 
 
   <!-- ============================================================
+       PROJECT FINDER
+  ============================================================ -->
+  <section class="project-finder" id="project-finder" aria-labelledby="projectFinderTitle">
+    <div class="section-inner">
+      <div class="finder-panel reveal">
+        <div class="finder-copy">
+          <div class="sec-tag">Project Finder</div>
+          <h2 id="projectFinderTitle">Choose your fastest path.</h2>
+          <p>Pick the closest option and skip straight to the part of the site that fits your project.</p>
+        </div>
+
+        <div class="finder-options" aria-label="Project enquiry shortcuts">
+          <a href="strategy-call.html#contact" class="finder-option" data-track="click_book_call" data-track-location="project_finder_advice">
+            <span>Need advice</span>
+            <strong>Strategy call or audit</strong>
+            <small>For clarity before spending.</small>
+          </a>
+          <a href="#recent-project-types" class="finder-option" data-track="click_project_finder" data-track-location="project_finder_build">
+            <span>Need something built</span>
+            <strong>Deck, landing page, or kit</strong>
+            <small>For a clear project deliverable.</small>
+          </a>
+          <a href="#content-creation" class="finder-option" data-track="click_project_finder" data-track-location="project_finder_content">
+            <span>Need content</span>
+            <strong>Shoot, edit, or brand kit</strong>
+            <small>For launch, social, or campaign assets.</small>
+          </a>
+          <a href="#contact" class="finder-option finder-option-accent" data-prefill-service="Not sure yet" data-prefill-project-type="Need advice first" data-track="click_project_enquiry" data-track-location="project_finder_enquiry">
+            <span>Ready now</span>
+            <strong>Send an enquiry</strong>
+            <small>Tell us what you need in one form.</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        QUICK SERVICES
   ============================================================ -->
   <section class="section" id="quick-services">
@@ -197,7 +236,7 @@
                 <li>Campaign review or setup guidance</li>
                 <li>Audience and creative advice</li>
               </ul>
-              <a href="#contact" class="qsc-btn" data-track="click_quick_service" data-track-location="meta_ads_walkthrough">Book a Walkthrough &rarr;</a>
+              <a href="#contact" class="qsc-btn" data-prefill-service="Meta Ads Walkthrough" data-prefill-project-type="Need advice first" data-track="click_quick_service" data-track-location="meta_ads_walkthrough">Book a Walkthrough &rarr;</a>
             </div>
 
             <!-- Content Strategy Session -->
@@ -210,7 +249,7 @@
                 <li>Messaging, themes, and channel direction</li>
                 <li>Clear next steps for posts, campaigns, or launches</li>
               </ul>
-              <a href="#contact" class="qsc-btn" data-track="click_quick_service" data-track-location="content_strategy">Book Content Strategy &rarr;</a>
+              <a href="#contact" class="qsc-btn" data-prefill-service="Content Strategy Session" data-prefill-project-type="Need advice first" data-track="click_quick_service" data-track-location="content_strategy">Book Content Strategy &rarr;</a>
             </div>
 
             <!-- Marketing Audit -->
@@ -245,7 +284,7 @@
                 <li>Story flow and layout support</li>
                 <li>Fast turnaround options</li>
               </ul>
-              <a href="presentation-deck-design.html" class="qsc-btn" data-track="click_service_page" data-track-location="quick_services_deck">View packages &rarr;</a>
+              <a href="presentation-deck-design.html" class="qsc-btn" data-track="click_service_page" data-track-location="quick_services_deck">View Packages &rarr;</a>
             </div>
 
             <!-- Brand Content Kit -->
@@ -259,7 +298,7 @@
                 <li>2 to 3 edited videos ready for social</li>
                 <li>Logo intro animation included</li>
               </ul>
-              <a href="#content-creation" class="qsc-btn" data-track="click_quick_service" data-track-location="brand_content_kit">View Content Packages &rarr;</a>
+              <a href="#content-creation" class="qsc-btn" data-track="click_quick_service" data-track-location="brand_content_kit">View Packages &rarr;</a>
             </div>
 
             <!-- Landing Page Setup -->
@@ -273,7 +312,7 @@
                 <li>Lead form or WhatsApp integration</li>
                 <li>Fast turnaround</li>
               </ul>
-              <a href="#contact" class="qsc-btn" data-track="click_quick_service" data-track-location="landing_page_setup">Request a Landing Page &rarr;</a>
+              <a href="#contact" class="qsc-btn" data-prefill-service="Landing Page Setup" data-prefill-project-type="Project based work" data-track="click_quick_service" data-track-location="landing_page_setup">Start Project Enquiry &rarr;</a>
             </div>
           </div>
 
@@ -340,7 +379,7 @@
             <span class="pill">Instagram</span>
             <span class="pill">Retargeting</span>
           </div>
-          <a href="#pricing" class="svc-arrow">See packages →</a>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Meta Ads Management" data-prefill-project-type="Monthly support">Ask About Monthly Support →</a>
         </div>
 
         <div class="svc">
@@ -353,7 +392,7 @@
             <span class="pill">Video</span>
             <span class="pill">Events</span>
           </div>
-          <a href="#contact" class="svc-arrow">Discuss your shoot →</a>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Content Shoot" data-prefill-project-type="Project based work">Book a Content Shoot →</a>
         </div>
 
         <div class="svc">
@@ -366,7 +405,7 @@
             <span class="pill">Content</span>
             <span class="pill">Growth</span>
           </div>
-          <a href="#pricing" class="svc-arrow">See packages →</a>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support">Ask About Monthly Support →</a>
         </div>
 
         <div class="svc">
@@ -379,7 +418,7 @@
             <span class="pill">Proposals</span>
             <span class="pill">Reports</span>
           </div>
-          <a href="presentation-deck-design.html" class="svc-arrow">View deck packages →</a>
+          <a href="presentation-deck-design.html" class="svc-arrow">View Packages →</a>
         </div>
 
         <div class="svc">
@@ -392,7 +431,7 @@
             <span class="pill">Short Form</span>
             <span class="pill">Brand Story</span>
           </div>
-          <a href="#pricing" class="svc-arrow">See packages →</a>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support">Ask About Monthly Support →</a>
         </div>
       </div>
 
@@ -426,7 +465,7 @@
           <div class="lc-title">Project Based</div>
           <div class="lc-examples">Presentation decks, campaign setup, content shoots, landing pages, brand content kits</div>
           <div class="lc-client"><strong>Ideal for:</strong> businesses with a specific launch, pitch, campaign, or content need.</div>
-          <a href="#contact" class="ladder-btn">Discuss a Project</a>
+          <a href="#contact" class="ladder-btn" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work">Start Project Enquiry</a>
         </div>
 
         <div class="ladder-card reveal d2">
@@ -434,7 +473,7 @@
           <div class="lc-title">Ongoing Growth</div>
           <div class="lc-examples">Ads management, social media support, content strategy, monthly retainers</div>
           <div class="lc-client"><strong>Ideal for:</strong> businesses ready for consistent execution, stronger reporting, and better growth habits.</div>
-          <a href="#pricing" class="ladder-btn">See Growth Packages</a>
+          <a href="#contact" class="ladder-btn" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support">Ask About Monthly Support</a>
         </div>
       </div>
 
@@ -498,7 +537,61 @@
       </div>
 
       <div style="text-align:center; margin-top:48px;" class="reveal">
-        <a href="#contact" class="btn btn-orange">Ask About Monthly Support &rarr;</a>
+          <a href="#contact" class="btn btn-orange" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support">Ask About Monthly Support &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       RECENT PROJECT TYPES
+  ============================================================ -->
+  <section class="section" id="recent-project-types">
+    <div class="section-inner">
+
+      <div class="sec-header reveal">
+        <div class="sec-tag">Recent Project Types</div>
+        <h2 class="sec-title">Recent Project Types</h2>
+        <p class="sec-sub">A simple look at the kinds of digital projects Kahnec Hub can support.</p>
+      </div>
+
+      <div class="project-type-grid reveal d1">
+        <div class="project-type-card">
+          <h3>Presentation Decks</h3>
+          <p>Pitch decks, proposal decks, reports, strategy decks, and internal presentations.</p>
+          <a href="presentation-deck-design.html" class="svc-arrow" data-track="click_service_page" data-track-location="recent_project_decks">View service &rarr;</a>
+        </div>
+
+        <div class="project-type-card">
+          <h3>Landing Pages</h3>
+          <p>Simple one page websites and campaign pages built to collect leads or explain an offer.</p>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Landing Page Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="recent_project_landing_pages">Start enquiry &rarr;</a>
+        </div>
+
+        <div class="project-type-card">
+          <h3>Google Ads Support</h3>
+          <p>Walkthroughs, audits, setup support, and ongoing campaign management.</p>
+          <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="recent_project_google_ads">View service &rarr;</a>
+        </div>
+
+        <div class="project-type-card">
+          <h3>Brand Content Kits</h3>
+          <p>Short form video content captured in one session and edited for social media.</p>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Brand Content Kit" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="recent_project_brand_content_kit">Ask about this &rarr;</a>
+        </div>
+
+        <div class="project-type-card">
+          <h3>Content Shoots</h3>
+          <p>DJI Pocket and drone supported content for launches, events, properties, and service businesses.</p>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Content Shoot" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="recent_project_content_shoots">Start enquiry &rarr;</a>
+        </div>
+
+        <div class="project-type-card">
+          <h3>Strategy Sessions</h3>
+          <p>Focused calls to clarify your next move before spending time or money.</p>
+          <a href="strategy-call.html#contact" class="svc-arrow" data-track="click_book_call" data-track-location="recent_project_strategy">View service &rarr;</a>
+        </div>
       </div>
 
     </div>
@@ -517,7 +610,7 @@
           <h2 class="sec-title">Need a deck that<br/>actually makes <em>sense?</em></h2>
           <p class="sec-sub">I create clean, affordable presentation decks for business meetings, pitches, proposals, strategy sessions, and internal presentations.</p>
           <p class="deck-note">Decks can be delivered in PowerPoint or Google Slides depending on what your team needs.</p>
-          <a href="presentation-deck-design.html" class="btn btn-orange" data-track="click_service_page" data-track-location="deck_feature">View Deck Packages &rarr;</a>
+          <a href="presentation-deck-design.html" class="btn btn-orange" data-track="click_service_page" data-track-location="deck_feature">View Packages &rarr;</a>
         </div>
 
         <div class="deck-packages">
@@ -569,7 +662,10 @@
           <h2 class="sec-title">Need content you can<br/>actually <em>post?</em></h2>
           <p class="sec-sub">We create simple, clean video content using mobile and drone setups, built for social media, launches, campaigns, and real business use.</p>
           <p class="deck-note">Best for service businesses, property showcases, launches, events, and social media campaigns.</p>
-          <a href="#contact" class="btn btn-orange" data-track="click_content_shoot" data-track-location="content_feature">Book a Content Shoot &rarr;</a>
+          <div class="deck-actions">
+            <a href="#contact" class="btn btn-orange" data-prefill-service="Content Shoot" data-prefill-project-type="Project based work" data-track="click_content_shoot" data-track-location="content_feature">Book a Content Shoot &rarr;</a>
+            <a href="#contact" class="btn btn-outline" data-prefill-service="Brand Content Kit" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="brand_content_kit_feature">Ask About Brand Content Kit</a>
+          </div>
         </div>
 
         <div class="content-highlight-card">
@@ -597,7 +693,7 @@
       <div style="text-align:center;" class="sec-header reveal">
         <div class="sec-tag" style="justify-content:center;">Pricing</div>
         <h2 class="sec-title">Clear, transparent<br/><em>pricing.</em></h2>
-        <p class="sec-sub" style="margin:0 auto;">Quick services start below. Need a full retainer? Book a strategy call and we'll put together your tailored proposal.</p>
+        <p class="sec-sub" style="margin:0 auto;">Quick services start below. Need a full retainer? Send a project enquiry and we will recommend the right next step.</p>
       </div>
 
       <!-- QUICK SERVICE PRICING TIER -->
@@ -669,7 +765,7 @@
             <li>Strategy onboarding call</li>
             <li>Email and WhatsApp support</li>
           </ul>
-          <a href="#contact" class="pbtn pbtn-outline js-book-call" data-track="click_book_call" data-track-location="pricing_launch">Get Started &rarr;</a>
+          <a href="#contact" class="pbtn pbtn-outline" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_launch">Ask About Monthly Support &rarr;</a>
         </div>
 
         <!-- Growth (featured) -->
@@ -688,7 +784,7 @@
             <li>Retargeting campaigns included</li>
             <li>Direct WhatsApp access</li>
           </ul>
-          <a href="#contact" class="pbtn pbtn-orange js-book-call" data-track="click_book_call" data-track-location="pricing_growth">Request Package Details &rarr;</a>
+          <a href="#contact" class="pbtn pbtn-orange" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_growth">Ask About Monthly Support &rarr;</a>
         </div>
 
         <!-- Scale -->
@@ -706,14 +802,14 @@
             <li>Quarterly performance reviews</li>
             <li>Custom deliverables based on goals</li>
           </ul>
-          <a href="#contact" class="pbtn pbtn-outline js-book-call" data-track="click_book_call" data-track-location="pricing_scale">Ask About Monthly Support &rarr;</a>
+          <a href="#contact" class="pbtn pbtn-outline" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_scale">Ask About Monthly Support &rarr;</a>
         </div>
 
       </div>
 
       <p class="price-note reveal">
         No lock in contracts. No hidden fees.
-        <a href="#contact" class="js-book-call" data-track="click_book_call" data-track-location="pricing_note">Book a strategy call to get your tailored proposal &rarr;</a>
+        <a href="#contact" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="pricing_note">Start Project Enquiry &rarr;</a>
       </p>
 
     </div>
@@ -794,7 +890,7 @@
           <p>No fluff. No lock in pressure. Just focused work, honest feedback, and next steps you can actually use.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;">
             <a href="#quick-services" class="btn btn-outline">See Quick Services</a>
-            <a href="#contact" class="btn btn-orange js-book-call" data-track="click_book_call" data-track-location="about">Book a Strategy Call &rarr;</a>
+            <a href="strategy-call.html#contact" class="btn btn-orange js-book-call" data-track="click_book_call" data-track-location="about">Book a Strategy Call &rarr;</a>
           </div>
         </div>
 
@@ -973,7 +1069,7 @@
                 <label class="flabel">Website or social profile (optional)</label>
                 <input type="text" name="website" class="fi" placeholder="yourwebsite.com"/>
               </div>
-              <button type="submit" class="fsubmit" data-loading-text="Sending audit request...">Request My Free Audit &rarr;</button>
+              <button type="submit" class="fsubmit" data-loading-text="Sending audit request...">Start with an Audit &rarr;</button>
               <div id="auditStatus" class="form-status" role="status" aria-live="polite"></div>
               <p class="fnote">No spam. No pressure. Just useful insights.</p>
             </form>
@@ -986,15 +1082,54 @@
 
 
   <!-- ============================================================
+       PROJECT PATHS
+  ============================================================ -->
+  <section class="section" id="project-paths">
+    <div class="section-inner">
+
+      <div style="text-align:center;" class="sec-header reveal">
+        <div class="sec-tag" style="justify-content:center;">Choose a Path</div>
+        <h2 class="sec-title">Not sure what you need yet?</h2>
+        <p class="sec-sub" style="margin:0 auto;">Start with the path that sounds closest to your situation.</p>
+      </div>
+
+      <div class="ladder-row">
+        <div class="ladder-card reveal">
+          <div class="lc-icon">01</div>
+          <div class="lc-title">I need quick advice</div>
+          <div class="lc-client">Start with a strategy call, audit, walkthrough, or content planning session.</div>
+          <a href="strategy-call.html#contact" class="ladder-btn js-book-call" data-track="click_book_call" data-track-location="project_path_advice">Book a Strategy Call</a>
+        </div>
+
+        <div class="ladder-card reveal d1">
+          <div class="lc-icon">02</div>
+          <div class="lc-title">I need something built</div>
+          <div class="lc-client">Choose a deck, landing page, content kit, or campaign setup.</div>
+          <a href="#contact" class="ladder-btn" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="project_path_built">Start a Project</a>
+        </div>
+
+        <div class="ladder-card reveal d2">
+          <div class="lc-icon">03</div>
+          <div class="lc-title">I need ongoing support</div>
+          <div class="lc-client">Get help with ads, content, reporting, and monthly growth support.</div>
+          <a href="#contact" class="ladder-btn" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="project_path_support">Ask About Monthly Support</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        CTA BANNER
   ============================================================ -->
   <div class="cta-section">
     <div class="cta-inner reveal">
-      <h2>Need growth<br/>or just <em>guidance?</em></h2>
-      <p>Get quick help on a specific challenge or book a strategy call to map out your full growth plan. We work at your pace.</p>
+      <h2>Ready to start<br/>the right <em>project?</em></h2>
+      <p>Send a clear enquiry and we will recommend the best next step for your goals, timeline, and budget.</p>
       <div class="cta-actions">
-        <a href="#quick-services" class="btn btn-orange" style="padding:14px 32px; border-radius:50px; font-size:0.95rem;">See Quick Services &rarr;</a>
-        <a href="#contact" class="btn btn-outline js-book-call" data-track="click_book_call" data-track-location="cta" style="padding:14px 32px; border-radius:50px; font-size:0.95rem; color:#fff; border-color:rgba(255,255,255,0.25);">Book a Strategy Call</a>
+        <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="cta" style="padding:14px 32px; border-radius:50px; font-size:0.95rem;">Start Project Enquiry &rarr;</a>
+        <a href="strategy-call.html#contact" class="btn btn-outline js-book-call" data-track="click_book_call" data-track-location="cta" style="padding:14px 32px; border-radius:50px; font-size:0.95rem; color:#fff; border-color:rgba(255,255,255,0.25);">Book a Strategy Call</a>
       </div>
       <p class="cta-or">Need something else? <a href="#" data-kh-href="emailHref" data-kh-text="contactEmail">Email us</a></p>
     </div>
@@ -1025,7 +1160,7 @@
               <span class="clk-icon blue">in</span>LinkedIn
             </a>
             <a href="#" class="clk" target="_blank" rel="noopener noreferrer" data-kh-href="instagramUrl">
-              <span class="clk-icon grad">&#128247;</span>Instagram · <span data-kh-text="instagramHandle">@kahnec_withkyle</span>
+              <span class="clk-icon grad">IG</span>Instagram · <span data-kh-text="instagramHandle">@kahnec_withkyle</span>
             </a>
           </div>
         </div>
@@ -1033,8 +1168,13 @@
         <!-- Right: form -->
         <div class="reveal d1">
           <div class="contact-form-card">
-            <div class="cf-head">Book your strategy call</div>
-            <div class="cf-sub">Share your goals and we'll recommend the best next move <span data-kh-text="responseTimeText">within 24 hours</span>.</div>
+            <div class="cf-head">Start a Digital Project</div>
+            <div class="cf-sub">Tell us what you need and we will recommend the right next step within 24 hours.</div>
+            <div class="contact-trust-row" aria-label="Enquiry trust points">
+              <span>Response within 24 hours</span>
+              <span>One off and monthly support available</span>
+              <span>Built for Caribbean businesses and remote clients</span>
+            </div>
             <form id="contactForm" class="cf-2col lead-form"
               method="POST"
               data-form-key="contact"
@@ -1054,8 +1194,8 @@
                 <label class="flabel">Business name</label>
                 <input type="text" name="business" class="fi" placeholder="Your business"/>
               </div>
-              <div class="cf-full">
-                <label class="flabel">Monthly budget</label>
+              <div>
+                <label class="flabel">Budget or monthly spend</label>
                 <select name="budget" class="fi fsel">
                   <option value="" disabled selected>Select a range</option>
                   <option>Under $500/month</option>
@@ -1065,22 +1205,33 @@
                   <option>Prefer to discuss</option>
                 </select>
               </div>
+              <div>
+                <label class="flabel">How soon do you need this?</label>
+                <select name="timeline" class="fi fsel">
+                  <option value="" disabled selected>Select one</option>
+                  <option>As soon as possible</option>
+                  <option>This week</option>
+                  <option>This month</option>
+                  <option>No rush</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
               <div class="cf-full">
                 <label class="flabel">Service interested in</label>
                 <select name="service" class="fi fsel">
                   <option value="" disabled selected>Select a service</option>
                   <option>Strategy Call</option>
                   <option>Google Ads Walkthrough</option>
+                  <option>Google Ads Management</option>
                   <option>Meta Ads Walkthrough</option>
-                  <option>Google Ads Training</option>
-                  <option>Meta Ads Training</option>
+                  <option>Meta Ads Management</option>
                   <option>Content Strategy Session</option>
                   <option>Presentation Deck Design</option>
                   <option>Brand Content Kit</option>
                   <option>Video Editing</option>
+                  <option>Content Shoot</option>
                   <option>Landing Page Setup</option>
                   <option>Marketing Audit</option>
-                  <option>Content Shoot</option>
                   <option>Ongoing Marketing Support</option>
                   <option>Not sure yet</option>
                 </select>
@@ -1096,12 +1247,12 @@
                 </select>
               </div>
               <div class="cf-full">
-                <label class="flabel">Tell us about your goals</label>
+                <label class="flabel">Tell us about the project</label>
                 <textarea name="message" class="fi" style="resize:vertical; min-height:100px;"
-                  placeholder="What's your biggest marketing challenge right now?"></textarea>
+                  placeholder="Tell us what you need built, fixed, planned, or supported."></textarea>
               </div>
               <div class="cf-full">
-                <button type="submit" class="cf-submit" data-loading-text="Sending enquiry...">Request My Strategy Call &rarr;</button>
+                <button type="submit" class="cf-submit" data-loading-text="Sending enquiry...">Send Project Enquiry &rarr;</button>
               </div>
               <div class="cf-full">
                 <div id="contactStatus" class="form-status" role="status" aria-live="polite"></div>
@@ -1157,20 +1308,22 @@
 
         <div>
           <div class="footer-col-title">Services</div>
+          <!-- Future service pages to build: brand-content-kit.html, landing-page-setup.html, meta-ads-help.html, content-creation.html -->
           <ul class="footer-links">
-            <li><a href="google-ads-help.html">Google Ads</a></li>
-            <li><a href="#services">Meta Ads</a></li>
-            <li><a href="#content-creation">Content Creation</a></li>
+            <li><a href="google-ads-help.html">Google Ads Help</a></li>
+            <li><a href="presentation-deck-design.html">Presentation Deck Design</a></li>
+            <li><a href="strategy-call.html">Strategy Call</a></li>
             <li><a href="#content-creation">Brand Content Kit</a></li>
             <li><a href="#contact">Landing Page Setup</a></li>
+            <li><a href="#content-creation">Content Creation</a></li>
             <li><a href="#services">Drone Content Production</a></li>
-            <li><a href="presentation-deck-design.html">Presentation Design</a></li>
+            <li><a href="#contact">Ongoing Marketing Support</a></li>
           </ul>
         </div>
 
         <div>
           <div class="footer-col-title">Get Updates</div>
-          <p style="font-size:0.82rem; color:rgba(255,255,255,0.4); margin-bottom:14px; line-height:1.6;">
+          <p style="font-size:0.82rem; color:rgba(255,255,255,0.68); margin-bottom:14px; line-height:1.6;">
             Marketing tips and growth insights from the Caribbean.
           </p>
           <div class="newsletter-box">
@@ -1214,7 +1367,7 @@
   <div class="chat-widget">
     <button class="chat-btn" id="chatBtn" onclick="toggleChat()">
       <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      Chat with us
+      Project helper
       <span class="chat-dot"></span>
     </button>
     <div class="chat-panel" id="chatPanel">

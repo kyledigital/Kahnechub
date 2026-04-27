@@ -8,7 +8,7 @@
     businessName: 'Kahnec Hub',
     founderName: 'Kyle Hector',
     bookingLink: '',
-    fallbackBookingHref: '#contact',
+    fallbackBookingHref: 'strategy-call.html#contact',
     responseTimeText: 'within 24 hours',
     contact: {
       email: '',
@@ -16,6 +16,20 @@
       instagramHandle: '',
       instagramUrl: '',
       linkedinUrl: ''
+    },
+    integrations: {
+      formspree: {
+        auditFormId: '',
+        contactFormId: '',
+        newsletterFormId: ''
+      },
+      analytics: {
+        googleAnalyticsId: '',
+        plausibleDomain: '',
+        plausibleScriptUrl: '',
+        umamiWebsiteId: '',
+        umamiScriptUrl: ''
+      }
     },
     forms: {}
   };
@@ -51,6 +65,58 @@
   function getBookingHref(config) {
     const bookingLink = (config.bookingLink || '').trim();
     return bookingLink || config.fallbackBookingHref || '#contact';
+  }
+
+  function injectScript(src, attributes) {
+    if (!src || document.querySelector(`script[src="${src}"]`)) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+
+    Object.entries(attributes || {}).forEach(([key, value]) => {
+      if (value) {
+        script.setAttribute(key, value);
+      }
+    });
+
+    document.head.appendChild(script);
+  }
+
+  function initAnalytics(config) {
+    const analytics = config.integrations && config.integrations.analytics
+      ? config.integrations.analytics
+      : {};
+
+    const gaId = (analytics.googleAnalyticsId || '').trim();
+    if (gaId) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function gtag() {
+        window.dataLayer.push(arguments);
+      };
+
+      window.gtag('js', new Date());
+      window.gtag('config', gaId);
+      injectScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`);
+    }
+
+    const plausibleDomain = (analytics.plausibleDomain || '').trim();
+    if (plausibleDomain) {
+      injectScript(
+        (analytics.plausibleScriptUrl || 'https://plausible.io/js/script.js').trim(),
+        { 'data-domain': plausibleDomain }
+      );
+    }
+
+    const umamiWebsiteId = (analytics.umamiWebsiteId || '').trim();
+    if (umamiWebsiteId) {
+      injectScript(
+        (analytics.umamiScriptUrl || 'https://cloud.umami.is/script.js').trim(),
+        { 'data-website-id': umamiWebsiteId }
+      );
+    }
   }
 
   function getWhatsAppHref(config) {
@@ -310,6 +376,57 @@
     return true;
   }
 
+  function normalizeOptionText(value) {
+    return String(value || '')
+      .replace(/[–—]/g, '-')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function setSelectOptionByText(select, text) {
+    if (!select || !text) {
+      return;
+    }
+
+    const normalText = normalizeOptionText(text);
+    const option = Array.from(select.options).find((item) => normalizeOptionText(item.textContent) === normalText)
+      || Array.from(select.options).find((item) => normalizeOptionText(item.textContent).includes(normalText));
+
+    if (option) {
+      select.value = option.value || option.textContent;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
+
+  function initEnquiryPrefill() {
+    document.querySelectorAll('[data-prefill-service], [data-prefill-project-type]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const form = document.getElementById('contactForm');
+        if (!form) {
+          return;
+        }
+
+        const service = link.dataset.prefillService || '';
+        const projectType = link.dataset.prefillProjectType || '';
+        const message = form.querySelector('[name="message"]');
+        const formCard = form.closest('.contact-form-card');
+
+        setSelectOptionByText(form.querySelector('[name="service"]'), service);
+        setSelectOptionByText(form.querySelector('[name="project_type"]'), projectType);
+
+        if (message && service && !message.value.trim()) {
+          message.value = `I am interested in ${service}.`;
+          message.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        if (formCard) {
+          formCard.classList.remove('is-prefilled');
+          window.requestAnimationFrame(() => formCard.classList.add('is-prefilled'));
+        }
+      });
+    });
+  }
+
   function getStatusElement(form) {
     const statusElement = form.querySelector('.form-status');
     if (statusElement) {
@@ -375,14 +492,12 @@
   async function submitLeadForm(form, config) {
     const formKey = form.dataset.formKey;
     const formConfig = config.forms[formKey];
-    const endpoint = formConfig && typeof formConfig.endpoint === 'string'
-      ? formConfig.endpoint.trim()
-      : '';
+    const endpoint = resolveFormEndpoint(config, formKey, formConfig);
 
-    if (!endpoint || endpoint.includes('YOUR_')) {
+    if (!endpoint) {
       return {
         ok: false,
-        message: 'This form is not connected yet. Add the live endpoint in assets/js/site-config.js before launch.'
+        message: 'This form is not connected yet. Add the live Formspree IDs in assets/js/site-config.js before launch.'
       };
     }
 
@@ -482,6 +597,30 @@
     });
   }
 
+  function resolveFormEndpoint(config, formKey, formConfig) {
+    const directEndpoint = formConfig && typeof formConfig.endpoint === 'string'
+      ? formConfig.endpoint.trim()
+      : '';
+
+    if (directEndpoint && !directEndpoint.includes('YOUR_')) {
+      return directEndpoint;
+    }
+
+    const formspree = config.integrations && config.integrations.formspree
+      ? config.integrations.formspree
+      : {};
+
+    const formIdMap = {
+      audit: formspree.auditFormId,
+      contact: formspree.contactFormId,
+      popup: formspree.auditFormId,
+      newsletter: formspree.newsletterFormId
+    };
+
+    const formId = (formIdMap[formKey] || '').trim();
+    return formId ? `https://formspree.io/f/${formId}` : '';
+  }
+
   function initPopup() {
     let popupShown = window.sessionStorage.getItem('kh_popup');
     const popup = document.getElementById('popupBg');
@@ -555,36 +694,174 @@
 
     let chatOpen = false;
     let chatStep = 0;
+    let captureStep = '';
     const chatAnswers = {};
+    const chatLead = {};
 
     const chatFlow = [
       {
-        msg: 'Hey! What type of business are you running?',
-        choices: ['E-commerce', 'Service business', 'Hospitality / Tourism', 'Real estate', 'Startup']
+        msg: 'What do you need help with right now?',
+        choices: ['Quick advice / audit', 'Google or Meta ads', 'Deck or presentation', 'Landing page', 'Content shoot or editing', 'Monthly support']
       },
       {
-        msg: "Got it - what's your biggest challenge right now?",
-        choices: ['Not enough leads', "Ads aren't working", 'No consistent content', 'Just getting started', 'Multiple challenges']
+        msg: 'How soon do you need this?',
+        choices: ['As soon as possible', 'This week', 'This month', 'No rush', 'Not sure yet']
       },
       {
-        msg: 'And your rough monthly marketing budget?',
-        choices: ['Under $300', '$300-$800', '$800-$2,000', '$2,000+', 'Not sure yet']
+        msg: 'What budget range feels closest?',
+        choices: ['Under $500/month', '$500-$1,500/month', '$1,500-$5,000/month', '$5,000+/month', 'Prefer to discuss']
       }
     ];
 
     function getRecommendation() {
+      const need = chatAnswers.need || '';
       const budget = chatAnswers.budget || '';
-      const challenge = chatAnswers.challenge || '';
+      const timeline = chatAnswers.timeline || '';
 
-      if (budget.includes('Under') || budget.includes('Not sure')) {
-        return 'Based on this, a <strong>quick service</strong> is a strong first step. Start with an audit, walkthrough, or strategy call before investing in a larger package.';
+      if (need.includes('Deck')) {
+        return 'A <strong>presentation deck project</strong> looks like the right path. Send the goal, deadline, and any rough notes you already have.';
       }
 
-      if (challenge.includes('leads') || challenge.includes('Ads')) {
-        return 'You likely need paid media that converts. Our <strong>Growth package</strong> is designed for businesses ready to turn traffic into enquiries.';
+      if (need.includes('Landing')) {
+        return 'A <strong>landing page setup</strong> is likely the best fit. We can shape the page around one offer, one audience, and one enquiry action.';
       }
 
-      return 'A <strong>strategy call</strong> looks like the best next step, with room to move into project based work or monthly support when the timing is right.';
+      if (need.includes('Content')) {
+        return 'A <strong>content shoot or Brand Content Kit</strong> looks like a strong next step, especially if you need usable assets quickly.';
+      }
+
+      if (need.includes('Monthly')) {
+        return 'You likely need <strong>ongoing marketing support</strong> with ads, content, reporting, and steady execution.';
+      }
+
+      if (need.includes('ads')) {
+        return 'You likely need <strong>paid ads support</strong>. Start with a walkthrough or audit if things are unclear, or management if you are ready for ongoing optimisation.';
+      }
+
+      if (budget.includes('Under') || timeline.includes('Not sure')) {
+        return 'A <strong>strategy call or marketing audit</strong> is a sensible first move before committing to a bigger project.';
+      }
+
+      return 'A <strong>strategy call</strong> looks like the best next step, with room to move into project work or monthly support when the scope is clear.';
+    }
+
+    function getLeadService() {
+      const need = chatAnswers.need || '';
+
+      if (need.includes('Deck')) return 'Presentation Deck Design';
+      if (need.includes('Landing')) return 'Landing Page Setup';
+      if (need.includes('Content')) return 'Content Shoot';
+      if (need.includes('Monthly')) return 'Ongoing Marketing Support';
+      if (need.includes('ads')) return 'Google Ads Management';
+      if (need.includes('Quick')) return 'Strategy Call';
+
+      return 'Not sure yet';
+    }
+
+    function getLeadProjectType() {
+      const need = chatAnswers.need || '';
+
+      if (need.includes('Monthly')) return 'Monthly support';
+      if (need.includes('Quick')) return 'Need advice first';
+      return 'Project based work';
+    }
+
+    function buildLeadSummary() {
+      const lines = [
+        'Kahnec Hub project enquiry',
+        `Need: ${chatAnswers.need || 'Not sure yet'}`,
+        `Timeline: ${chatAnswers.timeline || 'Not sure yet'}`,
+        `Budget: ${chatAnswers.budget || 'Prefer to discuss'}`,
+        `Name: ${chatLead.name || ''}`,
+        `Contact: ${chatLead.contact || ''}`
+      ];
+
+      if (chatLead.details) {
+        lines.push(`Extra details: ${chatLead.details}`);
+      }
+
+      return lines.filter((line) => !line.endsWith(': ')).join('\n');
+    }
+
+    function getWhatsAppLeadHref() {
+      const baseHref = getWhatsAppHref(config);
+      const separator = baseHref.includes('?') ? '&' : '?';
+      return `${baseHref}${separator}text=${encodeURIComponent(buildLeadSummary())}`;
+    }
+
+    function setSelectByText(select, text) {
+      if (!select || !text) {
+        return;
+      }
+
+      setSelectOptionByText(select, text);
+    }
+
+    function applyChatLeadToForm() {
+      const form = document.getElementById('contactForm');
+
+      if (!form) {
+        try {
+          window.sessionStorage.setItem('kh_chat_lead', JSON.stringify({ chatAnswers, chatLead }));
+        } catch {
+          // Session storage is optional.
+        }
+
+        window.location.href = 'index.html#contact';
+        return;
+      }
+
+      const nameField = form.querySelector('[name="name"]');
+      const emailField = form.querySelector('[name="email"]');
+      const messageField = form.querySelector('[name="message"]');
+
+      if (nameField && chatLead.name) {
+        nameField.value = chatLead.name;
+      }
+
+      if (emailField && EMAIL_PATTERN.test(chatLead.contact || '')) {
+        emailField.value = chatLead.contact;
+      }
+
+      setSelectByText(form.querySelector('[name="budget"]'), chatAnswers.budget);
+      setSelectByText(form.querySelector('[name="timeline"]'), chatAnswers.timeline);
+      setSelectByText(form.querySelector('[name="service"]'), getLeadService());
+      setSelectByText(form.querySelector('[name="project_type"]'), getLeadProjectType());
+
+      if (messageField) {
+        messageField.value = buildLeadSummary();
+        messageField.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
+      form.querySelectorAll('input, textarea, select').forEach((field) => {
+        field.setAttribute('aria-invalid', 'false');
+      });
+
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      addChatMessage('I added your chat details to the enquiry form. You can review it and send when ready.', 'bot');
+    }
+
+    function applyStoredChatLead() {
+      let storedLead = null;
+
+      try {
+        storedLead = JSON.parse(window.sessionStorage.getItem('kh_chat_lead') || 'null');
+        window.sessionStorage.removeItem('kh_chat_lead');
+      } catch {
+        storedLead = null;
+      }
+
+      if (!storedLead || window.location.hash !== '#contact') {
+        return;
+      }
+
+      Object.assign(chatAnswers, storedLead.chatAnswers || {});
+      Object.assign(chatLead, storedLead.chatLead || {});
+      window.setTimeout(applyChatLeadToForm, 350);
     }
 
     function addChatMessage(text, role) {
@@ -595,7 +872,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function addChatChoices(items) {
+    function addChatChoices(items, onSelect) {
       const row = document.createElement('div');
       row.className = 'chat-choices';
       row.id = 'chatChoices';
@@ -607,11 +884,41 @@
         button.textContent = choice;
         button.addEventListener('click', () => {
           row.remove();
+          if (typeof onSelect === 'function') {
+            onSelect(choice);
+            return;
+          }
+
           handleChatChoice(choice);
         });
         row.appendChild(button);
       });
 
+      chatMessages.appendChild(row);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addLeadActions() {
+      const row = document.createElement('div');
+      row.className = 'chat-choices';
+
+      const formButton = document.createElement('button');
+      formButton.className = 'cch';
+      formButton.type = 'button';
+      formButton.textContent = 'Fill enquiry form';
+      formButton.addEventListener('click', applyChatLeadToForm);
+
+      const whatsAppLink = document.createElement('a');
+      whatsAppLink.className = 'cch chat-link-choice';
+      whatsAppLink.href = getWhatsAppLeadHref();
+      whatsAppLink.target = '_blank';
+      whatsAppLink.rel = 'noopener noreferrer';
+      whatsAppLink.textContent = 'Open WhatsApp summary';
+      whatsAppLink.setAttribute('data-track', 'click_whatsapp');
+      whatsAppLink.setAttribute('data-track-location', 'chat_lead_summary');
+
+      row.appendChild(formButton);
+      row.appendChild(whatsAppLink);
       chatMessages.appendChild(row);
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
@@ -641,10 +948,10 @@
       addChatMessage(choice, 'user');
 
       if (chatStep === 0) {
-        chatAnswers.business = choice;
+        chatAnswers.need = choice;
       }
       if (chatStep === 1) {
-        chatAnswers.challenge = choice;
+        chatAnswers.timeline = choice;
       }
       if (chatStep === 2) {
         chatAnswers.budget = choice;
@@ -665,13 +972,64 @@
 
           addChatMessage(getRecommendation(), 'bot');
           window.setTimeout(() => {
-            addChatMessage(
-              `Best next step: ${buildChatBookingLink(config)} or ${buildChatWhatsAppLink(config)}.`,
-              'bot'
-            );
+            addChatMessage('Want to turn this into a quick enquiry?', 'bot');
+            window.setTimeout(() => {
+              addChatChoices(['Yes, build my enquiry', 'No, show me the links'], handleLeadPromptChoice);
+            }, 200);
           }, 600);
         }, 900);
       }, 200);
+    }
+
+    function handleLeadPromptChoice(choice) {
+      addChatMessage(choice, 'user');
+
+      if (!choice.includes('Yes')) {
+        window.setTimeout(() => {
+          addChatMessage(
+            `No problem. Best next step: ${buildChatBookingLink(config)} or ${buildChatWhatsAppLink(config)}.`,
+            'bot'
+          );
+        }, 500);
+        return;
+      }
+
+      captureStep = 'name';
+      window.setTimeout(() => {
+        addChatMessage('Great. What name should we put on the enquiry?', 'bot');
+      }, 500);
+    }
+
+    function handleLeadInput(value) {
+      if (captureStep === 'name') {
+        chatLead.name = value;
+        captureStep = 'contact';
+        addChatMessage(escapeHtml(value), 'user');
+        window.setTimeout(() => {
+          addChatMessage('What is the best email or WhatsApp number to reply to?', 'bot');
+        }, 500);
+        return;
+      }
+
+      if (captureStep === 'contact') {
+        chatLead.contact = value;
+        captureStep = 'details';
+        addChatMessage(escapeHtml(value), 'user');
+        window.setTimeout(() => {
+          addChatMessage('Last thing: add one sentence about what you need, or type "skip".', 'bot');
+        }, 500);
+        return;
+      }
+
+      if (captureStep === 'details') {
+        chatLead.details = value.toLowerCase() === 'skip' ? '' : value;
+        captureStep = '';
+        addChatMessage(escapeHtml(value), 'user');
+        window.setTimeout(() => {
+          addChatMessage('Done. I prepared a short project enquiry from your answers.', 'bot');
+          addLeadActions();
+        }, 500);
+      }
     }
 
     window.sendChat = function sendChat() {
@@ -685,8 +1043,14 @@
         choicesElement.remove();
       }
 
-      addChatMessage(value, 'user');
       chatInput.value = '';
+
+      if (captureStep) {
+        handleLeadInput(value);
+        return;
+      }
+
+      addChatMessage(escapeHtml(value), 'user');
 
       window.setTimeout(() => {
         addTypingIndicator();
@@ -716,6 +1080,8 @@
       }
     };
 
+    applyStoredChatLead();
+
     chatInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         window.sendChat();
@@ -725,12 +1091,14 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const config = getConfig();
+    initAnalytics(config);
     applySiteConfig(config);
     initTracking();
     initNav();
     initReveal();
     initCounters();
     initFieldValidation();
+    initEnquiryPrefill();
     initLeadForms(config);
     initPopup();
     initChatbot(config);
