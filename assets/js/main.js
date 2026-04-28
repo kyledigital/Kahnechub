@@ -267,6 +267,119 @@
     });
   }
 
+  function setActiveServiceTab(tabName, shouldFocus) {
+    const tabs = Array.from(document.querySelectorAll('[data-tab]'));
+    const panels = Array.from(document.querySelectorAll('[data-tab-panel]'));
+
+    if (!tabs.length || !panels.length) {
+      return;
+    }
+
+    const activeTab = tabs.find((tab) => tab.dataset.tab === tabName) || tabs[0];
+    const activeTabName = activeTab.dataset.tab;
+
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.tab === activeTabName;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.tabPanel === activeTabName;
+      panel.classList.toggle('is-active', isActive);
+      panel.hidden = !isActive;
+    });
+
+    if (shouldFocus) {
+      activeTab.focus({ preventScroll: true });
+    }
+  }
+
+  function initServiceTabs() {
+    const tabs = Array.from(document.querySelectorAll('[data-tab]'));
+    if (!tabs.length) {
+      return;
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        setActiveServiceTab(tab.dataset.tab, false);
+      });
+
+      tab.addEventListener('keydown', (event) => {
+        const isNext = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+        const isPrevious = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
+
+        if (!isNext && !isPrevious && event.key !== 'Home' && event.key !== 'End') {
+          return;
+        }
+
+        event.preventDefault();
+
+        let nextIndex = index;
+        if (isNext) {
+          nextIndex = (index + 1) % tabs.length;
+        } else if (isPrevious) {
+          nextIndex = (index - 1 + tabs.length) % tabs.length;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = tabs.length - 1;
+        }
+
+        setActiveServiceTab(tabs[nextIndex].dataset.tab, true);
+      });
+    });
+
+    document.querySelectorAll('[data-open-tab]').forEach((link) => {
+      link.addEventListener('click', () => {
+        setActiveServiceTab(link.dataset.openTab, false);
+      });
+    });
+
+    setActiveServiceTab(tabs[0].dataset.tab, false);
+  }
+
+  function openAccordionPanel(panelId) {
+    const panel = document.getElementById(panelId);
+    if (!panel) {
+      return;
+    }
+
+    const trigger = document.querySelector(`[aria-controls="${panelId}"][data-accordion-trigger]`);
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    panel.hidden = false;
+    panel.classList.add('open');
+  }
+
+  function initProgressiveAccordions() {
+    document.querySelectorAll('[data-accordion-trigger]').forEach((trigger) => {
+      const panelId = trigger.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+
+      if (!panel) {
+        return;
+      }
+
+      trigger.addEventListener('click', () => {
+        const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+        trigger.setAttribute('aria-expanded', String(willOpen));
+        panel.hidden = !willOpen;
+        panel.classList.toggle('open', willOpen);
+      });
+    });
+
+    document.querySelectorAll('[data-accordion-open]').forEach((link) => {
+      link.addEventListener('click', () => {
+        window.setTimeout(() => openAccordionPanel(link.dataset.accordionOpen), 80);
+      });
+    });
+  }
+
   function initMotionClasses() {
     document.documentElement.classList.add('motion-ready');
 
@@ -281,7 +394,13 @@
       '.cs-row .cs',
       '.test-row .tcard',
       '.blog-grid .blog-card',
-      '.ladder-row .ladder-card'
+      '.ladder-row .ladder-card',
+      '.start-grid .start-card',
+      '.compact-service-grid .compact-service-card',
+      '.work-path-grid .work-path-card',
+      '.result-snapshot-grid .result-card',
+      '.featured-service-grid .featured-service-card',
+      '.pricing-snapshot-grid .price-chip'
     ];
 
     motionGroups.forEach((selector) => {
@@ -1180,6 +1299,8 @@
     applySiteConfig(config);
     initTracking();
     initNav();
+    initServiceTabs();
+    initProgressiveAccordions();
     initMotionClasses();
     initReveal();
     initCounters();

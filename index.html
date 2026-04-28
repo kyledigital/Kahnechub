@@ -36,10 +36,9 @@
       </a>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#quick-services">Quick Services</a></li>
+        <li><a href="#start-here">Start Here</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#results">Results</a></li>
-        <li><a href="blog/index.html">Blog</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -79,7 +78,7 @@
 
         <div class="hero-actions reveal stagger-4">
           <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="hero">Start Project Enquiry &rarr;</a>
-          <a href="#project-finder" class="btn btn-outline">Find the Right Service</a>
+          <a href="#start-here" class="btn btn-outline">Find the Right Service</a>
         </div>
 
         <div class="hero-note reveal stagger-5">Quick services available for one off projects or ongoing growth.</div>
@@ -148,9 +147,514 @@
 
 
   <!-- ============================================================
+       START HERE
+       Future service pages to build: brand-content-kit.html, landing-page-setup.html,
+       meta-ads-help.html, content-creation.html
+  ============================================================ -->
+  <section class="section start-here-section" id="start-here">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Start Here</div>
+        <h2 class="sec-title">Start with the kind of<br/>help you <em>need.</em></h2>
+        <p class="sec-sub">Choose the closest option. You do not need to know the exact service yet.</p>
+      </div>
+
+      <div class="start-grid">
+        <a href="#services" class="start-card reveal" data-open-tab="quick-help" data-track="click_start_here" data-track-location="quick_help">
+          <span class="start-card-num">01</span>
+          <h3>I need quick advice</h3>
+          <p>Calls, walkthroughs, audits, and practical reviews.</p>
+          <span class="start-card-link">See quick help &rarr;</span>
+        </a>
+        <a href="#services" class="start-card reveal d1" data-open-tab="project-based" data-track="click_start_here" data-track-location="project_based">
+          <span class="start-card-num">02</span>
+          <h3>I need something built</h3>
+          <p>Decks, landing pages, campaign setup, and content kits.</p>
+          <span class="start-card-link">See project options &rarr;</span>
+        </a>
+        <a href="#services" class="start-card reveal d2" data-open-tab="content" data-track="click_start_here" data-track-location="content">
+          <span class="start-card-num">03</span>
+          <h3>I need content</h3>
+          <p>Video shoots, drone content, editing, and brand assets.</p>
+          <span class="start-card-link">See content help &rarr;</span>
+        </a>
+        <a href="#services" class="start-card reveal d3" data-open-tab="monthly-support" data-track="click_start_here" data-track-location="monthly_support">
+          <span class="start-card-num">04</span>
+          <h3>I need ongoing support</h3>
+          <p>Monthly ads, content, reporting, and growth support.</p>
+          <span class="start-card-link">See monthly support &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVICES TABS
+  ============================================================ -->
+  <section class="section section-alt" id="services">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Services</div>
+        <h2 class="sec-title">Find the right support<br/>without the <em>scroll.</em></h2>
+        <p class="sec-sub">Pick a category. Open a card only when you need more detail.</p>
+      </div>
+
+      <div class="service-tabs reveal d1">
+        <div class="tab-list" role="tablist" aria-label="Service categories">
+          <button class="tab-btn is-active" id="tab-quick-help" type="button" role="tab" aria-selected="true" aria-controls="panel-quick-help" data-tab="quick-help">Quick Help</button>
+          <button class="tab-btn" id="tab-project-based" type="button" role="tab" aria-selected="false" aria-controls="panel-project-based" data-tab="project-based" tabindex="-1">Project Based</button>
+          <button class="tab-btn" id="tab-content" type="button" role="tab" aria-selected="false" aria-controls="panel-content" data-tab="content" tabindex="-1">Content</button>
+          <button class="tab-btn" id="tab-monthly-support" type="button" role="tab" aria-selected="false" aria-controls="panel-monthly-support" data-tab="monthly-support" tabindex="-1">Monthly Support</button>
+        </div>
+
+        <div class="tab-panel is-active" id="panel-quick-help" role="tabpanel" aria-labelledby="tab-quick-help" data-tab-panel="quick-help">
+          <div class="compact-service-grid">
+            <article class="compact-service-card reveal">
+              <div class="service-card-top"><h3>Strategy Call</h3><span>from JMD $8,500</span></div>
+              <p>A focused call to decide what to fix, build, or pause.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-strategy-call" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-strategy-call" hidden>
+                <p><strong>Best for:</strong> business owners who need clarity before spending.</p>
+                <p><strong>Includes:</strong> 15 to 60 minute planning session and next steps.</p>
+                <p><strong>Next step:</strong> Book a call.</p>
+              </div>
+              <a href="strategy-call.html#contact" class="svc-arrow js-book-call" data-track="click_book_call" data-track-location="tab_strategy_call">Book a Strategy Call &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d1">
+              <div class="service-card-top"><h3>Google Ads Walkthrough</h3><span>from JMD $12,000</span></div>
+              <p>Live support to review, set up, or improve your Google Ads account.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-google-walkthrough" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-google-walkthrough" hidden>
+                <p><strong>Best for:</strong> search campaigns, account reviews, and practical fixes.</p>
+                <p><strong>Includes:</strong> screen share review, account guidance, and action list.</p>
+                <p><strong>Next step:</strong> View the Google Ads service page.</p>
+              </div>
+              <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="tab_google_ads">View service &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d2">
+              <div class="service-card-top"><h3>Meta Ads Walkthrough</h3><span>from JMD $12,000</span></div>
+              <p>Help with Facebook and Instagram campaigns, audiences, and creative direction.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-meta-walkthrough" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-meta-walkthrough" hidden>
+                <p><strong>Best for:</strong> campaign setup, audience review, and ad creative feedback.</p>
+                <p><strong>Includes:</strong> 60 minute review with practical next steps.</p>
+                <p><strong>Next step:</strong> Start an enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Meta Ads Walkthrough" data-prefill-project-type="Need advice first" data-track="click_quick_service" data-track-location="tab_meta_ads">Book a Walkthrough &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d3">
+              <div class="service-card-top"><h3>Content Strategy Session</h3><span>from JMD $8,500</span></div>
+              <p>A planning session for content themes, channels, and launch ideas.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-content-strategy" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-content-strategy" hidden>
+                <p><strong>Best for:</strong> owners who need direction before posting or filming.</p>
+                <p><strong>Includes:</strong> content themes, message direction, and posting priorities.</p>
+                <p><strong>Next step:</strong> Book a content strategy session.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Content Strategy Session" data-prefill-project-type="Need advice first" data-track="click_quick_service" data-track-location="tab_content_strategy">Book Content Strategy &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal">
+              <div class="service-card-top"><h3>Marketing Audit</h3><span>from JMD $10,000</span></div>
+              <p>A practical review of what is working, what is weak, and what to do next.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-marketing-audit" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-marketing-audit" hidden>
+                <p><strong>Best for:</strong> websites, ads, content, and offers that need a clearer plan.</p>
+                <p><strong>Includes:</strong> review notes, quick wins, and a simple roadmap.</p>
+                <p><strong>Next step:</strong> Start with an audit.</p>
+              </div>
+              <a href="#audit" class="svc-arrow" data-accordion-open="auditFormPanel" data-track="click_audit" data-track-location="tab_marketing_audit">Start with an Audit &rarr;</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-project-based" role="tabpanel" aria-labelledby="tab-project-based" data-tab-panel="project-based" hidden>
+          <div class="compact-service-grid">
+            <article class="compact-service-card reveal">
+              <div class="service-card-top"><h3>Presentation Deck Design</h3><span>from JMD $15,000</span></div>
+              <p>Clean pitch, proposal, report, and meeting decks.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-deck-design" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-deck-design" hidden>
+                <p><strong>Best for:</strong> pitches, proposals, training, reports, and investor meetings.</p>
+                <p><strong>Includes:</strong> layout support, visual clean-up, and branded slides.</p>
+                <p><strong>Next step:</strong> View the deck service page.</p>
+              </div>
+              <a href="presentation-deck-design.html" class="svc-arrow" data-track="click_service_page" data-track-location="tab_deck_design">View service &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d1">
+              <div class="service-card-top"><h3>Landing Page Setup</h3><span>from JMD $30,000</span></div>
+              <p>A simple campaign page built to explain an offer and collect leads.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-landing-page" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-landing-page" hidden>
+                <p><strong>Best for:</strong> launches, lead generation, WhatsApp enquiries, and offers.</p>
+                <p><strong>Includes:</strong> one page build, mobile design, and lead form or WhatsApp link.</p>
+                <p><strong>Next step:</strong> Start a project enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Landing Page Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_landing_page">Start enquiry &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d2">
+              <div class="service-card-top"><h3>Campaign Setup</h3><span>by scope</span></div>
+              <p>Setup support for Google, Meta, or launch campaigns.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-campaign-setup" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-campaign-setup" hidden>
+                <p><strong>Best for:</strong> businesses that have an offer and need a clean launch.</p>
+                <p><strong>Includes:</strong> structure, targeting direction, tracking review, and launch support.</p>
+                <p><strong>Next step:</strong> Send an enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Campaign Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_campaign_setup">Start enquiry &rarr;</a>
+            </article>
+
+            <article class="compact-service-card active-card reveal d3">
+              <div class="active-badge">Best for launch</div>
+              <div class="service-card-top"><h3>Brand Content Kit</h3><span>from JMD $25,000</span></div>
+              <p>Short form video assets captured in one session and edited for fast posting.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-brand-kit-project" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-brand-kit-project" hidden>
+                <p><strong>Best for:</strong> service businesses, launches, and offers that need usable clips.</p>
+                <p><strong>Includes:</strong> shoot session, 2 to 3 edited videos, and basic creative direction.</p>
+                <p><strong>Next step:</strong> Ask about Brand Content Kit. Future page: brand-content-kit.html.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Brand Content Kit" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_brand_content_project">Ask about this &rarr;</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-content" role="tabpanel" aria-labelledby="tab-content" data-tab-panel="content" hidden>
+          <div class="compact-service-grid">
+            <article class="compact-service-card reveal">
+              <div class="service-card-top"><h3>Content Shoot</h3><span>by scope</span></div>
+              <p>Photo and video capture for services, launches, events, and properties.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-content-shoot" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-content-shoot" hidden>
+                <p><strong>Best for:</strong> businesses that need fresh visuals for ads or social media.</p>
+                <p><strong>Includes:</strong> shoot planning, capture, and simple creative direction.</p>
+                <p><strong>Next step:</strong> Book a content shoot.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Content Shoot" data-prefill-project-type="Project based work" data-track="click_content_shoot" data-track-location="tab_content_shoot">Book a Content Shoot &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d1">
+              <div class="service-card-top"><h3>Drone Content Production</h3><span>by scope</span></div>
+              <p>Aerial content for properties, events, resorts, and outdoor campaigns.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-drone-content" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-drone-content" hidden>
+                <p><strong>Best for:</strong> locations, venues, real estate, tourism, and outdoor visuals.</p>
+                <p><strong>Includes:</strong> shoot planning, aerial capture, and edited clips where needed.</p>
+                <p><strong>Next step:</strong> Send a project enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Drone Content Production" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_drone_content">Start enquiry &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d2">
+              <div class="service-card-top"><h3>Short Form Video Editing</h3><span>by scope</span></div>
+              <p>Reels, clips, and short campaign videos edited for clear messages.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-video-editing" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-video-editing" hidden>
+                <p><strong>Best for:</strong> businesses with footage that needs editing and structure.</p>
+                <p><strong>Includes:</strong> trim, captions, basic polish, and export for social channels.</p>
+                <p><strong>Next step:</strong> Start an editing enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Video Editing" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_video_editing">Start enquiry &rarr;</a>
+            </article>
+
+            <article class="compact-service-card active-card reveal d3">
+              <div class="active-badge">Featured service</div>
+              <div class="service-card-top"><h3>Brand Content Kit</h3><span>from JMD $25,000</span></div>
+              <p>A compact content package for the week ahead.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-brand-kit-content" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-brand-kit-content" hidden>
+                <p><strong>Best for:</strong> teams that need a quick batch of usable brand videos.</p>
+                <p><strong>Includes:</strong> 1 shoot session, 2 to 3 edited clips, and posting direction.</p>
+                <p><strong>Next step:</strong> Ask about Brand Content Kit. Future page: brand-content-kit.html.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Brand Content Kit" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_brand_content_content">Ask about this &rarr;</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-monthly-support" role="tabpanel" aria-labelledby="tab-monthly-support" data-tab-panel="monthly-support" hidden>
+          <div class="compact-service-grid">
+            <article class="compact-service-card reveal">
+              <div class="service-card-top"><h3>Google Ads Management</h3><span>by scope</span></div>
+              <p>Search campaigns managed with clear goals, tracking, and reporting.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-google-management" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-google-management" hidden>
+                <p><strong>Best for:</strong> businesses with search demand and a clear offer.</p>
+                <p><strong>Includes:</strong> setup, optimisation, search terms review, and reporting.</p>
+                <p><strong>Next step:</strong> View Google Ads Help or ask about monthly support.</p>
+              </div>
+              <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="tab_google_management">View service &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d1">
+              <div class="service-card-top"><h3>Meta Ads Management</h3><span>by scope</span></div>
+              <p>Facebook and Instagram campaigns for awareness, leads, and retargeting.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-meta-management" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-meta-management" hidden>
+                <p><strong>Best for:</strong> brands that need paid social support over time.</p>
+                <p><strong>Includes:</strong> campaign setup, testing, audience refinement, and reporting.</p>
+                <p><strong>Next step:</strong> Ask about monthly support. Future page: meta-ads-help.html.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Meta Ads Management" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_meta_management">Ask about support &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d2">
+              <div class="service-card-top"><h3>Social Media Content Support</h3><span>by scope</span></div>
+              <p>Monthly content planning, asset support, and posting direction.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-social-support" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-social-support" hidden>
+                <p><strong>Best for:</strong> teams that need consistency without a full internal marketer.</p>
+                <p><strong>Includes:</strong> content calendar, creative support, and performance review.</p>
+                <p><strong>Next step:</strong> Send a monthly support enquiry.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Social Media Content Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_social_support">Ask about support &rarr;</a>
+            </article>
+
+            <article class="compact-service-card reveal d3">
+              <div class="service-card-top"><h3>Ongoing Marketing Support</h3><span>by scope</span></div>
+              <p>A practical monthly partner for ads, content, reporting, and next steps.</p>
+              <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-ongoing-support" data-accordion-trigger>View details</button>
+              <div class="details-panel" id="svc-ongoing-support" hidden>
+                <p><strong>Best for:</strong> businesses ready to improve visibility and lead flow.</p>
+                <p><strong>Includes:</strong> monthly planning, execution, optimisation, and reporting.</p>
+                <p><strong>Next step:</strong> Ask about monthly support.</p>
+              </div>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_ongoing_support">Ask about support &rarr;</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HOW TO WORK WITH US
+  ============================================================ -->
+  <section class="section" id="how-it-works">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">How to Work With Us</div>
+        <h2 class="sec-title">Three simple ways<br/>to start.</h2>
+        <p class="sec-sub">Start small, build a project, or move into monthly support when the timing is right.</p>
+      </div>
+
+      <div class="work-path-grid">
+        <article class="work-path-card reveal">
+          <span>Quick Help</span>
+          <h3>Get clarity first.</h3>
+          <p>Choose a call, audit, or walkthrough when you need direction before investing more.</p>
+          <a href="#services" class="svc-arrow" data-open-tab="quick-help">View quick help &rarr;</a>
+        </article>
+        <article class="work-path-card reveal d1">
+          <span>Project Based</span>
+          <h3>Build one clear thing.</h3>
+          <p>Use this path for a deck, landing page, campaign setup, or content kit.</p>
+          <a href="#services" class="svc-arrow" data-open-tab="project-based">View project services &rarr;</a>
+        </article>
+        <article class="work-path-card reveal d2">
+          <span>Ongoing Growth</span>
+          <h3>Improve month by month.</h3>
+          <p>Use monthly support for ads, content, reporting, and practical next steps.</p>
+          <a href="#services" class="svc-arrow" data-open-tab="monthly-support">View monthly support &rarr;</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       RESULTS SNAPSHOT
+  ============================================================ -->
+  <section class="section section-alt" id="results">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Results</div>
+        <h2 class="sec-title">Proof without the<br/><em>data dump.</em></h2>
+        <p class="sec-sub">A few examples of the kind of outcomes clear campaigns can create.</p>
+      </div>
+
+      <div class="result-snapshot-grid">
+        <article class="result-card reveal">
+          <span class="cs-tag-pill">Meta Ads</span>
+          <h3>The $250 campaign that reached half a million people</h3>
+          <div class="result-main">541K</div>
+          <p>Impressions from a small, focused campaign budget.</p>
+          <button class="details-toggle" type="button" aria-expanded="false" aria-controls="result-meta" data-accordion-trigger>View breakdown</button>
+          <div class="details-panel" id="result-meta" hidden>
+            <div class="mini-stat-grid">
+              <span><strong>$250</strong>Total spend</span>
+              <span><strong>36.7K</strong>Unique viewers</span>
+              <span><strong>3,394</strong>Profile visits</span>
+            </div>
+            <p>The lesson: smart targeting and a clear message can create useful reach without needing a huge budget.</p>
+          </div>
+        </article>
+
+        <article class="result-card reveal d1">
+          <span class="cs-tag-pill">Product Launch</span>
+          <h3>A single launch post that kept getting attention</h3>
+          <div class="result-main">231K+</div>
+          <p>Total views from a product launch campaign.</p>
+          <button class="details-toggle" type="button" aria-expanded="false" aria-controls="result-launch" data-accordion-trigger>View breakdown</button>
+          <div class="details-panel" id="result-launch" hidden>
+            <div class="mini-stat-grid">
+              <span><strong>8.4x</strong>ROAS</span>
+              <span><strong>54K+</strong>Audience managed</span>
+              <span><strong>~1K</strong>Average organic views</span>
+            </div>
+            <p>The lesson: content works harder when the message, offer, and amplification plan fit together.</p>
+          </div>
+        </article>
+
+        <article class="result-card reveal d2">
+          <span class="cs-tag-pill">Campaign Strategy</span>
+          <h3>Refill Hope, from concept to public attention</h3>
+          <div class="result-main">220K+</div>
+          <p>Views from a humanitarian campaign built from concept to launch.</p>
+          <button class="details-toggle" type="button" aria-expanded="false" aria-controls="result-refill" data-accordion-trigger>View breakdown</button>
+          <div class="details-panel" id="result-refill" hidden>
+            <div class="mini-stat-grid">
+              <span><strong>15K</strong>Gallons distributed</span>
+              <span><strong>100%</strong>Concept ownership</span>
+              <span><strong>$0</strong>Paid budget</span>
+            </div>
+            <p>The lesson: strong ideas and useful storytelling can move people before paid media enters the picture.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FEATURED SERVICES
+  ============================================================ -->
+  <section class="section" id="featured-services">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Featured Services</div>
+        <h2 class="sec-title">Useful places<br/>to go next.</h2>
+        <p class="sec-sub">These pages give more detail when you are ready to compare options.</p>
+      </div>
+
+      <div class="featured-service-grid">
+        <article class="featured-service-card reveal">
+          <h3>Presentation Deck Design</h3>
+          <p>Clean decks for pitches, proposals, meetings, and reports.</p>
+          <a href="presentation-deck-design.html" class="svc-arrow" data-track="click_service_page" data-track-location="featured_deck">View service &rarr;</a>
+        </article>
+        <article class="featured-service-card reveal d1">
+          <h3>Google Ads Help</h3>
+          <p>Walkthroughs, reviews, and setup support for search campaigns.</p>
+          <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="featured_google_ads">View service &rarr;</a>
+        </article>
+        <article class="featured-service-card reveal d2">
+          <h3>Brand Content Kit</h3>
+          <p>Short form video assets captured and edited for fast posting.</p>
+          <a href="#contact" class="svc-arrow" data-prefill-service="Brand Content Kit" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="featured_brand_content">Ask about this &rarr;</a>
+        </article>
+        <article class="featured-service-card reveal d3">
+          <h3>Strategy Call</h3>
+          <p>A focused call to choose the right next step.</p>
+          <a href="strategy-call.html#contact" class="svc-arrow js-book-call" data-track="click_book_call" data-track-location="featured_strategy">View service &rarr;</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRICING SNAPSHOT
+  ============================================================ -->
+  <section class="section section-alt" id="pricing">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Pricing</div>
+        <h2 class="sec-title">Pricing at a<br/><em>glance.</em></h2>
+        <p class="sec-sub">Simple starting points. Full scope depends on what you need built or managed.</p>
+      </div>
+
+      <div class="pricing-snapshot-grid reveal d1">
+        <div class="price-chip"><span>Quick Services</span><strong>from JMD $8,500</strong></div>
+        <div class="price-chip"><span>Walkthroughs</span><strong>from JMD $12,000</strong></div>
+        <div class="price-chip"><span>Decks</span><strong>from JMD $15,000</strong></div>
+        <div class="price-chip"><span>Brand Content Kits</span><strong>from JMD $25,000</strong></div>
+        <div class="price-chip"><span>Landing Pages</span><strong>from JMD $30,000</strong></div>
+        <div class="price-chip"><span>Monthly Support</span><strong>by scope</strong></div>
+      </div>
+
+      <div class="accordion-shell reveal d2">
+        <button class="accordion-heading" type="button" aria-expanded="false" aria-controls="pricingDetails" data-accordion-trigger>
+          View pricing details
+          <span aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-panel" id="pricingDetails" hidden>
+          <div class="quick-pricing compact-pricing">
+            <div class="qp-grid">
+              <div class="qp-card"><div class="qp-service">Strategy Call</div><div class="qp-price">from JMD $8,500</div></div>
+              <div class="qp-card"><div class="qp-service">Content Strategy Session</div><div class="qp-price">from JMD $8,500</div></div>
+              <div class="qp-card"><div class="qp-service">Google Ads Walkthrough</div><div class="qp-price">from JMD $12,000</div></div>
+              <div class="qp-card"><div class="qp-service">Meta Ads Walkthrough</div><div class="qp-price">from JMD $12,000</div></div>
+              <div class="qp-card"><div class="qp-service">Marketing Audit</div><div class="qp-price">from JMD $10,000</div></div>
+              <div class="qp-card"><div class="qp-service">Presentation Deck Design</div><div class="qp-price">from JMD $15,000</div></div>
+              <div class="qp-card"><div class="qp-service">Brand Content Kit</div><div class="qp-price">from JMD $25,000</div></div>
+              <div class="qp-card"><div class="qp-service">Landing Page Setup</div><div class="qp-price">from JMD $30,000</div></div>
+            </div>
+          </div>
+
+          <div class="price-row compact-price-row">
+            <div class="pcard">
+              <div class="ptier">Monthly</div>
+              <div class="pname">Launch</div>
+              <div class="ptag">Get visible. Build momentum fast.</div>
+              <ul class="pfeats">
+                <li>One channel or social media support</li>
+                <li>Content calendar and scheduling</li>
+                <li>Monthly performance report</li>
+              </ul>
+              <a href="#contact" class="pbtn pbtn-outline" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_snapshot_launch">Ask About Support &rarr;</a>
+            </div>
+            <div class="pcard feat active-card">
+              <div class="feat-badge">Popular</div>
+              <div class="ptier">Monthly</div>
+              <div class="pname">Growth</div>
+              <div class="ptag">Paid ads and content working together.</div>
+              <ul class="pfeats">
+                <li>Meta or Google Ads management</li>
+                <li>Campaign setup and optimisation</li>
+                <li>Reporting and strategy calls</li>
+              </ul>
+              <a href="#contact" class="pbtn pbtn-orange" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_snapshot_growth">Ask About Support &rarr;</a>
+            </div>
+            <div class="pcard">
+              <div class="ptier">Monthly</div>
+              <div class="pname">Scale</div>
+              <div class="ptag">A fuller ads, content, and strategy engine.</div>
+              <ul class="pfeats">
+                <li>Google Ads and Meta Ads management</li>
+                <li>Content production and storytelling</li>
+                <li>Priority support and campaign execution</li>
+              </ul>
+              <a href="#contact" class="pbtn pbtn-outline" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="pricing_snapshot_scale">Ask About Support &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        PROJECT FINDER
   ============================================================ -->
-  <section class="project-finder" id="project-finder" aria-labelledby="projectFinderTitle">
+  <section class="project-finder legacy-home-section" id="legacy-project-finder" aria-labelledby="projectFinderTitle" hidden>
     <div class="section-inner">
       <div class="finder-panel reveal">
         <div class="finder-copy">
@@ -165,12 +669,12 @@
             <strong>Strategy call or audit</strong>
             <small>For clarity before spending.</small>
           </a>
-          <a href="#recent-project-types" class="finder-option" data-track="click_project_finder" data-track-location="project_finder_build">
+          <a href="#services" class="finder-option" data-open-tab="project-based" data-track="click_project_finder" data-track-location="project_finder_build">
             <span>Need something built</span>
             <strong>Deck, landing page, or kit</strong>
             <small>For a clear project deliverable.</small>
           </a>
-          <a href="#content-creation" class="finder-option" data-track="click_project_finder" data-track-location="project_finder_content">
+          <a href="#services" class="finder-option" data-open-tab="content" data-track="click_project_finder" data-track-location="project_finder_content">
             <span>Need content</span>
             <strong>Shoot, edit, or brand kit</strong>
             <small>For launch, social, or campaign assets.</small>
@@ -189,7 +693,7 @@
   <!-- ============================================================
        QUICK SERVICES
   ============================================================ -->
-  <section class="section" id="quick-services">
+  <section class="section legacy-home-section" id="legacy-quick-services" hidden>
     <div class="section-inner">
 
       <div class="sec-header reveal">
@@ -299,7 +803,7 @@
                 <li>2 to 3 edited videos ready for social</li>
                 <li>Logo intro animation included</li>
               </ul>
-              <a href="#content-creation" class="qsc-btn" data-track="click_quick_service" data-track-location="brand_content_kit">View Packages &rarr;</a>
+              <a href="#services" class="qsc-btn" data-open-tab="content" data-track="click_quick_service" data-track-location="brand_content_kit">View Packages &rarr;</a>
             </div>
 
             <!-- Landing Page Setup -->
@@ -347,7 +851,7 @@
   <!-- ============================================================
        SERVICES
   ============================================================ -->
-  <section class="section section-alt" id="services">
+  <section class="section section-alt legacy-home-section" id="legacy-services" hidden>
     <div class="section-inner">
 
       <div class="sec-header reveal">
@@ -443,7 +947,7 @@
   <!-- ============================================================
        SERVICE LADDER
   ============================================================ -->
-  <section class="section" id="service-ladder">
+  <section class="section legacy-home-section" id="legacy-service-ladder" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -458,7 +962,7 @@
           <div class="lc-title">Quick Help</div>
           <div class="lc-examples">Walkthroughs, audits, deck design, one off calls</div>
           <div class="lc-client"><strong>Ideal for:</strong> small businesses, founders, and teams that need clear next steps without a long commitment.</div>
-          <a href="#quick-services" class="ladder-btn">See Quick Services</a>
+          <a href="#services" class="ladder-btn" data-open-tab="quick-help">See Quick Services</a>
         </div>
 
         <div class="ladder-card reveal d1">
@@ -485,7 +989,7 @@
   <!-- ============================================================
        CASE STUDIES / RESULTS
   ============================================================ -->
-  <section class="section section-alt" id="results">
+  <section class="section section-alt legacy-home-section" id="legacy-results" hidden>
     <div class="section-inner">
 
       <div class="sec-header reveal">
@@ -548,7 +1052,7 @@
   <!-- ============================================================
        RECENT PROJECT TYPES
   ============================================================ -->
-  <section class="section" id="recent-project-types">
+  <section class="section legacy-home-section" id="legacy-recent-project-types" hidden>
     <div class="section-inner">
 
       <div class="sec-header reveal">
@@ -602,7 +1106,7 @@
   <!-- ============================================================
        PRESENTATION DECK OFFER
   ============================================================ -->
-  <section class="section" id="presentation-decks">
+  <section class="section legacy-home-section" id="legacy-presentation-decks" hidden>
     <div class="section-inner">
 
       <div class="deck-feature reveal">
@@ -654,7 +1158,7 @@
   <!-- ============================================================
        CONTENT CREATION OFFER
   ============================================================ -->
-  <section class="section section-alt" id="content-creation">
+  <section class="section section-alt legacy-home-section" id="legacy-content-creation" hidden>
     <div class="section-inner">
 
       <div class="deck-feature content-feature reveal">
@@ -689,7 +1193,7 @@
   <!-- ============================================================
        PRICING
   ============================================================ -->
-  <section class="section section-alt" id="pricing">
+  <section class="section section-alt legacy-home-section" id="legacy-pricing" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -821,7 +1325,7 @@
   <!-- ============================================================
        PROCESS
   ============================================================ -->
-  <section class="section section-alt">
+  <section class="section section-alt legacy-home-section" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -891,7 +1395,7 @@
           <p>Either way, you get clear thinking, practical execution, and a Caribbean lens that understands local context while still building for the wider market.</p>
           <p>No fluff. No lock in pressure. Just focused work, honest feedback, and next steps you can actually use.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;">
-            <a href="#quick-services" class="btn btn-outline">See Quick Services</a>
+            <a href="#services" class="btn btn-outline" data-open-tab="quick-help">See Quick Help</a>
             <a href="strategy-call.html#contact" class="btn btn-orange js-book-call" data-track="click_book_call" data-track-location="about">Book a Strategy Call &rarr;</a>
           </div>
         </div>
@@ -904,7 +1408,7 @@
   <!-- ============================================================
        TESTIMONIALS
   ============================================================ -->
-  <section class="section section-alt">
+  <section class="section section-alt legacy-home-section" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -944,7 +1448,7 @@
   <!-- ============================================================
        FAQ
   ============================================================ -->
-  <section class="section" id="faq">
+  <section class="section legacy-home-section" id="legacy-faq" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -1016,7 +1520,7 @@
   <!-- ============================================================
        BLOG / INSIGHTS
   ============================================================ -->
-  <section class="section section-alt" id="blog">
+  <section class="section section-alt legacy-home-section" id="legacy-blog" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -1066,7 +1570,7 @@
        AUDIT / LEAD MAGNET FORM
        Connected via assets/js/site-config.js
   ============================================================ -->
-  <section class="section section-warm" id="audit">
+  <section class="section section-warm legacy-home-section" id="legacy-audit" hidden>
     <div class="section-inner">
       <div class="audit-grid">
 
@@ -1087,7 +1591,7 @@
 
         <div class="reveal d1">
           <div class="form-box">
-            <form id="auditForm" class="fl lead-form"
+            <form id="legacyAuditForm" class="fl"
               method="POST"
               data-form-key="audit"
               data-lead-source="audit_form"
@@ -1122,7 +1626,7 @@
                 <input type="text" name="website" class="fi" placeholder="yourwebsite.com"/>
               </div>
               <button type="submit" class="fsubmit" data-loading-text="Sending audit request...">Start with an Audit &rarr;</button>
-              <div id="auditStatus" class="form-status" role="status" aria-live="polite"></div>
+              <div id="legacyAuditStatus" class="form-status" role="status" aria-live="polite"></div>
               <p class="fnote">No spam. No pressure. Just useful insights.</p>
             </form>
           </div>
@@ -1136,7 +1640,7 @@
   <!-- ============================================================
        PROJECT PATHS
   ============================================================ -->
-  <section class="section" id="project-paths">
+  <section class="section legacy-home-section" id="legacy-project-paths" hidden>
     <div class="section-inner">
 
       <div style="text-align:center;" class="sec-header reveal">
@@ -1175,13 +1679,194 @@
   <!-- ============================================================
        CTA BANNER
   ============================================================ -->
-  <div class="cta-section">
+  <div class="cta-section legacy-home-section" hidden>
     <div class="cta-inner reveal">
       <h2>Ready to start<br/>the right <em>project?</em></h2>
       <p>Send a clear enquiry and we will recommend the best next step for your goals, timeline, and budget.</p>
       <div class="cta-actions">
         <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="cta" style="padding:14px 32px; border-radius:50px; font-size:0.95rem;">Start Project Enquiry &rarr;</a>
         <a href="strategy-call.html#contact" class="btn btn-outline js-book-call" data-track="click_book_call" data-track-location="cta" style="padding:14px 32px; border-radius:50px; font-size:0.95rem; color:#fff; border-color:rgba(255,255,255,0.25);">Book a Strategy Call</a>
+      </div>
+      <p class="cta-or">Need something else? <a href="#" data-kh-href="emailHref" data-kh-text="contactEmail">Email us</a></p>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       LATEST INSIGHTS
+  ============================================================ -->
+  <section class="section section-alt" id="blog">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">Latest Insights</div>
+        <h2 class="sec-title">Short reads for<br/>clearer decisions.</h2>
+        <p class="sec-sub">Useful notes on ads, content, offers, and strategy. Kept lower on the page so services stay easy to follow.</p>
+      </div>
+
+      <div class="blog-grid compact-blog-grid">
+        <article class="blog-card reveal">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Digital marketing dashboard showing campaign data on a laptop" loading="lazy" decoding="async"/>
+          <div class="blog-meta">Google Ads &middot; YouTube</div>
+          <h3>The Ad That Made Someone Ask: “Who Does Their Marketing?”</h3>
+          <p>How Google Ads and YouTube campaigns can help local businesses become easier to notice and trust.</p>
+          <a href="blog/google-ads-youtube-campaigns-local-business.html" class="svc-arrow" data-track="click_blog_card" data-track-location="latest_google_youtube">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card reveal d1">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard on a laptop showing campaign performance data" loading="lazy" decoding="async"/>
+          <div class="blog-meta">Paid Ads &middot; 4 min read</div>
+          <h3>Before you increase ad spend, sharpen the offer.</h3>
+          <p>Most campaigns need a cleaner message and stronger landing path before they need a bigger budget.</p>
+          <a href="blog/before-you-increase-ad-spend.html" class="svc-arrow" data-track="click_blog_card" data-track-location="latest_ads">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card reveal d2">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=900&q=80" alt="Creative production desk with camera equipment for content creation" loading="lazy" decoding="async"/>
+          <div class="blog-meta">Content &middot; 3 min read</div>
+          <h3>What a useful brand content kit should include.</h3>
+          <p>A practical look at the clips, hooks, and variations that make content easier to post consistently.</p>
+          <a href="blog/brand-content-kit.html" class="svc-arrow" data-track="click_blog_card" data-track-location="latest_content">Read article &rarr;</a>
+        </article>
+      </div>
+
+      <div class="section-action reveal d3">
+        <a href="blog/index.html" class="btn btn-outline" data-track="click_blog_index" data-track-location="latest_insights">View all articles &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       COMPACT AUDIT CTA
+       Connected via assets/js/site-config.js
+  ============================================================ -->
+  <section class="section section-warm" id="audit">
+    <div class="section-inner">
+      <div class="audit-compact reveal">
+        <div>
+          <span class="audit-badge">Audit</span>
+          <h2 class="audit-h">Not sure what to<br/><em>fix first?</em></h2>
+          <p>Start with a simple marketing audit and get clear next steps.</p>
+        </div>
+        <button class="btn btn-orange" type="button" aria-expanded="false" aria-controls="auditFormPanel" data-accordion-trigger>
+          Start with an Audit &rarr;
+        </button>
+      </div>
+
+      <div class="accordion-panel audit-form-panel" id="auditFormPanel" hidden>
+        <div class="audit-grid audit-grid-compact">
+          <div>
+            <ul class="audit-list">
+              <li>What's working and what's wasting budget</li>
+              <li>Gaps in your ad or content strategy</li>
+              <li>Quick wins you can implement right away</li>
+              <li>A simple roadmap for what to focus on next</li>
+            </ul>
+          </div>
+
+          <div class="form-box">
+            <form id="auditForm" class="fl lead-form"
+              method="POST"
+              data-form-key="audit"
+              data-lead-source="audit_form"
+              data-referring-section="audit"
+              data-track-submit="submit_audit_form">
+
+              <div class="fg">
+                <label class="flabel">Your name</label>
+                <input type="text" name="name" class="fi" placeholder="Kyle Hector" required/>
+              </div>
+              <div class="fg">
+                <label class="flabel">Business email</label>
+                <input type="email" name="email" class="fi" placeholder="you@business.com" required/>
+              </div>
+              <div class="fg">
+                <label class="flabel">Business name & industry</label>
+                <input type="text" name="business" class="fi" placeholder="Acme Co · Hospitality"/>
+              </div>
+              <div class="fg">
+                <label class="flabel">What are you currently running?</label>
+                <select name="channel" class="fi fsel">
+                  <option value="" disabled selected>Select one</option>
+                  <option>Google Ads</option>
+                  <option>Meta Ads</option>
+                  <option>Social Media</option>
+                  <option>Nothing yet</option>
+                  <option>Multiple channels</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label class="flabel">Website or social profile (optional)</label>
+                <input type="text" name="website" class="fi" placeholder="yourwebsite.com"/>
+              </div>
+              <button type="submit" class="fsubmit" data-loading-text="Sending audit request...">Send Audit Request &rarr;</button>
+              <div id="auditStatus" class="form-status" role="status" aria-live="polite"></div>
+              <p class="fnote">No spam. No pressure. Just useful insights.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section class="section" id="faq">
+    <div class="section-inner">
+      <div class="sec-header reveal">
+        <div class="sec-tag">FAQ</div>
+        <h2 class="sec-title">Common questions,<br/>simple answers.</h2>
+      </div>
+
+      <div class="faq-wrap progressive-faq">
+        <div class="faq-item reveal">
+          <button class="faq-btn" type="button" aria-expanded="false" aria-controls="newFaqPricing" data-accordion-trigger>
+            How much do services cost?
+            <span class="faq-ico">+</span>
+          </button>
+          <div class="faq-ans" id="newFaqPricing" hidden>Quick services start from the pricing shown above. Monthly support is shaped around your goals, channels, and pace.</div>
+        </div>
+
+        <div class="faq-item reveal d1">
+          <button class="faq-btn" type="button" aria-expanded="false" aria-controls="newFaqOneOff" data-accordion-trigger>
+            Can I work with Kahnec Hub on a one off project?
+            <span class="faq-ico">+</span>
+          </button>
+          <div class="faq-ans" id="newFaqOneOff" hidden>Yes. Walkthroughs, audits, deck design, landing pages, strategy sessions, and content kits can be handled as focused one off projects.</div>
+        </div>
+
+        <div class="faq-item reveal d2">
+          <button class="faq-btn" type="button" aria-expanded="false" aria-controls="newFaqRemote" data-accordion-trigger>
+            Do you only work with businesses in Jamaica?
+            <span class="faq-ico">+</span>
+          </button>
+          <div class="faq-ans" id="newFaqRemote" hidden>No. Kahnec Hub is rooted in Jamaica and the Caribbean, but digital strategy, ads, and websites can be handled remotely.</div>
+        </div>
+
+        <div class="faq-item reveal d3">
+          <button class="faq-btn" type="button" aria-expanded="false" aria-controls="newFaqResults" data-accordion-trigger>
+            How long before I see results from paid ads?
+            <span class="faq-ico">+</span>
+          </button>
+          <div class="faq-ans" id="newFaqResults" hidden>Most campaigns show useful learning within 2 to 4 weeks. Stronger optimisation usually happens after enough data is collected.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FINAL CTA
+  ============================================================ -->
+  <div class="cta-section" id="final-cta">
+    <div class="cta-inner reveal">
+      <h2>Ready to start<br/>the right <em>project?</em></h2>
+      <p>Send a clear enquiry and we will recommend the best next step for your goals, timeline, and budget.</p>
+      <div class="cta-actions">
+        <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="final_cta">Start Project Enquiry &rarr;</a>
+        <a href="strategy-call.html#contact" class="btn btn-outline js-book-call" data-track="click_book_call" data-track-location="final_cta">Book a Strategy Call</a>
       </div>
       <p class="cta-or">Need something else? <a href="#" data-kh-href="emailHref" data-kh-text="contactEmail">Email us</a></p>
     </div>
@@ -1340,7 +2025,7 @@
         <div>
           <div class="footer-col-title">Quick Links</div>
           <ul class="footer-links">
-            <li><a href="#quick-services">Quick Services</a></li>
+            <li><a href="#start-here">Start Here</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#results">Results</a></li>
             <li><a href="blog/index.html">Blog</a></li>
@@ -1366,10 +2051,10 @@
             <li><a href="google-ads-help.html">Google Ads Help</a></li>
             <li><a href="presentation-deck-design.html">Presentation Deck Design</a></li>
             <li><a href="strategy-call.html">Strategy Call</a></li>
-            <li><a href="#content-creation">Brand Content Kit</a></li>
+            <li><a href="#services" data-open-tab="content">Brand Content Kit</a></li>
             <li><a href="#contact">Landing Page Setup</a></li>
-            <li><a href="#content-creation">Content Creation</a></li>
-            <li><a href="#services">Drone Content Production</a></li>
+            <li><a href="#services" data-open-tab="content">Content Creation</a></li>
+            <li><a href="#services" data-open-tab="content">Drone Content Production</a></li>
             <li><a href="#contact">Ongoing Marketing Support</a></li>
           </ul>
         </div>
