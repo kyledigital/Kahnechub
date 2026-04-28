@@ -2504,6 +2504,40 @@ h2.sec-title em {
   transform: none;
 }
 
+/* Featured cards that were designed as dark panels must stay dark after motion classes are added. */
+.deck-card.featured.featured-motion-card,
+.pcard.feat.featured-motion-card,
+.content-highlight-card.featured-motion-card {
+  background: var(--brand-panel);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.content-highlight-card.featured-motion-card::before,
+.deck-card.featured.featured-motion-card::before,
+.pcard.feat.featured-motion-card::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 42%);
+}
+
+.content-highlight-card.featured-motion-card .deck-tier,
+.deck-card.featured.featured-motion-card .deck-tier,
+.pcard.feat.featured-motion-card .ptier {
+  background: rgba(255, 255, 255, 0.16);
+  color: #F5F7FF !important;
+}
+
+.content-highlight-card.featured-motion-card h3,
+.deck-card.featured.featured-motion-card h3,
+.pcard.feat.featured-motion-card .pname {
+  color: #fff !important;
+}
+
+.content-highlight-card.featured-motion-card li,
+.deck-card.featured.featured-motion-card li,
+.pcard.feat.featured-motion-card .ptag,
+.pcard.feat.featured-motion-card .pfeats li {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
 .motion-link {
   display: inline-flex;
   align-items: center;
