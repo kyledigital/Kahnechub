@@ -8,7 +8,7 @@
     businessName: 'Kahnec Hub',
     founderName: 'Kyle Hector',
     bookingLink: '',
-    fallbackBookingHref: 'strategy-call.html#contact',
+    fallbackBookingHref: 'index.html?service=Strategy%20Call&project_type=Need%20advice%20first#contact',
     responseTimeText: 'within 24 hours',
     contact: {
       email: '',
@@ -64,7 +64,15 @@
 
   function getBookingHref(config) {
     const bookingLink = (config.bookingLink || '').trim();
-    return bookingLink || config.fallbackBookingHref || '#contact';
+    if (bookingLink) {
+      return bookingLink;
+    }
+
+    if (document.getElementById('contactForm')) {
+      return '#contact';
+    }
+
+    return config.fallbackBookingHref || 'index.html?service=Strategy%20Call&project_type=Need%20advice%20first#contact';
   }
 
   function injectScript(src, attributes) {
@@ -199,6 +207,11 @@
         element.removeAttribute('target');
         element.removeAttribute('rel');
       }
+
+      if (bookingHref === '#contact') {
+        element.dataset.prefillService = element.dataset.prefillService || 'Strategy Call';
+        element.dataset.prefillProjectType = element.dataset.prefillProjectType || 'Need advice first';
+      }
     });
   }
 
@@ -254,6 +267,58 @@
     });
   }
 
+  function initMotionClasses() {
+    document.documentElement.classList.add('motion-ready');
+
+    const motionGroups = [
+      '.quick-svc-grid .quick-svc-card',
+      '.svc-grid .svc',
+      '.project-type-grid .project-type-card',
+      '.deck-packages .deck-card',
+      '.qp-grid .qp-card',
+      '.price-row .pcard',
+      '.process-row .proc',
+      '.cs-row .cs',
+      '.test-row .tcard',
+      '.blog-grid .blog-card',
+      '.ladder-row .ladder-card'
+    ];
+
+    motionGroups.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        element.classList.add('lift-card');
+        element.classList.add('motion-card');
+
+        if (!element.classList.contains('reveal')) {
+          element.classList.add('reveal');
+        }
+
+        element.classList.add(`stagger-${(index % 4) + 1}`);
+      });
+    });
+
+    document.querySelectorAll('.process-row .proc').forEach((element) => {
+      element.classList.add('progress-line');
+      element.classList.add('motion-progress');
+    });
+
+    document.querySelectorAll('.pcard.feat, .deck-card.featured, .content-highlight-card').forEach((element) => {
+      element.classList.add('featured-motion-card');
+    });
+
+    document.querySelectorAll('.svc-arrow').forEach((element) => {
+      element.classList.add('motion-link');
+    });
+
+    document.querySelectorAll('.blog-card').forEach((element) => {
+      element.classList.add('motion-image');
+    });
+
+    document.querySelectorAll('.lead-form').forEach((element) => {
+      element.classList.add('motion-form');
+    });
+  }
+
   function initReveal() {
     const revealElements = document.querySelectorAll('.reveal');
     if (!revealElements.length) {
@@ -263,7 +328,10 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          // Keep the old class and add the clearer reusable motion class.
           entry.target.classList.add('visible');
+          entry.target.classList.add('is-visible');
+          entry.target.classList.add('reveal-visible');
           revealObserver.unobserve(entry.target);
         }
       });
@@ -398,31 +466,48 @@
     }
   }
 
+  function applyContactPrefill(form, service, projectType) {
+    if (!form) {
+      return;
+    }
+
+    const message = form.querySelector('[name="message"]');
+    const formCard = form.closest('.contact-form-card');
+
+    setSelectOptionByText(form.querySelector('[name="service"]'), service);
+    setSelectOptionByText(form.querySelector('[name="project_type"]'), projectType);
+
+    if (message && service && !message.value.trim()) {
+      message.value = `I am interested in ${service}.`;
+      message.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    if (formCard) {
+      formCard.classList.remove('is-prefilled');
+      window.requestAnimationFrame(() => formCard.classList.add('is-prefilled'));
+    }
+  }
+
   function initEnquiryPrefill() {
+    const form = document.getElementById('contactForm');
+
+    if (form) {
+      const params = new URLSearchParams(window.location.search);
+      const service = params.get('service') || '';
+      const projectType = params.get('project_type') || '';
+
+      if (service || projectType) {
+        applyContactPrefill(form, service, projectType);
+      }
+    }
+
     document.querySelectorAll('[data-prefill-service], [data-prefill-project-type]').forEach((link) => {
       link.addEventListener('click', () => {
-        const form = document.getElementById('contactForm');
-        if (!form) {
-          return;
-        }
-
-        const service = link.dataset.prefillService || '';
-        const projectType = link.dataset.prefillProjectType || '';
-        const message = form.querySelector('[name="message"]');
-        const formCard = form.closest('.contact-form-card');
-
-        setSelectOptionByText(form.querySelector('[name="service"]'), service);
-        setSelectOptionByText(form.querySelector('[name="project_type"]'), projectType);
-
-        if (message && service && !message.value.trim()) {
-          message.value = `I am interested in ${service}.`;
-          message.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-
-        if (formCard) {
-          formCard.classList.remove('is-prefilled');
-          window.requestAnimationFrame(() => formCard.classList.add('is-prefilled'));
-        }
+        applyContactPrefill(
+          document.getElementById('contactForm'),
+          link.dataset.prefillService || '',
+          link.dataset.prefillProjectType || ''
+        );
       });
     });
   }
@@ -1095,6 +1180,7 @@
     applySiteConfig(config);
     initTracking();
     initNav();
+    initMotionClasses();
     initReveal();
     initCounters();
     initFieldValidation();
