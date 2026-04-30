@@ -4664,6 +4664,7 @@ h2.sec-title em,
 }
 
 .kahnec-mascot-wrap {
+  align-content: center;
   background:
     radial-gradient(circle at 78% 14%, rgba(255, 255, 255, 0.95), transparent 30%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(244, 242, 255, 0.88) 100%);
@@ -4671,15 +4672,17 @@ h2.sec-title em,
   border-radius: 22px;
   box-shadow: 0 18px 45px rgba(36, 16, 71, 0.1);
   display: grid;
+  gap: 12px;
   min-height: 230px;
   overflow: hidden;
   padding: 18px;
-  place-items: end center;
+  place-items: center;
   position: relative;
 }
 
 .kahnec-mascot-wrap--project {
-  align-content: space-between;
+  align-content: center;
+  gap: 18px;
   min-height: 100%;
   place-items: center;
 }
@@ -4701,12 +4704,10 @@ h2.sec-title em,
   color: #171716;
   font-size: 0.88rem;
   font-weight: 800;
-  left: 18px;
   line-height: 1.45;
   max-width: 220px;
   padding: 13px 15px;
-  position: absolute;
-  top: 18px;
+  position: relative;
   z-index: 2;
 }
 
@@ -4724,17 +4725,14 @@ h2.sec-title em,
 }
 
 .kahnec-mascot-wrap--project .kahnec-mascot-bubble {
-  justify-self: start;
-  max-width: 230px;
-  position: relative;
-  top: auto;
-  left: auto;
+  justify-self: center;
+  max-width: 250px;
 }
 
 .kahnec-mascot-glow {
   background: radial-gradient(circle, rgba(111, 103, 255, 0.32), transparent 68%);
   border-radius: 999px;
-  bottom: 0;
+  bottom: 8%;
   filter: blur(2px);
   height: 46%;
   opacity: 0.74;
@@ -5693,10 +5691,10 @@ h2.sec-title em,
 
   .kahnec-mascot-bubble {
     font-size: 0.82rem;
-    left: 14px;
+    left: auto;
     max-width: calc(100% - 28px);
     padding: 11px 13px;
-    top: 14px;
+    top: auto;
   }
 
   .section-helper {
