@@ -925,6 +925,54 @@
     renderEstimate();
   }
 
+  function initKahniIntro() {
+    const videos = Array.from(document.querySelectorAll('[data-kahni-video]'));
+    const prefersReducedMotion = window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+
+    if (videos.length && !prefersReducedMotion) {
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.35 });
+
+        videos.forEach((video) => observer.observe(video));
+      } else {
+        videos.forEach((video) => video.play().catch(() => {}));
+      }
+    }
+
+    document.querySelectorAll('[data-kahni-start]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const matchSection = document.getElementById('start-here');
+        const startButton = document.querySelector('[data-match-start]');
+
+        if (matchSection) {
+          matchSection.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+          });
+        }
+
+        window.setTimeout(() => {
+          if (startButton && !startButton.closest('[hidden]')) {
+            startButton.click();
+          }
+        }, prefersReducedMotion ? 0 : 420);
+      });
+    });
+  }
+
   function initProjectMatch() {
     const root = document.querySelector('[data-project-match]');
     if (!root) {
@@ -1988,6 +2036,7 @@
     initFieldValidation();
     initEnquiryPrefill();
     initProjectMatch();
+    initKahniIntro();
     initCampaignEstimator();
     initLeadForms(config);
     initPopup();

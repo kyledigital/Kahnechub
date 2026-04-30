@@ -3518,16 +3518,16 @@ body {
   align-items: center;
   border-radius: 999px;
   display: inline-flex;
-  height: clamp(52px, 7.1vw, 84px);
+  height: clamp(58px, 0.64em, 94px);
   justify-content: center;
-  margin: 0 0.08em;
-  vertical-align: 0.08em;
-  width: clamp(52px, 7.1vw, 84px);
+  margin: 0 0.09em;
+  vertical-align: 0.04em;
+  width: clamp(58px, 0.64em, 94px);
 }
 
 .hero-icon svg {
-  height: 34%;
-  width: 34%;
+  height: 39%;
+  width: 39%;
 }
 
 .hero-icon-orange {
@@ -3985,6 +3985,144 @@ body {
 
 .section-inner {
   max-width: 1240px;
+}
+
+.kahni-intro-section {
+  background: #fbfbff;
+  padding-bottom: 82px;
+  padding-top: 82px;
+}
+
+.kahni-intro {
+  align-items: center;
+  display: grid;
+  gap: 44px;
+  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 0.72fr);
+}
+
+.kahni-intro-copy {
+  max-width: 570px;
+}
+
+.kahni-intro-copy .sec-title {
+  margin-top: 14px;
+}
+
+.kahni-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.kahni-intro-media {
+  min-width: 0;
+}
+
+.kahni-video-frame {
+  aspect-ratio: 1 / 1;
+  background:
+    radial-gradient(circle at 72% 22%, rgba(255, 255, 255, 0.95), transparent 28%),
+    linear-gradient(145deg, #ffffff 0%, #f3f1ff 100%);
+  border: 1px solid rgba(111, 103, 255, 0.22);
+  border-radius: 30px;
+  box-shadow: 0 28px 70px rgba(36, 16, 71, 0.12);
+  display: grid;
+  overflow: hidden;
+  padding: 20px;
+  place-items: center;
+  position: relative;
+}
+
+.kahni-intro-video {
+  border-radius: 24px;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.kahni-video-count {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(111, 103, 255, 0.22);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1;
+  min-height: 42px;
+  padding: 0 18px;
+  position: absolute;
+  right: 26px;
+  top: 26px;
+  z-index: 3;
+}
+
+.kahni-float {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(111, 103, 255, 0.16);
+  box-shadow: 0 16px 34px rgba(36, 16, 71, 0.08);
+  color: #746cef;
+  display: flex;
+  position: absolute;
+  z-index: 2;
+}
+
+.kahni-float-card {
+  border-radius: 18px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  left: 28px;
+  letter-spacing: 0.08em;
+  padding: 13px 16px;
+  text-transform: uppercase;
+  top: 28px;
+}
+
+.kahni-float-chart {
+  border-radius: 20px;
+  bottom: 78px;
+  gap: 6px;
+  height: 72px;
+  justify-content: center;
+  right: 26px;
+  transform: rotate(6deg);
+  width: 84px;
+}
+
+.kahni-float-chart span {
+  background: currentColor;
+  border-radius: 999px 999px 6px 6px;
+  display: block;
+  width: 9px;
+}
+
+.kahni-float-chart span:nth-child(1) { height: 22px; opacity: 0.55; }
+.kahni-float-chart span:nth-child(2) { height: 34px; opacity: 0.72; }
+.kahni-float-chart span:nth-child(3) { height: 48px; }
+
+.kahni-float-chat {
+  border-radius: 19px;
+  bottom: 28px;
+  gap: 5px;
+  height: 58px;
+  justify-content: center;
+  left: 42px;
+  width: 68px;
+}
+
+.kahni-float-chat span {
+  background: currentColor;
+  border-radius: 50%;
+  display: block;
+  height: 6px;
+  width: 6px;
 }
 
 .sec-tag,
@@ -5221,6 +5359,21 @@ h2.sec-title em,
     grid-template-columns: 1fr;
   }
 
+  .kahni-intro {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  .kahni-intro-copy {
+    max-width: 680px;
+  }
+
+  .kahni-intro-media {
+    margin: 0 auto;
+    max-width: 560px;
+    width: 100%;
+  }
+
   .campaign-estimator-card,
   .campaign-estimator-copy {
     padding: 24px;
@@ -5311,13 +5464,72 @@ h2.sec-title em,
   }
 
   .hero-icon {
-    height: 46px;
-    width: 46px;
+    height: clamp(58px, 16vw, 70px);
+    margin-left: 0.06em;
+    margin-right: 0.06em;
+    width: clamp(58px, 16vw, 70px);
+  }
+
+  .hero-icon svg {
+    height: 40%;
+    width: 40%;
   }
 
   .hero-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .kahni-intro-section {
+    padding: 54px 18px;
+  }
+
+  .kahni-intro {
+    gap: 24px;
+  }
+
+  .kahni-intro-copy {
+    text-align: left;
+  }
+
+  .kahni-intro-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .kahni-video-frame {
+    border-radius: 24px;
+    padding: 10px;
+  }
+
+  .kahni-intro-video {
+    border-radius: 19px;
+  }
+
+  .kahni-video-count {
+    font-size: 0.78rem;
+    min-height: 34px;
+    padding: 0 13px;
+    right: 18px;
+    top: 18px;
+  }
+
+  .kahni-float-card {
+    display: none;
+  }
+
+  .kahni-float-chart {
+    bottom: 46px;
+    height: 58px;
+    right: 16px;
+    width: 66px;
+  }
+
+  .kahni-float-chat {
+    bottom: 16px;
+    height: 48px;
+    left: 18px;
+    width: 58px;
   }
 
   .capacity-cue {
