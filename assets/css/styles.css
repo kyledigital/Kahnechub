@@ -2194,6 +2194,8 @@ h2.sec-title em {
 /* ── CONTACT ── */
 #contact.section-dark {
   background: linear-gradient(135deg, rgba(23, 33, 94, 0.98) 0%, rgba(61, 62, 198, 0.96) 100%);
+  margin: 0;
+  max-width: none;
   overflow: hidden;
   position: relative;
 }
