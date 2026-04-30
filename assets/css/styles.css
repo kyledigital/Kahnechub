@@ -4293,6 +4293,10 @@ h2.sec-title em,
   padding: 28px;
 }
 
+.match-mobile-guide {
+  display: none;
+}
+
 .match-progress {
   display: grid;
   gap: 10px;
@@ -5604,6 +5608,52 @@ h2.sec-title em,
   .project-match {
     border-radius: 24px;
     padding: 10px;
+  }
+
+  .project-match > .kahnec-mascot-wrap--project {
+    display: none;
+  }
+
+  .match-mobile-guide {
+    align-items: center;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.98), transparent 30%),
+      linear-gradient(135deg, #f2f0ff 0%, #ffffff 100%);
+    border: 1px solid rgba(111, 103, 255, 0.18);
+    border-radius: 18px;
+    box-shadow: 0 14px 30px rgba(36, 16, 71, 0.07);
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    margin-bottom: 18px;
+    padding: 10px 12px;
+  }
+
+  .match-mobile-guide img {
+    display: block;
+    filter: drop-shadow(0 9px 12px rgba(87, 77, 199, 0.18));
+    height: 58px;
+    object-fit: contain;
+    object-position: center bottom;
+    width: 58px;
+  }
+
+  .match-mobile-guide span {
+    color: var(--accent);
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  .match-mobile-guide p {
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin: 0;
   }
 
   .kahnec-mascot-wrap {

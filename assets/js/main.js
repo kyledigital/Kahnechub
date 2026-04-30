@@ -1026,6 +1026,7 @@
     const stepLabel = root.querySelector('[data-match-step-label]');
     const progress = root.querySelector('[data-match-progress]');
     const helperBubble = root.querySelector('[data-match-helper-bubble]');
+    const inlineHelper = root.querySelector('[data-match-inline-helper]');
 
     const steps = [
       {
@@ -1192,6 +1193,9 @@
     function setHelperBubbleCopy(copy) {
       if (helperBubble) {
         helperBubble.innerHTML = copy;
+      }
+      if (inlineHelper) {
+        inlineHelper.innerHTML = copy;
       }
     }
 
