@@ -4606,6 +4606,21 @@ h2.sec-title em,
   color: #fff !important;
 }
 
+.compact-service-card.active-card .service-card-top h3,
+.compact-service-card.active-card > p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.compact-service-card.active-card .service-card-top span {
+  background: rgba(90, 99, 255, 0.18);
+  border-color: rgba(134, 142, 255, 0.34);
+  color: #9fa6ff;
+}
+
+.compact-service-card.active-card > .svc-arrow {
+  color: #9fa6ff;
+}
+
 .result-snapshot-grid {
   grid-template-columns: 1.1fr 0.9fr 1fr;
 }
