@@ -3936,6 +3936,21 @@ body {
   line-height: 1.65;
 }
 
+.lab-stat-copy {
+  grid-template-columns: minmax(120px, auto) minmax(180px, 360px) minmax(240px, 420px);
+}
+
+.lab-stat-copy span {
+  color: #5651ff;
+  font-weight: 800;
+}
+
+.lab-stat-copy strong {
+  font-size: clamp(2.3rem, 4.8vw, 4.7rem);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
 .strip {
   background: #fff;
   border: 0;

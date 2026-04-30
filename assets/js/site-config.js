@@ -4,9 +4,9 @@ window.KH_CONFIG = {
   founderName: 'Kyle Hector',
 
   // Add your live scheduler URL here when ready (Calendly, TidyCal, etc.).
-  // Leave blank to send strategy call buttons to the main contact form.
+  // Leave blank to send free discovery call buttons to the main contact form.
   bookingLink: 'https://calendly.com/kylehector/15min',
-  fallbackBookingHref: 'index.html?service=Strategy%20Call&project_type=Need%20advice%20first#contact',
+  fallbackBookingHref: 'index.html?service=Free%20Discovery%20Call&project_type=Need%20advice%20first#contact',
 
   // Used in contact copy and follow-up messaging.
   responseTimeText: 'within 24 hours',

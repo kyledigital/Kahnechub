@@ -209,7 +209,7 @@
       }
 
       if (bookingHref === '#contact') {
-        element.dataset.prefillService = element.dataset.prefillService || 'Strategy Call';
+        element.dataset.prefillService = element.dataset.prefillService || 'Free Discovery Call';
         element.dataset.prefillProjectType = element.dataset.prefillProjectType || 'Need advice first';
       }
     });
@@ -1083,12 +1083,12 @@
         prefillProjectType: 'Monthly support'
       },
       strategy: {
-        service: 'Strategy Call or Marketing Audit',
+        service: 'Strategy Session or Marketing Audit',
         copy: 'Best if you need help deciding what to fix, build, or promote first.',
         why: 'You are still deciding the best move, so clarity should come before more spend.',
-        nextStep: 'Book a strategy call or start with an audit.',
+        nextStep: 'Book a strategy session or start with an audit.',
         price: 'from JMD $8,500',
-        cta: 'Book a Strategy Call',
+        cta: 'Book a Strategy Session',
         href: 'strategy-call.html#contact',
         secondaryCta: 'Start with an Audit',
         secondaryHref: '#audit'
@@ -1561,7 +1561,7 @@
 
   function buildChatBookingLink(config) {
     const bookingHref = getBookingHref(config);
-    return buildTrackedLink(bookingHref, 'book a strategy call', 'click_book_call', isExternalUrl(bookingHref));
+    return buildTrackedLink(bookingHref, 'book a free discovery call', 'click_book_call', isExternalUrl(bookingHref));
   }
 
   function buildChatWhatsAppLink(config) {
@@ -1624,10 +1624,10 @@
       }
 
       if (budget.includes('Under') || timeline.includes('Not sure')) {
-        return 'A <strong>strategy call or marketing audit</strong> is a sensible first move before committing to a bigger project.';
+        return 'A <strong>free discovery call, strategy session, or marketing audit</strong> is a sensible first move before committing to a bigger project.';
       }
 
-      return 'A <strong>strategy call</strong> looks like the best next step, with room to move into project work or monthly support when the scope is clear.';
+      return 'A <strong>strategy session</strong> looks like the best next step, with room to move into project work or monthly support when the scope is clear.';
     }
 
     function getLeadService() {
@@ -1638,7 +1638,7 @@
       if (need.includes('Content')) return 'Content Shoot';
       if (need.includes('Monthly')) return 'Ongoing Marketing Support';
       if (need.includes('ads')) return 'Google Ads Management';
-      if (need.includes('Quick')) return 'Strategy Call';
+      if (need.includes('Quick')) return 'Strategy Session';
 
       return 'Not sure yet';
     }
