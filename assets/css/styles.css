@@ -5329,6 +5329,23 @@ h2.sec-title em,
 .cta-section,
 .footer {
   background: var(--brand-panel-soft);
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
+
+.cta-section {
+  margin-bottom: -1px;
+}
+
+#contact.section-dark {
+  margin-bottom: -1px;
+  margin-top: -1px;
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: -1px;
 }
 
 .contact-form-card {
