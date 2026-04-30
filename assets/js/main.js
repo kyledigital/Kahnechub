@@ -931,6 +931,42 @@
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false;
 
+    videos.forEach((video) => {
+      const loopEnd = Number.parseFloat(video.dataset.loopEnd || '');
+      let rafId = 0;
+
+      function loopBeforeTail() {
+        if (Number.isFinite(loopEnd) && loopEnd > 0 && video.currentTime >= loopEnd) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
+
+        if (!video.paused && !video.ended) {
+          rafId = window.requestAnimationFrame(loopBeforeTail);
+        }
+      }
+
+      video.addEventListener('loadedmetadata', () => {
+        if (video.currentTime > 0.1) {
+          video.currentTime = 0;
+        }
+      });
+
+      video.addEventListener('play', () => {
+        window.cancelAnimationFrame(rafId);
+        rafId = window.requestAnimationFrame(loopBeforeTail);
+      });
+
+      video.addEventListener('pause', () => {
+        window.cancelAnimationFrame(rafId);
+      });
+
+      video.addEventListener('ended', () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      });
+    });
+
     if (videos.length && !prefersReducedMotion) {
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
