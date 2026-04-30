@@ -3989,15 +3989,15 @@ body {
 
 .kahni-intro-section {
   background: #fbfbff;
-  padding-bottom: 82px;
-  padding-top: 82px;
+  padding-bottom: 62px;
+  padding-top: 62px;
 }
 
 .kahni-intro {
   align-items: center;
   display: grid;
-  gap: 44px;
-  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 0.72fr);
+  gap: 36px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 420px);
 }
 
 .kahni-intro-copy {
@@ -4016,7 +4016,9 @@ body {
 }
 
 .kahni-intro-media {
+  justify-self: end;
   min-width: 0;
+  width: 100%;
 }
 
 .kahni-video-frame {
@@ -4032,6 +4034,7 @@ body {
   padding: 20px;
   place-items: center;
   position: relative;
+  width: 100%;
 }
 
 .kahni-intro-video {
@@ -5360,17 +5363,18 @@ h2.sec-title em,
   }
 
   .kahni-intro {
-    gap: 30px;
-    grid-template-columns: 1fr;
+    gap: 28px;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
   }
 
   .kahni-intro-copy {
-    max-width: 680px;
+    max-width: 540px;
   }
 
   .kahni-intro-media {
-    margin: 0 auto;
-    max-width: 560px;
+    justify-self: end;
+    margin: 0;
+    max-width: 360px;
     width: 100%;
   }
 
@@ -5481,11 +5485,12 @@ h2.sec-title em,
   }
 
   .kahni-intro-section {
-    padding: 54px 18px;
+    padding: 46px 18px;
   }
 
   .kahni-intro {
     gap: 24px;
+    grid-template-columns: 1fr;
   }
 
   .kahni-intro-copy {
@@ -5499,6 +5504,8 @@ h2.sec-title em,
 
   .kahni-video-frame {
     border-radius: 24px;
+    margin: 0 auto;
+    max-width: 310px;
     padding: 10px;
   }
 
