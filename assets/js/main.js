@@ -631,6 +631,300 @@
     });
   }
 
+  function initCampaignEstimator() {
+    const root = document.querySelector('[data-campaign-estimator]');
+    if (!root) {
+      return;
+    }
+
+    const assumptions = {
+      'google-search': {
+        label: 'Google Search',
+        model: 'cpc',
+        lowCpc: 80,
+        midCpc: 150,
+        highCpc: 300,
+        lowCtr: 0.03,
+        highCtr: 0.08,
+        bestFor: 'capturing people already searching',
+        service: 'Google Ads Help',
+        prefillService: 'Google Ads Walkthrough'
+      },
+      'youtube-awareness': {
+        label: 'YouTube Awareness',
+        model: 'cpm',
+        lowCpm: 250,
+        midCpm: 500,
+        highCpm: 900,
+        lowFrequency: 1.5,
+        highFrequency: 3,
+        bestFor: 'getting seen with video',
+        service: 'Google Ads Help / YouTube Ads Support',
+        prefillService: 'Google Ads Walkthrough'
+      },
+      'display-awareness': {
+        label: 'Display Awareness',
+        model: 'cpm',
+        lowCpm: 200,
+        midCpm: 450,
+        highCpm: 800,
+        lowFrequency: 2,
+        highFrequency: 4,
+        bestFor: 'low cost visibility and remarketing',
+        service: 'Google Ads Help',
+        prefillService: 'Google Ads Walkthrough'
+      },
+      'meta-awareness': {
+        label: 'Meta Awareness',
+        model: 'cpm',
+        lowCpm: 250,
+        midCpm: 600,
+        highCpm: 1000,
+        lowFrequency: 1.8,
+        highFrequency: 3.5,
+        bestFor: 'Facebook and Instagram visibility',
+        service: 'Meta Ads Support',
+        prefillService: 'Meta Ads Walkthrough'
+      }
+    };
+
+    const budgetRange = root.querySelector('[data-estimator-budget-range]');
+    const budgetInput = root.querySelector('[data-estimator-budget-input]');
+    const budgetButtons = Array.from(root.querySelectorAll('[data-estimator-budget]'));
+    const typeButtons = Array.from(root.querySelectorAll('[data-estimator-type]'));
+    const summary = root.querySelector('[data-estimator-summary]');
+    const resultsGrid = root.querySelector('[data-estimator-results]');
+    const clicksCard = root.querySelector('[data-estimator-clicks-card]');
+    const reachCard = root.querySelector('[data-estimator-reach-card]');
+    const clicksValue = root.querySelector('[data-estimator-clicks]');
+    const impressionsValue = root.querySelector('[data-estimator-impressions]');
+    const reachValue = root.querySelector('[data-estimator-reach]');
+    const bestFor = root.querySelector('[data-estimator-best-for]');
+    const service = root.querySelector('[data-estimator-service]');
+    const planCta = root.querySelector('[data-estimator-plan]');
+
+    let currentBudget = Number(budgetInput && budgetInput.value) || 50000;
+    let currentType = 'google-search';
+    let currentEstimate = {};
+    let updateTimer;
+
+    function roundMetric(value) {
+      if (!Number.isFinite(value)) {
+        return 0;
+      }
+      if (value >= 10000) {
+        return Math.round(value / 1000) * 1000;
+      }
+      if (value >= 1000) {
+        return Math.round(value / 100) * 100;
+      }
+      return Math.round(value);
+    }
+
+    function formatNumber(value) {
+      const rounded = roundMetric(value);
+      if (rounded >= 1000000) {
+        const millions = rounded / 1000000;
+        return `${Number.isInteger(millions) ? millions : millions.toFixed(1)}M`;
+      }
+      if (rounded >= 1000) {
+        const thousands = rounded / 1000;
+        return `${Number.isInteger(thousands) ? thousands : thousands.toFixed(1)}K`;
+      }
+      return rounded.toLocaleString('en-US');
+    }
+
+    function formatRange(low, high) {
+      return `${formatNumber(low)} - ${formatNumber(high)}`;
+    }
+
+    function formatBudget(value) {
+      return `JMD $${Math.round(value).toLocaleString('en-US')}`;
+    }
+
+    function estimateBudget(budget, type) {
+      const config = assumptions[type] || assumptions['google-search'];
+
+      if (config.model === 'cpc') {
+        const clicksLow = budget / config.highCpc;
+        const clicksHigh = budget / config.lowCpc;
+        const impressionsLow = clicksLow / config.highCtr;
+        const impressionsHigh = clicksHigh / config.lowCtr;
+
+        return {
+          config,
+          clicksLow: roundMetric(clicksLow),
+          clicksHigh: roundMetric(clicksHigh),
+          impressionsLow: roundMetric(impressionsLow),
+          impressionsHigh: roundMetric(impressionsHigh),
+          reachLow: '',
+          reachHigh: ''
+        };
+      }
+
+      const impressionsLow = (budget / config.highCpm) * 1000;
+      const impressionsHigh = (budget / config.lowCpm) * 1000;
+      const reachLow = impressionsLow / config.highFrequency;
+      const reachHigh = impressionsHigh / config.lowFrequency;
+
+      return {
+        config,
+        clicksLow: '',
+        clicksHigh: '',
+        impressionsLow: roundMetric(impressionsLow),
+        impressionsHigh: roundMetric(impressionsHigh),
+        reachLow: roundMetric(reachLow),
+        reachHigh: roundMetric(reachHigh)
+      };
+    }
+
+    function setEstimatorHiddenFields() {
+      const form = document.getElementById('contactForm');
+      if (!form || !currentEstimate.config) {
+        return;
+      }
+
+      const values = {
+        estimator_budget: formatBudget(currentBudget),
+        estimator_campaign_type: currentEstimate.config.label,
+        estimator_impressions_low: currentEstimate.impressionsLow,
+        estimator_impressions_high: currentEstimate.impressionsHigh,
+        estimator_clicks_low: currentEstimate.clicksLow,
+        estimator_clicks_high: currentEstimate.clicksHigh,
+        estimator_reach_low: currentEstimate.reachLow,
+        estimator_reach_high: currentEstimate.reachHigh
+      };
+
+      Object.keys(values).forEach((key) => {
+        const field = form.querySelector(`[data-estimator-field="${key}"]`);
+        if (field) {
+          field.value = values[key] || '';
+        }
+      });
+    }
+
+    function updateBudgetControls() {
+      if (budgetInput) {
+        budgetInput.value = Math.round(currentBudget);
+      }
+      if (budgetRange) {
+        const min = Number(budgetRange.min) || 15000;
+        const max = Number(budgetRange.max) || 200000;
+        budgetRange.value = Math.min(max, Math.max(min, currentBudget));
+      }
+
+      budgetButtons.forEach((button) => {
+        button.classList.toggle('is-active', Number(button.dataset.estimatorBudget) === currentBudget);
+      });
+    }
+
+    function updateTypeControls() {
+      typeButtons.forEach((button) => {
+        const isActive = button.dataset.estimatorType === currentType;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
+
+    function renderEstimate() {
+      currentEstimate = estimateBudget(currentBudget, currentType);
+      const { config } = currentEstimate;
+
+      if (summary) {
+        summary.textContent = `Based on ${formatBudget(currentBudget)}, this ${config.label} campaign could roughly generate...`;
+      }
+
+      if (config.model === 'cpc') {
+        if (clicksCard) {
+          clicksCard.hidden = false;
+        }
+        if (reachCard) {
+          reachCard.hidden = true;
+        }
+        if (clicksValue) {
+          clicksValue.textContent = formatRange(currentEstimate.clicksLow, currentEstimate.clicksHigh);
+        }
+      } else {
+        if (clicksCard) {
+          clicksCard.hidden = true;
+        }
+        if (reachCard) {
+          reachCard.hidden = false;
+        }
+        if (reachValue) {
+          reachValue.textContent = formatRange(currentEstimate.reachLow, currentEstimate.reachHigh);
+        }
+      }
+
+      if (impressionsValue) {
+        impressionsValue.textContent = formatRange(currentEstimate.impressionsLow, currentEstimate.impressionsHigh);
+      }
+      if (bestFor) {
+        bestFor.textContent = config.bestFor;
+      }
+      if (service) {
+        service.textContent = config.service;
+      }
+      if (planCta) {
+        planCta.dataset.prefillService = config.prefillService;
+        planCta.dataset.prefillProjectType = 'Need advice first';
+      }
+
+      setEstimatorHiddenFields();
+
+      if (resultsGrid) {
+        resultsGrid.classList.remove('is-updating');
+        window.clearTimeout(updateTimer);
+        window.requestAnimationFrame(() => {
+          resultsGrid.classList.add('is-updating');
+          updateTimer = window.setTimeout(() => resultsGrid.classList.remove('is-updating'), 260);
+        });
+      }
+    }
+
+    function setBudget(value) {
+      const nextBudget = Math.max(1000, Number(value) || 50000);
+      currentBudget = nextBudget;
+      updateBudgetControls();
+      renderEstimate();
+    }
+
+    if (budgetRange) {
+      budgetRange.addEventListener('input', () => setBudget(budgetRange.value));
+    }
+
+    if (budgetInput) {
+      budgetInput.addEventListener('input', () => setBudget(budgetInput.value));
+    }
+
+    budgetButtons.forEach((button) => {
+      button.addEventListener('click', () => setBudget(button.dataset.estimatorBudget));
+    });
+
+    typeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        currentType = button.dataset.estimatorType || 'google-search';
+        updateTypeControls();
+        renderEstimate();
+      });
+    });
+
+    if (planCta) {
+      planCta.addEventListener('click', () => {
+        setEstimatorHiddenFields();
+        applyContactPrefill(
+          document.getElementById('contactForm'),
+          planCta.dataset.prefillService || 'Google Ads Walkthrough',
+          planCta.dataset.prefillProjectType || 'Need advice first'
+        );
+      });
+    }
+
+    updateBudgetControls();
+    updateTypeControls();
+    renderEstimate();
+  }
+
   function initProjectMatch() {
     const root = document.querySelector('[data-project-match]');
     if (!root) {
@@ -647,6 +941,7 @@
     const optionsElement = root.querySelector('[data-match-options]');
     const stepLabel = root.querySelector('[data-match-step-label]');
     const progress = root.querySelector('[data-match-progress]');
+    const helperBubble = root.querySelector('[data-match-helper-bubble]');
 
     const steps = [
       {
@@ -803,6 +1098,19 @@
     const answers = {};
     let currentStep = 0;
 
+    const helperBubbleCopy = [
+      'What are you trying to grow?',
+      'Nice. I&rsquo;m learning what your business needs.',
+      'Almost there. Let&rsquo;s narrow it down.',
+      'Got it. Let&rsquo;s find your best move.'
+    ];
+
+    function setHelperBubbleCopy(copy) {
+      if (helperBubble) {
+        helperBubble.innerHTML = copy;
+      }
+    }
+
     function getOptionLabel(stepKey, value) {
       const step = steps.find((item) => item.key === stepKey);
       const option = step ? step.options.find((item) => item[0] === value) : null;
@@ -884,6 +1192,7 @@
       const step = steps[currentStep];
       const selectedValue = answers[step.key] || '';
 
+      setHelperBubbleCopy(helperBubbleCopy[currentStep] || helperBubbleCopy[0]);
       stepLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
       progress.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
       questionElement.textContent = step.question;
@@ -912,6 +1221,7 @@
     function renderResult() {
       const result = getRecommendedResult();
       setQuizHiddenFields(result);
+      setHelperBubbleCopy('Here&rsquo;s your best next move.');
 
       quiz.hidden = true;
       resultContainer.hidden = false;
@@ -1678,6 +1988,7 @@
     initFieldValidation();
     initEnquiryPrefill();
     initProjectMatch();
+    initCampaignEstimator();
     initLeadForms(config);
     initPopup();
     initChatbot(config);

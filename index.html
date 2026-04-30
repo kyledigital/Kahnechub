@@ -209,31 +209,81 @@
       </div>
 
       <div class="project-match reveal d1" data-project-match>
-        <div class="match-intro" data-match-intro>
-          <div class="match-intro-copy">
-            <span class="match-eyebrow">Kahnec Project Match</span>
-            <h3>Choose with confidence.</h3>
-            <p>Not sure what you need? This will help you choose.</p>
+        <div class="match-state-stack">
+          <div class="match-intro" data-match-intro>
+            <div class="match-intro-copy">
+              <span class="match-eyebrow">Kahnec Project Match</span>
+              <h3>Feed the Growth Monster</h3>
+              <p>Not sure what your business needs next? Answer a few quick questions and get matched with the best service for your goal.</p>
+            </div>
+            <button type="button" class="match-start-btn" data-match-start data-track="click_project_match_start">Start the Match &rarr;</button>
           </div>
-          <button type="button" class="match-start-btn" data-match-start data-track="click_project_match_start">Start the Match &rarr;</button>
+
+          <div class="match-quiz" data-match-quiz hidden>
+            <div class="match-progress">
+              <span data-match-step-label>Step 1 of 4</span>
+              <div class="match-progress-bar" aria-hidden="true"><span data-match-progress></span></div>
+            </div>
+            <fieldset class="match-fieldset">
+              <legend data-match-question>What are you trying to do?</legend>
+              <div class="match-options" data-match-options></div>
+            </fieldset>
+            <div class="match-actions">
+              <button type="button" class="match-nav-btn" data-match-back>Back</button>
+              <button type="button" class="match-nav-btn match-nav-primary" data-match-next disabled>Next</button>
+            </div>
+          </div>
+
+          <div class="match-result" data-match-result hidden aria-live="polite"></div>
         </div>
 
-        <div class="match-quiz" data-match-quiz hidden>
-          <div class="match-progress">
-            <span data-match-step-label>Step 1 of 4</span>
-            <div class="match-progress-bar" aria-hidden="true"><span data-match-progress></span></div>
-          </div>
-          <fieldset class="match-fieldset">
-            <legend data-match-question>What are you trying to do?</legend>
-            <div class="match-options" data-match-options></div>
-          </fieldset>
-          <div class="match-actions">
-            <button type="button" class="match-nav-btn" data-match-back>Back</button>
-            <button type="button" class="match-nav-btn match-nav-primary" data-match-next disabled>Next</button>
-          </div>
+        <!-- Kahnec Helper: decorative guide for the Project Match flow. -->
+        <div class="kahnec-mascot-wrap kahnec-mascot-wrap--project is-floating is-blinking is-pulsing" aria-hidden="true">
+          <div class="kahnec-mascot-bubble" data-match-helper-bubble>Tell me your goal and I&rsquo;ll help you choose.</div>
+          <span class="kahnec-mascot-glow"></span>
+          <img class="kahnec-mascot kahnec-mascot-img kahnec-mascot--project" src="assets/images/helpers/kahnec-helper-project.png" alt="" loading="eager" decoding="async"/>
+          <svg class="kahnec-mascot kahnec-mascot--project" viewBox="0 0 260 250" focusable="false">
+            <defs>
+              <radialGradient id="helperBodyProject" cx="34%" cy="22%" r="78%">
+                <stop offset="0%" stop-color="#f7f4ff"/>
+                <stop offset="55%" stop-color="#c9c4ff"/>
+                <stop offset="100%" stop-color="#8278f6"/>
+              </radialGradient>
+              <linearGradient id="helperHornProject" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6d67cf"/>
+                <stop offset="100%" stop-color="#221b55"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="132" cy="225" rx="70" ry="12" fill="#6c63ff" opacity="0.12"/>
+            <path d="M78 66c-26-10-32-32-18-48 22 8 34 24 35 47z" fill="url(#helperHornProject)"/>
+            <path d="M181 66c25-11 31-33 17-49-22 8-34 24-35 48z" fill="url(#helperHornProject)"/>
+            <path d="M94 50l-8-35" class="mascot-line"/>
+            <path d="M166 50l8-35" class="mascot-line"/>
+            <circle class="mascot-antenna-tip" cx="84" cy="13" r="9"/>
+            <circle class="mascot-antenna-tip" cx="176" cy="13" r="9"/>
+            <ellipse cx="130" cy="130" rx="74" ry="84" fill="url(#helperBodyProject)"/>
+            <circle cx="104" cy="112" r="22" fill="#fff"/>
+            <circle cx="154" cy="112" r="22" fill="#fff"/>
+            <g class="mascot-eye">
+              <circle cx="104" cy="114" r="11" fill="#11111d"/>
+              <circle cx="154" cy="114" r="11" fill="#11111d"/>
+              <circle cx="99" cy="108" r="4" fill="#fff"/>
+              <circle cx="149" cy="108" r="4" fill="#fff"/>
+            </g>
+            <path d="M94 92q12-9 25 0" class="mascot-brow"/>
+            <path d="M141 92q12-9 25 0" class="mascot-brow"/>
+            <path d="M99 145q32 26 64 0" class="mascot-smile"/>
+            <path d="M154 151l6 11 7-11z" fill="#fff"/>
+            <rect x="42" y="142" width="72" height="86" rx="14" fill="#ecebff" stroke="#c8c5ff" stroke-width="3" class="mascot-tablet"/>
+            <circle cx="59" cy="158" r="3" fill="#c1bdff"/>
+            <path d="M57 205q20-28 39-6l14-23" class="mascot-chart-line"/>
+            <path d="M83 171q-21 8-34 23" class="mascot-arm"/>
+            <path d="M183 157q28-18 38-54" class="mascot-arm mascot-raised-arm"/>
+            <circle cx="223" cy="96" r="10" fill="#b9b2ff"/>
+            <path d="M217 97l7-15 6 16" class="mascot-finger"/>
+            <path d="M207 200q10 11 23 2" class="mascot-foot"/>
+          </svg>
         </div>
-
-        <div class="match-result" data-match-result hidden aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -530,6 +580,87 @@
 
 
   <!-- ============================================================
+       CAMPAIGN POTENTIAL ESTIMATOR
+  ============================================================ -->
+  <section class="section campaign-estimator-section" id="campaign-estimator">
+    <div class="section-inner">
+      <div class="campaign-estimator-shell reveal" data-campaign-estimator>
+        <div class="campaign-estimator-copy">
+          <div class="sec-tag">Campaign Estimator</div>
+          <h2 class="sec-title">What could your ad<br/>budget <em>unlock?</em></h2>
+          <p class="sec-sub">Use this simple estimator to see a rough range of possible impressions, clicks, or reach based on your monthly ad budget. These are planning estimates, not guaranteed results.</p>
+          <p class="estimator-note">Actual performance depends on targeting, creative, offer, landing page, competition, campaign type, and market conditions.</p>
+
+          <div class="kahnec-mascot-wrap kahnec-mascot-wrap--estimator is-floating is-pulsing" aria-hidden="true">
+            <div class="kahnec-mascot-bubble">Let&rsquo;s turn your budget into a clearer plan.</div>
+            <span class="kahnec-mascot-glow"></span>
+            <img class="kahnec-mascot kahnec-mascot-img kahnec-mascot--estimator" src="assets/images/helpers/kahnec-helper-results.png" alt="" loading="lazy" decoding="async"/>
+          </div>
+        </div>
+
+        <div class="campaign-estimator-card">
+          <div class="estimator-control">
+            <label for="estimatorBudgetRange">Monthly ad budget</label>
+            <div class="estimator-budget-row">
+              <input id="estimatorBudgetRange" type="range" min="15000" max="200000" step="5000" value="50000" data-estimator-budget-range/>
+              <input class="estimator-budget-input" type="number" min="1000" step="1000" value="50000" aria-label="Custom monthly ad budget in JMD" data-estimator-budget-input/>
+            </div>
+            <div class="estimator-budget-options" aria-label="Budget presets">
+              <button type="button" data-estimator-budget="15000">JMD $15,000</button>
+              <button type="button" data-estimator-budget="30000">JMD $30,000</button>
+              <button type="button" data-estimator-budget="50000" class="is-active">JMD $50,000</button>
+              <button type="button" data-estimator-budget="100000">JMD $100,000</button>
+              <button type="button" data-estimator-budget="200000">JMD $200,000</button>
+            </div>
+          </div>
+
+          <div class="estimator-control">
+            <span class="estimator-label">Campaign type</span>
+            <div class="estimator-type-options" role="group" aria-label="Campaign type">
+              <button type="button" data-estimator-type="google-search" class="is-active">Google Search</button>
+              <button type="button" data-estimator-type="youtube-awareness">YouTube Awareness</button>
+              <button type="button" data-estimator-type="display-awareness">Display Awareness</button>
+              <button type="button" data-estimator-type="meta-awareness">Meta Awareness</button>
+            </div>
+          </div>
+
+          <div class="estimator-summary" aria-live="polite">
+            <span data-estimator-summary>Based on your selected budget, this campaign could roughly generate...</span>
+          </div>
+
+          <div class="estimator-result-grid" data-estimator-results>
+            <div class="estimator-result-card" data-estimator-clicks-card>
+              <span>Estimated clicks</span>
+              <strong data-estimator-clicks>330 - 625</strong>
+            </div>
+            <div class="estimator-result-card">
+              <span>Estimated impressions</span>
+              <strong data-estimator-impressions>7.8K - 20.8K</strong>
+            </div>
+            <div class="estimator-result-card" data-estimator-reach-card hidden>
+              <span>Estimated reach</span>
+              <strong data-estimator-reach>5.2K - 6.9K</strong>
+            </div>
+          </div>
+
+          <div class="estimator-fit">
+            <p><strong>Best for:</strong> <span data-estimator-best-for>capturing people already searching</span></p>
+            <p><strong>Suggested service:</strong> <span data-estimator-service>Google Ads Help</span></p>
+          </div>
+
+          <p class="estimator-disclaimer">Estimate only. Final results depend on campaign setup and market conditions. These figures are rough planning estimates based on simple assumptions, not guaranteed results. A real forecast should be validated inside Google Ads using campaign settings, targeting, keywords, creative, and market data.</p>
+
+          <div class="estimator-actions">
+            <a href="#contact" class="btn btn-orange" data-estimator-plan data-prefill-service="Google Ads Walkthrough" data-prefill-project-type="Need advice first" data-track="click_project_enquiry" data-track-location="campaign_estimator">Plan My Campaign &rarr;</a>
+            <a href="strategy-call.html#contact" class="btn btn-outline js-book-call" data-track="click_book_call" data-track-location="campaign_estimator">Start with a Strategy Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        HOW TO WORK WITH US
   ============================================================ -->
   <section class="section" id="how-it-works">
@@ -573,6 +704,43 @@
         <div class="sec-tag">Results</div>
         <h2 class="sec-title">Clear results from<br/><em>focused campaigns.</em></h2>
         <p class="sec-sub">Real examples of the kind of outcomes practical strategy, content, and campaign support can create.</p>
+      </div>
+
+      <div class="section-helper section-helper--results reveal d1">
+        <!-- Kahnec Helper: decorative campaign results guide. -->
+        <div class="kahnec-mascot-wrap kahnec-mascot-wrap--results is-bouncing is-pulsing" aria-hidden="true">
+          <div class="kahnec-mascot-bubble">Real campaign proof, not guesswork.</div>
+          <span class="kahnec-mascot-glow"></span>
+          <img class="kahnec-mascot kahnec-mascot-img kahnec-mascot--results" src="assets/images/helpers/kahnec-helper-results.png" alt="" loading="lazy" decoding="async"/>
+          <svg class="kahnec-mascot kahnec-mascot--results" viewBox="0 0 260 210" focusable="false">
+            <defs>
+              <radialGradient id="helperBodyResults" cx="34%" cy="18%" r="82%">
+                <stop offset="0%" stop-color="#fbf9ff"/>
+                <stop offset="58%" stop-color="#c8c1ff"/>
+                <stop offset="100%" stop-color="#776bf4"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="128" cy="190" rx="58" ry="10" fill="#6c63ff" opacity="0.12"/>
+            <path d="M78 54c-20-9-24-27-12-39 17 7 26 19 27 38z" fill="#302768"/>
+            <path d="M166 54c20-9 24-27 12-39-17 7-26 19-27 38z" fill="#302768"/>
+            <path d="M94 42l-8-28M152 42l9-28" class="mascot-line"/>
+            <circle class="mascot-antenna-tip" cx="84" cy="13" r="7"/>
+            <circle class="mascot-antenna-tip" cx="163" cy="13" r="7"/>
+            <ellipse cx="123" cy="113" rx="64" ry="72" fill="url(#helperBodyResults)"/>
+            <path d="M76 111q-23-23-33-53" class="mascot-arm mascot-celebrate-arm"/>
+            <path d="M171 111q29-17 43-48" class="mascot-arm mascot-celebrate-arm"/>
+            <rect x="26" y="30" width="48" height="58" rx="11" fill="#fff" stroke="#d7d3ff" stroke-width="2"/>
+            <path d="M38 71h7v8h-7zM50 62h7v17h-7zM62 52h7v27h-7z" class="mascot-chart-bar"/>
+            <path d="M37 52c13 3 20-7 29-14" class="mascot-chart-line"/>
+            <path d="M191 55h17v23h-17zM213 42h17v36h-17zM235 29h17v49h-17z" class="mascot-chart-bar"/>
+            <path d="M190 37q25-9 50-30" class="mascot-chart-line"/>
+            <path d="M95 108q11 15 23 0" class="mascot-smile"/>
+            <path d="M128 108q11 15 23 0" class="mascot-smile"/>
+            <path d="M98 136q27 24 54 0" class="mascot-mouth-open"/>
+            <path d="M154 138l-7 12h14z" fill="#fff"/>
+            <path d="M52 99l-8 11M213 105l11 8M53 133l-11 8M201 139l12 11" class="mascot-sparkle"/>
+          </svg>
+        </div>
       </div>
 
       <div class="result-snapshot-grid">
@@ -674,6 +842,48 @@
         <div class="sec-tag">Pricing</div>
         <h2 class="sec-title">Pricing at a<br/><em>glance.</em></h2>
         <p class="sec-sub">Simple starting points. Full scope depends on what you need built or managed.</p>
+      </div>
+
+      <div class="section-helper section-helper--pricing reveal d1">
+        <!-- Kahnec Helper: decorative pricing guide. -->
+        <div class="kahnec-mascot-wrap kahnec-mascot-wrap--pricing is-nodding is-pulsing" aria-hidden="true">
+          <div class="kahnec-mascot-bubble">Simple, transparent pricing that grows with you.</div>
+          <span class="kahnec-mascot-glow"></span>
+          <img class="kahnec-mascot kahnec-mascot-img kahnec-mascot--pricing" src="assets/images/helpers/kahnec-helper-wave.png" alt="" loading="lazy" decoding="async"/>
+          <svg class="kahnec-mascot kahnec-mascot--pricing" viewBox="0 0 240 210" focusable="false">
+            <defs>
+              <radialGradient id="helperBodyPricing" cx="36%" cy="18%" r="82%">
+                <stop offset="0%" stop-color="#fbf9ff"/>
+                <stop offset="60%" stop-color="#cfc8ff"/>
+                <stop offset="100%" stop-color="#7e72f5"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="120" cy="190" rx="58" ry="10" fill="#6c63ff" opacity="0.12"/>
+            <path d="M73 56c-20-9-25-28-13-40 18 7 28 20 28 39z" fill="#302768"/>
+            <path d="M160 56c20-9 25-28 13-40-18 7-28 20-28 39z" fill="#302768"/>
+            <path d="M90 42l-7-28M147 42l9-28" class="mascot-line"/>
+            <circle class="mascot-antenna-tip" cx="81" cy="13" r="7"/>
+            <circle class="mascot-antenna-tip" cx="158" cy="13" r="7"/>
+            <ellipse cx="117" cy="114" rx="61" ry="70" fill="url(#helperBodyPricing)"/>
+            <circle cx="96" cy="102" r="18" fill="#fff"/>
+            <circle cx="136" cy="102" r="18" fill="#fff"/>
+            <g class="mascot-eye">
+              <circle cx="96" cy="104" r="8" fill="#11111d"/>
+              <circle cx="136" cy="104" r="8" fill="#11111d"/>
+              <circle cx="93" cy="100" r="3" fill="#fff"/>
+              <circle cx="133" cy="100" r="3" fill="#fff"/>
+            </g>
+            <path d="M94 134q22 18 45 0" class="mascot-smile"/>
+            <path d="M71 121q-20 19-28 42" class="mascot-arm"/>
+            <path d="M161 121q18 17 26 41" class="mascot-arm"/>
+            <path d="M35 112h42l14 19-31 52-39-20z" fill="#fff" stroke="#d7d3ff" stroke-width="3"/>
+            <circle cx="57" cy="128" r="5" fill="#9d94ff"/>
+            <text x="58" y="162" text-anchor="middle" class="mascot-price-text">$</text>
+            <ellipse class="mascot-coin" cx="196" cy="156" rx="25" ry="9" fill="#b9b2ff"/>
+            <path class="mascot-coin" d="M171 143c0-5 11-9 25-9s25 4 25 9v18c0 5-11 9-25 9s-25-4-25-9z" fill="#dcd8ff" stroke="#aea7ff" stroke-width="2"/>
+            <path d="M188 148h16M188 156h16" class="mascot-line"/>
+          </svg>
+        </div>
       </div>
 
       <div class="pricing-snapshot-grid reveal d1">
@@ -1981,6 +2191,48 @@
           <div class="sec-tag">Contact</div>
           <h2 class="contact-title">Share the<br/><em>project</em><br/>details.</h2>
           <p class="contact-intro">Use the form when you are ready to outline what you need. For quick questions, email or WhatsApp works too.</p>
+          <!-- Kahnec Helper: decorative support guide near the contact routes. -->
+          <div class="kahnec-mascot-wrap kahnec-mascot-wrap--support is-waving is-pulsing" aria-hidden="true">
+            <div class="kahnec-mascot-bubble">We&rsquo;re here to help. Send us a message anytime.</div>
+            <span class="kahnec-mascot-glow"></span>
+            <img class="kahnec-mascot kahnec-mascot-img kahnec-mascot--support" src="assets/images/helpers/kahnec-helper-support.png" alt="" loading="lazy" decoding="async"/>
+            <svg class="kahnec-mascot kahnec-mascot--support" viewBox="0 0 240 210" focusable="false">
+              <defs>
+                <radialGradient id="helperBodySupport" cx="36%" cy="18%" r="82%">
+                  <stop offset="0%" stop-color="#fbf9ff"/>
+                  <stop offset="58%" stop-color="#c8c1ff"/>
+                  <stop offset="100%" stop-color="#776bf4"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="122" cy="190" rx="58" ry="10" fill="#b8b2ff" opacity="0.18"/>
+              <path d="M76 54c-20-9-24-27-12-39 17 7 26 19 27 38z" fill="#221b55"/>
+              <path d="M164 54c20-9 24-27 12-39-17 7-26 19-27 38z" fill="#221b55"/>
+              <path d="M94 40l-8-27M151 40l9-27" class="mascot-line"/>
+              <circle class="mascot-antenna-tip" cx="84" cy="12" r="7"/>
+              <circle class="mascot-antenna-tip" cx="162" cy="12" r="7"/>
+              <ellipse cx="122" cy="112" rx="62" ry="70" fill="url(#helperBodySupport)"/>
+              <path d="M67 91c0-29 24-52 55-52s55 23 55 52" class="mascot-headset"/>
+              <rect x="57" y="84" width="18" height="38" rx="9" fill="#5751c7"/>
+              <rect x="169" y="84" width="18" height="38" rx="9" fill="#5751c7"/>
+              <path d="M178 118q-6 26-36 27" class="mascot-headset"/>
+              <circle cx="139" cy="145" r="5" fill="#5751c7"/>
+              <circle cx="101" cy="102" r="18" fill="#fff"/>
+              <circle cx="141" cy="102" r="18" fill="#fff"/>
+              <g class="mascot-eye">
+                <circle cx="101" cy="104" r="8" fill="#11111d"/>
+                <circle cx="141" cy="104" r="8" fill="#11111d"/>
+                <circle cx="98" cy="100" r="3" fill="#fff"/>
+                <circle cx="138" cy="100" r="3" fill="#fff"/>
+              </g>
+              <path d="M98 134q23 18 47 0" class="mascot-smile"/>
+              <path d="M145 139l7 10 6-10z" fill="#fff"/>
+              <path d="M78 125q-18 14-27 37" class="mascot-arm"/>
+              <path d="M166 118q30-9 41-38" class="mascot-arm mascot-wave-arm"/>
+              <circle cx="208" cy="74" r="10" fill="#c3bdff"/>
+              <path d="M33 67h34c7 0 12 5 12 12v17c0 7-5 12-12 12H51l-15 13v-13h-3c-7 0-12-5-12-12V79c0-7 5-12 12-12z" fill="#fff" stroke="#d7d3ff" stroke-width="2"/>
+              <path d="M41 86h19M41 96h13" class="mascot-line"/>
+            </svg>
+          </div>
           <div class="clks">
             <a href="#" class="clk" data-kh-href="emailHref" data-track="click_email" data-track-location="contact_email">
               <span class="clk-icon orange">&#9993;</span><span data-kh-text="contactEmail">Email us</span>
@@ -2015,6 +2267,14 @@
               <input type="hidden" name="quiz_stage" data-quiz-field="quiz_stage"/>
               <input type="hidden" name="quiz_need" data-quiz-field="quiz_need"/>
               <input type="hidden" name="quiz_timeline" data-quiz-field="quiz_timeline"/>
+              <input type="hidden" name="estimator_budget" data-estimator-field="estimator_budget"/>
+              <input type="hidden" name="estimator_campaign_type" data-estimator-field="estimator_campaign_type"/>
+              <input type="hidden" name="estimator_impressions_low" data-estimator-field="estimator_impressions_low"/>
+              <input type="hidden" name="estimator_impressions_high" data-estimator-field="estimator_impressions_high"/>
+              <input type="hidden" name="estimator_clicks_low" data-estimator-field="estimator_clicks_low"/>
+              <input type="hidden" name="estimator_clicks_high" data-estimator-field="estimator_clicks_high"/>
+              <input type="hidden" name="estimator_reach_low" data-estimator-field="estimator_reach_low"/>
+              <input type="hidden" name="estimator_reach_high" data-estimator-field="estimator_reach_high"/>
 
               <div>
                 <label class="flabel">Full name</label>

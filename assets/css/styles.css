@@ -4037,9 +4037,18 @@ h2.sec-title em,
   border: 1px solid rgba(90, 99, 255, 0.13);
   border-radius: 30px;
   box-shadow: 0 26px 70px rgba(36, 16, 71, 0.12);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.46fr);
+  align-items: stretch;
   margin: 0 auto;
-  max-width: 980px;
+  max-width: 1120px;
   padding: 16px;
+}
+
+.match-state-stack {
+  display: grid;
+  min-width: 0;
 }
 
 .match-intro,
@@ -4263,6 +4272,527 @@ h2.sec-title em,
   padding: 0;
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+/* Campaign Estimator */
+.campaign-estimator-section {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(90, 99, 255, 0.08), transparent 30%),
+    linear-gradient(180deg, #fff 0%, #f8f7ff 100%);
+}
+
+.campaign-estimator-shell {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.86), transparent 28%),
+    linear-gradient(135deg, #ebe8ff 0%, #fff 52%, #f7f6ff 100%);
+  border: 1px solid rgba(90, 99, 255, 0.14);
+  border-radius: 30px;
+  box-shadow: 0 26px 70px rgba(36, 16, 71, 0.12);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  padding: 16px;
+}
+
+.campaign-estimator-copy,
+.campaign-estimator-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(36, 16, 71, 0.07);
+  border-radius: 22px;
+  box-shadow: 0 16px 36px rgba(36, 16, 71, 0.06);
+}
+
+.campaign-estimator-copy {
+  align-content: start;
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+}
+
+.campaign-estimator-copy .sec-header,
+.campaign-estimator-copy .sec-sub {
+  margin: 0;
+}
+
+.campaign-estimator-copy .sec-title {
+  margin-bottom: 0;
+}
+
+.estimator-note,
+.estimator-disclaimer {
+  color: #706d82;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.kahnec-mascot-wrap--estimator {
+  margin-top: 8px;
+  min-height: 260px;
+}
+
+.kahnec-mascot--estimator {
+  max-width: 275px;
+  width: min(100%, 275px);
+}
+
+.campaign-estimator-card {
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+}
+
+.estimator-control {
+  display: grid;
+  gap: 12px;
+}
+
+.estimator-control label,
+.estimator-label {
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.estimator-budget-row {
+  align-items: center;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) 150px;
+}
+
+.estimator-budget-row input[type='range'] {
+  accent-color: var(--accent);
+  cursor: pointer;
+  width: 100%;
+}
+
+.estimator-budget-input {
+  background: #fff;
+  border: 1px solid rgba(36, 16, 71, 0.11);
+  border-radius: 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 900;
+  min-height: 46px;
+  padding: 0 14px;
+  width: 100%;
+}
+
+.estimator-budget-options,
+.estimator-type-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.estimator-budget-options button,
+.estimator-type-options button {
+  background: #f7f6ff;
+  border: 1px solid rgba(90, 99, 255, 0.16);
+  border-radius: 999px;
+  color: #4f4a68;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  min-height: 38px;
+  padding: 9px 13px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.estimator-budget-options button:hover,
+.estimator-type-options button:hover,
+.estimator-budget-options button.is-active,
+.estimator-type-options button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.estimator-summary {
+  background: #15111f;
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.5;
+  padding: 15px 16px;
+}
+
+.estimator-result-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.estimator-result-card {
+  background: #fff;
+  border: 1px solid rgba(90, 99, 255, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(36, 16, 71, 0.05);
+  padding: 18px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.estimator-result-grid.is-updating .estimator-result-card {
+  box-shadow: 0 20px 42px rgba(90, 99, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.estimator-result-card span {
+  color: #817e92;
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.estimator-result-card strong {
+  color: var(--accent);
+  display: block;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.estimator-fit {
+  background: #f8f7ff;
+  border: 1px solid rgba(90, 99, 255, 0.1);
+  border-radius: 16px;
+  display: grid;
+  gap: 8px;
+  padding: 15px 16px;
+}
+
+.estimator-fit p {
+  color: #68647b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.estimator-fit strong {
+  color: var(--text);
+}
+
+.estimator-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Kahnec Helpers: decorative mascot system used across key homepage sections. */
+.section-helper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -26px 0 28px;
+}
+
+.section-helper .kahnec-mascot-wrap {
+  max-width: 460px;
+  width: 100%;
+}
+
+.kahnec-mascot-wrap {
+  background:
+    radial-gradient(circle at 78% 14%, rgba(255, 255, 255, 0.95), transparent 30%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(244, 242, 255, 0.88) 100%);
+  border: 1px solid rgba(111, 103, 255, 0.18);
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(36, 16, 71, 0.1);
+  display: grid;
+  min-height: 230px;
+  overflow: hidden;
+  padding: 18px;
+  place-items: end center;
+  position: relative;
+}
+
+.kahnec-mascot-wrap--project {
+  align-content: space-between;
+  min-height: 100%;
+  place-items: center;
+}
+
+.kahnec-mascot-wrap--support {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.22), transparent 30%),
+    rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  margin: 24px 0 22px;
+  max-width: 440px;
+}
+
+.kahnec-mascot-bubble {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(111, 103, 255, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(36, 16, 71, 0.08);
+  color: #171716;
+  font-size: 0.88rem;
+  font-weight: 800;
+  left: 18px;
+  line-height: 1.45;
+  max-width: 220px;
+  padding: 13px 15px;
+  position: absolute;
+  top: 18px;
+  z-index: 2;
+}
+
+.kahnec-mascot-bubble::after {
+  background: inherit;
+  border-bottom: 1px solid rgba(111, 103, 255, 0.16);
+  border-right: 1px solid rgba(111, 103, 255, 0.16);
+  bottom: -7px;
+  content: '';
+  height: 14px;
+  position: absolute;
+  right: 28px;
+  transform: rotate(45deg);
+  width: 14px;
+}
+
+.kahnec-mascot-wrap--project .kahnec-mascot-bubble {
+  justify-self: start;
+  max-width: 230px;
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.kahnec-mascot-glow {
+  background: radial-gradient(circle, rgba(111, 103, 255, 0.32), transparent 68%);
+  border-radius: 999px;
+  bottom: 0;
+  filter: blur(2px);
+  height: 46%;
+  opacity: 0.74;
+  position: absolute;
+  width: 80%;
+}
+
+.kahnec-mascot {
+  display: block;
+  filter: drop-shadow(0 16px 20px rgba(87, 77, 199, 0.2));
+  height: auto;
+  max-width: 290px;
+  position: relative;
+  width: min(100%, 290px);
+  z-index: 1;
+}
+
+.kahnec-mascot-img {
+  border-radius: 20px;
+  filter: drop-shadow(0 18px 28px rgba(87, 77, 199, 0.18));
+  object-fit: contain;
+  object-position: center bottom;
+  transform-origin: center bottom;
+}
+
+.kahnec-mascot-wrap svg.kahnec-mascot {
+  display: none;
+}
+
+.kahnec-mascot--results,
+.kahnec-mascot--pricing,
+.kahnec-mascot--support {
+  max-width: 270px;
+  width: min(100%, 270px);
+}
+
+.kahnec-mascot--project {
+  max-width: 280px;
+  width: min(100%, 280px);
+}
+
+.mascot-line,
+.mascot-brow,
+.mascot-smile,
+.mascot-arm,
+.mascot-finger,
+.mascot-foot,
+.mascot-chart-line,
+.mascot-sparkle,
+.mascot-price-mark,
+.mascot-headset {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mascot-line,
+.mascot-headset {
+  stroke: #7770dd;
+  stroke-width: 5;
+}
+
+.mascot-brow {
+  stroke: #4c45b0;
+  stroke-width: 7;
+}
+
+.mascot-smile {
+  stroke: #171716;
+  stroke-width: 4;
+}
+
+.mascot-mouth-open {
+  fill: #241647;
+}
+
+.mascot-arm,
+.mascot-finger,
+.mascot-foot {
+  stroke: #9b93ff;
+  stroke-width: 16;
+}
+
+.mascot-chart-line {
+  stroke: #756cff;
+  stroke-width: 5;
+}
+
+.mascot-chart-bar {
+  fill: #a9a1ff;
+}
+
+.mascot-sparkle {
+  stroke: #b6afff;
+  stroke-width: 3;
+}
+
+.mascot-price-mark {
+  stroke: #5751c7;
+  stroke-width: 6;
+}
+
+.mascot-price-text {
+  fill: #5751c7;
+  font-family: Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+}
+
+.mascot-antenna-tip {
+  fill: #f9fbff;
+  filter: drop-shadow(0 0 8px rgba(90, 99, 255, 0.58));
+  stroke: #c7c2ff;
+  stroke-width: 3;
+}
+
+.mascot-eye,
+.mascot-tablet,
+.mascot-raised-arm,
+.mascot-celebrate-arm,
+.mascot-wave-arm,
+.mascot-coin,
+.mascot-chart-bar,
+.mascot-antenna-tip {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.is-floating .kahnec-mascot {
+  animation: helperFloat 5.4s ease-in-out infinite;
+}
+
+.is-blinking .mascot-eye {
+  animation: helperBlink 6.8s ease-in-out infinite;
+}
+
+.is-bouncing .kahnec-mascot {
+  animation: helperBounce 4.8s ease-in-out infinite;
+}
+
+.is-waving .mascot-wave-arm {
+  animation: helperWave 3.8s ease-in-out infinite;
+}
+
+.is-waving .kahnec-mascot-img {
+  animation: helperWaveWhole 4.6s ease-in-out infinite;
+}
+
+.is-nodding .kahnec-mascot {
+  animation: helperNod 5.8s ease-in-out infinite;
+}
+
+.is-pulsing .kahnec-mascot-glow,
+.is-pulsing .mascot-antenna-tip {
+  animation: helperPulse 4.6s ease-in-out infinite;
+}
+
+.is-floating .mascot-tablet {
+  animation: helperTabletTilt 5.4s ease-in-out infinite;
+}
+
+.is-bouncing .mascot-chart-bar {
+  animation: helperBarPulse 3.6s ease-in-out infinite;
+}
+
+.is-nodding .mascot-coin {
+  animation: helperCoinLift 4.8s ease-in-out infinite;
+}
+
+@keyframes helperFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes helperBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96% { transform: scaleY(0.08); }
+}
+
+@keyframes helperPulse {
+  0%, 100% { opacity: 0.72; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes helperBounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-7px); }
+  55% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes helperWave {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-11deg); }
+  60% { transform: rotate(8deg); }
+}
+
+@keyframes helperWaveWhole {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  35% { transform: translateY(-4px) rotate(-1.4deg); }
+  70% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes helperNod {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(2px) rotate(1deg); }
+}
+
+@keyframes helperTabletTilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-2deg); }
+}
+
+@keyframes helperBarPulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.08); }
+}
+
+@keyframes helperCoinLift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 .start-card,
@@ -4672,8 +5202,22 @@ h2.sec-title em,
     grid-template-columns: 1fr;
   }
 
+  .campaign-estimator-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .campaign-estimator-card,
+  .campaign-estimator-copy {
+    padding: 24px;
+  }
+
   .goal-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-match {
+    grid-template-columns: 1fr;
+    max-width: 980px;
   }
 
   .match-intro {
@@ -4686,6 +5230,11 @@ h2.sec-title em,
 
   .match-options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-helper {
+    justify-content: center;
+    margin-top: -18px;
   }
 }
 
@@ -4791,9 +5340,64 @@ h2.sec-title em,
     grid-template-columns: 1fr;
   }
 
+  .campaign-estimator-shell {
+    border-radius: 24px;
+    padding: 10px;
+  }
+
+  .campaign-estimator-card,
+  .campaign-estimator-copy {
+    border-radius: 18px;
+    padding: 20px;
+  }
+
+  .estimator-budget-row,
+  .estimator-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .estimator-actions {
+    flex-direction: column;
+  }
+
+  .estimator-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
   .project-match {
     border-radius: 24px;
     padding: 10px;
+  }
+
+  .kahnec-mascot-wrap {
+    min-height: 210px;
+    padding: 16px;
+  }
+
+  .kahnec-mascot-wrap--project,
+  .kahnec-mascot-wrap--support {
+    min-height: 220px;
+  }
+
+  .kahnec-mascot,
+  .kahnec-mascot--results,
+  .kahnec-mascot--pricing,
+  .kahnec-mascot--support {
+    max-width: 220px;
+    width: min(100%, 220px);
+  }
+
+  .kahnec-mascot-bubble {
+    font-size: 0.82rem;
+    left: 14px;
+    max-width: calc(100% - 28px);
+    padding: 11px 13px;
+    top: 14px;
+  }
+
+  .section-helper {
+    margin: -18px 0 22px;
   }
 
   .match-intro,
@@ -4849,5 +5453,21 @@ h2.sec-title em,
   .wa {
     bottom: 18px;
     right: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-floating .kahnec-mascot,
+  .is-blinking .mascot-eye,
+  .is-bouncing .kahnec-mascot,
+  .is-waving .mascot-wave-arm,
+  .is-waving .kahnec-mascot-img,
+  .is-nodding .kahnec-mascot,
+  .is-pulsing .kahnec-mascot-glow,
+  .is-pulsing .mascot-antenna-tip,
+  .is-floating .mascot-tablet,
+  .is-bouncing .mascot-chart-bar,
+  .is-nodding .mascot-coin {
+    animation: none !important;
   }
 }
