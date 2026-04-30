@@ -36,7 +36,7 @@
       </a>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#start-here">Start Here</a></li>
+        <li><a href="#start-here">Goals</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#pricing">Pricing</a></li>
@@ -65,39 +65,46 @@
 
       <!-- Left: Text content -->
       <div class="hero-copy">
-        <div class="hero-badge reveal stagger-1">
-          <span class="hero-badge-dot"></span>
-          Digital Project Support
-        </div>
+        <h1 class="reveal stagger-1">
+          Turn attention
+          <span class="hero-icon hero-icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 15l4-9v6h6l-6 7v-4H5z" fill="currentColor"/>
+            </svg>
+          </span>
+          into<br/>
+          <span class="muted-word">growth</span> that people<br/>
+          can
+          <span class="hero-icon hero-icon-yellow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 13v4M12 7v10M17 10v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          see.
+        </h1>
 
-        <h1 class="reveal stagger-2">Turn attention into<br/>growth that people<br/>can <em>see.</em></h1>
-
-        <p class="hero-sub reveal stagger-3">
+        <p class="hero-sub reveal stagger-2">
           Ads, content creation, presentation decks, landing pages, and practical marketing support for Caribbean businesses and ambitious founders.
         </p>
 
-        <div class="hero-actions reveal stagger-4">
+        <div class="hero-actions reveal stagger-3">
           <a href="#contact" class="btn btn-orange" data-prefill-service="Not sure yet" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="hero">Start Project Enquiry &rarr;</a>
           <a href="#start-here" class="btn btn-outline">Find the Right Service</a>
         </div>
 
-        <div class="hero-note reveal stagger-5">Quick services available for one off projects or ongoing growth.</div>
+        <div class="hero-note reveal stagger-4">Quick services available for one off projects or ongoing growth.</div>
 
-        <!-- Animated counters — values set by data attributes -->
-        <div class="hero-stats reveal stagger-6">
-          <div class="hstat">
-            <div class="hstat-num" data-target="1.19" data-prefix="$" data-suffix="M">$0M</div>
-            <div class="hstat-label">Revenue driven</div>
+        <div class="capacity-cue reveal stagger-5" aria-label="Monthly support capacity">
+          <div class="capacity-cue-copy">
+            <span>Monthly support capacity</span>
+            <strong>2 of 3 active</strong>
           </div>
-          <div class="hstat">
-            <div class="hstat-num" data-target="8.4" data-suffix="x">0</div>
-            <div class="hstat-label">Average ROAS</div>
+          <div class="capacity-cue-meter" role="meter" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-label="Monthly support capacity: 2 of 3 active">
+            <span></span>
           </div>
-          <div class="hstat">
-            <div class="hstat-num" data-target="185" data-suffix="M+">0</div>
-            <div class="hstat-label">Impressions delivered</div>
-          </div>
+          <a href="#services" data-open-tab="monthly-support" data-track="click_capacity_board" data-track-location="hero">1 ongoing support slot open</a>
         </div>
+
       </div>
 
       <!-- Right: Floating metric cards (CSS animated) -->
@@ -127,6 +134,48 @@
       </div>
 
     </div>
+
+    <div class="hero-lab reveal d3">
+      <div class="lab-copy">
+        <h2>Your key to strategic success through practical marketing.</h2>
+        <p>Ready for clearer offers, stronger campaign decisions, and useful support without the guesswork?</p>
+      </div>
+
+      <div class="lab-grid">
+        <div class="lab-card lab-card-light">
+          <div class="mini-label">Campaign reports</div>
+          <h3>Fast access to what matters</h3>
+          <p>One view for spend, reach, leads, and the next practical move.</p>
+          <div class="mini-report">
+            <div>
+              <span>Total reach</span>
+              <strong>541K</strong>
+            </div>
+            <div>
+              <span>ROAS</span>
+              <strong>8.4x</strong>
+            </div>
+          </div>
+          <div class="spark-line" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="lab-card lab-card-dark">
+          <div class="dark-widgets" aria-hidden="true">
+            <span></span><span></span>
+          </div>
+          <h3>Offer control</h3>
+          <p>Know which service, asset, or campaign deserves your next dollar.</p>
+        </div>
+      </div>
+
+      <div class="lab-stat">
+        <span>Up to</span>
+        <strong>45%</strong>
+        <p>less time spent guessing what to fix next when campaigns are organized around clear decisions.</p>
+      </div>
+    </div>
   </div><!-- /hero-wrap -->
 
 
@@ -147,43 +196,44 @@
 
 
   <!-- ============================================================
-       START HERE
+       GOAL ROUTER
        Future service pages to build: brand-content-kit.html, landing-page-setup.html,
        meta-ads-help.html, content-creation.html
   ============================================================ -->
   <section class="section start-here-section" id="start-here">
     <div class="section-inner">
       <div class="sec-header reveal">
-        <div class="sec-tag">Start Here</div>
-        <h2 class="sec-title">Start with the kind of<br/>help you <em>need.</em></h2>
-        <p class="sec-sub">Choose the closest option. You do not need to know the exact service yet.</p>
+        <div class="sec-tag">Project Match</div>
+        <h2 class="sec-title">Find your best<br/>next <em>move.</em></h2>
+        <p class="sec-sub">Answer a few quick questions and get matched with the service that fits your goal.</p>
       </div>
 
-      <div class="start-grid">
-        <a href="#services" class="start-card reveal" data-open-tab="quick-help" data-track="click_start_here" data-track-location="quick_help">
-          <span class="start-card-num">01</span>
-          <h3>I need quick advice</h3>
-          <p>Calls, walkthroughs, audits, and practical reviews.</p>
-          <span class="start-card-link">See quick help &rarr;</span>
-        </a>
-        <a href="#services" class="start-card reveal d1" data-open-tab="project-based" data-track="click_start_here" data-track-location="project_based">
-          <span class="start-card-num">02</span>
-          <h3>I need something built</h3>
-          <p>Decks, landing pages, campaign setup, and content kits.</p>
-          <span class="start-card-link">See project options &rarr;</span>
-        </a>
-        <a href="#services" class="start-card reveal d2" data-open-tab="content" data-track="click_start_here" data-track-location="content">
-          <span class="start-card-num">03</span>
-          <h3>I need content</h3>
-          <p>Video shoots, drone content, editing, and brand assets.</p>
-          <span class="start-card-link">See content help &rarr;</span>
-        </a>
-        <a href="#services" class="start-card reveal d3" data-open-tab="monthly-support" data-track="click_start_here" data-track-location="monthly_support">
-          <span class="start-card-num">04</span>
-          <h3>I need ongoing support</h3>
-          <p>Monthly ads, content, reporting, and growth support.</p>
-          <span class="start-card-link">See monthly support &rarr;</span>
-        </a>
+      <div class="project-match reveal d1" data-project-match>
+        <div class="match-intro" data-match-intro>
+          <div class="match-intro-copy">
+            <span class="match-eyebrow">Kahnec Project Match</span>
+            <h3>Choose with confidence.</h3>
+            <p>Not sure what you need? This will help you choose.</p>
+          </div>
+          <button type="button" class="match-start-btn" data-match-start data-track="click_project_match_start">Start the Match &rarr;</button>
+        </div>
+
+        <div class="match-quiz" data-match-quiz hidden>
+          <div class="match-progress">
+            <span data-match-step-label>Step 1 of 4</span>
+            <div class="match-progress-bar" aria-hidden="true"><span data-match-progress></span></div>
+          </div>
+          <fieldset class="match-fieldset">
+            <legend data-match-question>What are you trying to do?</legend>
+            <div class="match-options" data-match-options></div>
+          </fieldset>
+          <div class="match-actions">
+            <button type="button" class="match-nav-btn" data-match-back>Back</button>
+            <button type="button" class="match-nav-btn match-nav-primary" data-match-next disabled>Next</button>
+          </div>
+        </div>
+
+        <div class="match-result" data-match-result hidden aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -196,8 +246,8 @@
     <div class="section-inner">
       <div class="sec-header reveal">
         <div class="sec-tag">Services</div>
-        <h2 class="sec-title">Find the right support<br/>without the <em>scroll.</em></h2>
-        <p class="sec-sub">Pick a category. Open a card only when you need more detail.</p>
+        <h2 class="sec-title">Find the right support<br/>for your <em>next move.</em></h2>
+        <p class="sec-sub">Choose the area that matches your goal, then send the clearest enquiry.</p>
       </div>
 
       <div class="service-tabs reveal d1">
@@ -224,14 +274,14 @@
 
             <article class="compact-service-card reveal d1">
               <div class="service-card-top"><h3>Google Ads Walkthrough</h3><span>from JMD $12,000</span></div>
-              <p>Live support to review, set up, or improve your Google Ads account.</p>
+              <p>Live support to review, set up, or improve your Google Ads account, including Search or YouTube campaign direction where relevant.</p>
               <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-google-walkthrough" data-accordion-trigger>View details</button>
               <div class="details-panel" id="svc-google-walkthrough" hidden>
-                <p><strong>Best for:</strong> search campaigns, account reviews, and practical fixes.</p>
+                <p><strong>Best for:</strong> Search or YouTube campaigns, account reviews, and practical fixes.</p>
                 <p><strong>Includes:</strong> screen share review, account guidance, and action list.</p>
                 <p><strong>Next step:</strong> View the Google Ads service page.</p>
               </div>
-              <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="tab_google_ads">View service &rarr;</a>
+              <a href="google-ads-help.html" class="svc-arrow" data-track="click_service_page" data-track-location="tab_google_ads">View Google Ads Help &rarr;</a>
             </article>
 
             <article class="compact-service-card reveal d2">
@@ -295,19 +345,19 @@
                 <p><strong>Includes:</strong> one page build, mobile design, and lead form or WhatsApp link.</p>
                 <p><strong>Next step:</strong> Start a project enquiry.</p>
               </div>
-              <a href="#contact" class="svc-arrow" data-prefill-service="Landing Page Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_landing_page">Start enquiry &rarr;</a>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Landing Page Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_landing_page">Start Lead Generation Enquiry &rarr;</a>
             </article>
 
             <article class="compact-service-card reveal d2">
               <div class="service-card-top"><h3>Campaign Setup</h3><span>by scope</span></div>
-              <p>Setup support for Google, Meta, or launch campaigns.</p>
+              <p>Setup support for Google, YouTube, Meta, or launch campaigns that need a clearer path to enquiries.</p>
               <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-campaign-setup" data-accordion-trigger>View details</button>
               <div class="details-panel" id="svc-campaign-setup" hidden>
-                <p><strong>Best for:</strong> businesses that have an offer and need a clean launch.</p>
+                <p><strong>Best for:</strong> businesses that have an offer and need a clean launch or lead generation path.</p>
                 <p><strong>Includes:</strong> structure, targeting direction, tracking review, and launch support.</p>
                 <p><strong>Next step:</strong> Send an enquiry.</p>
               </div>
-              <a href="#contact" class="svc-arrow" data-prefill-service="Campaign Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_campaign_setup">Start enquiry &rarr;</a>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Campaign Setup" data-prefill-project-type="Project based work" data-track="click_project_enquiry" data-track-location="tab_campaign_setup">Start Campaign Enquiry &rarr;</a>
             </article>
 
             <article class="compact-service-card active-card reveal d3">
@@ -379,6 +429,51 @@
         </div>
 
         <div class="tab-panel" id="panel-monthly-support" role="tabpanel" aria-labelledby="tab-monthly-support" data-tab-panel="monthly-support" hidden>
+          <section class="capacity-board" aria-labelledby="capacity-board-title">
+            <div class="capacity-board-main">
+              <div class="capacity-board-kicker">Capacity Board</div>
+              <h3 id="capacity-board-title">1 ongoing support slot open.</h3>
+              <p>I keep ongoing support limited so planning, execution, and reporting stay hands-on.</p>
+
+              <div class="capacity-board-meter-wrap">
+                <div class="capacity-board-meter-head">
+                  <span>Monthly support clients</span>
+                  <strong>2 / 3 active</strong>
+                </div>
+                <div class="capacity-board-meter" role="meter" aria-valuemin="0" aria-valuemax="3" aria-valuenow="2" aria-label="Monthly support capacity: 2 of 3 active clients">
+                  <span class="capacity-fill"></span>
+                  <span class="capacity-pin">Open 1</span>
+                </div>
+              </div>
+
+              <div class="capacity-stats" aria-label="Current monthly support capacity">
+                <div class="capacity-stat">
+                  <span>Active clients</span>
+                  <strong>2</strong>
+                </div>
+                <div class="capacity-stat">
+                  <span>Open slot</span>
+                  <strong>1</strong>
+                </div>
+                <div class="capacity-stat">
+                  <span>Max capacity</span>
+                  <strong>3</strong>
+                </div>
+              </div>
+            </div>
+
+            <aside class="capacity-board-side" aria-label="Best fit right now">
+              <div class="capacity-side-title">Best fit right now</div>
+              <ul>
+                <li><span></span>Google / Meta ads</li>
+                <li><span></span>Content planning</li>
+                <li><span></span>Reporting</li>
+                <li><span></span>Landing page support</li>
+              </ul>
+              <a href="#contact" class="capacity-board-link" data-prefill-service="Ongoing Marketing Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="capacity_board">Ask about monthly support &rarr;</a>
+            </aside>
+          </section>
+
           <div class="compact-service-grid">
             <article class="compact-service-card reveal">
               <div class="service-card-top"><h3>Google Ads Management</h3><span>by scope</span></div>
@@ -394,26 +489,26 @@
 
             <article class="compact-service-card reveal d1">
               <div class="service-card-top"><h3>Meta Ads Management</h3><span>by scope</span></div>
-              <p>Facebook and Instagram campaigns for awareness, leads, and retargeting.</p>
+              <p>Facebook and Instagram campaigns for visibility, leads, and retargeting.</p>
               <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-meta-management" data-accordion-trigger>View details</button>
               <div class="details-panel" id="svc-meta-management" hidden>
                 <p><strong>Best for:</strong> brands that need paid social support over time.</p>
                 <p><strong>Includes:</strong> campaign setup, testing, audience refinement, and reporting.</p>
                 <p><strong>Next step:</strong> Ask about monthly support. Future page: meta-ads-help.html.</p>
               </div>
-              <a href="#contact" class="svc-arrow" data-prefill-service="Meta Ads Management" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_meta_management">Ask about support &rarr;</a>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Meta Ads Management" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_meta_management">Ask about Meta Ads Support &rarr;</a>
             </article>
 
             <article class="compact-service-card reveal d2">
               <div class="service-card-top"><h3>Social Media Content Support</h3><span>by scope</span></div>
-              <p>Monthly content planning, asset support, and posting direction.</p>
+              <p>Monthly content planning, creative direction, asset support, and posting guidance.</p>
               <button class="details-toggle" type="button" aria-expanded="false" aria-controls="svc-social-support" data-accordion-trigger>View details</button>
               <div class="details-panel" id="svc-social-support" hidden>
                 <p><strong>Best for:</strong> teams that need consistency without a full internal marketer.</p>
                 <p><strong>Includes:</strong> content calendar, creative support, and performance review.</p>
                 <p><strong>Next step:</strong> Send a monthly support enquiry.</p>
               </div>
-              <a href="#contact" class="svc-arrow" data-prefill-service="Social Media Content Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_social_support">Ask about support &rarr;</a>
+              <a href="#contact" class="svc-arrow" data-prefill-service="Social Media Content Support" data-prefill-project-type="Monthly support" data-track="click_project_enquiry" data-track-location="tab_social_support">Ask about Content Support &rarr;</a>
             </article>
 
             <article class="compact-service-card reveal d3">
@@ -476,8 +571,8 @@
     <div class="section-inner">
       <div class="sec-header reveal">
         <div class="sec-tag">Results</div>
-        <h2 class="sec-title">Proof without the<br/><em>data dump.</em></h2>
-        <p class="sec-sub">A few examples of the kind of outcomes clear campaigns can create.</p>
+        <h2 class="sec-title">Clear results from<br/><em>focused campaigns.</em></h2>
+        <p class="sec-sub">Real examples of the kind of outcomes practical strategy, content, and campaign support can create.</p>
       </div>
 
       <div class="result-snapshot-grid">
@@ -1526,7 +1621,7 @@
       <div style="text-align:center;" class="sec-header reveal">
         <div class="sec-tag" style="justify-content:center;">Blog</div>
         <h2 class="sec-title">Practical marketing<br/><em>insights.</em></h2>
-        <p class="sec-sub" style="margin:0 auto;">Short reads for business owners who want clearer offers, stronger content, and smarter campaign decisions.</p>
+        <p class="sec-sub" style="margin:0 auto;">Practical notes for business owners who want clearer offers, stronger content, and smarter campaign decisions.</p>
       </div>
 
       <div class="blog-grid">
@@ -1539,7 +1634,7 @@
         </article>
 
         <article class="blog-card reveal">
-          <img class="blog-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard on a laptop showing campaign performance data" loading="lazy" decoding="async"/>
+          <img class="blog-img" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Marketing planning session with notes for improving an offer before increasing ad spend" loading="lazy" decoding="async"/>
           <div class="blog-meta">Paid Ads &middot; 4 min read</div>
           <h3>Before you increase ad spend, sharpen the offer.</h3>
           <p>Most campaigns do not need a bigger budget first. They need a cleaner message, a stronger landing path, and a reason for people to act now.</p>
@@ -1700,7 +1795,7 @@
       <div class="sec-header reveal">
         <div class="sec-tag">Latest Insights</div>
         <h2 class="sec-title">Short reads for<br/>clearer decisions.</h2>
-        <p class="sec-sub">Useful notes on ads, content, offers, and strategy. Kept lower on the page so services stay easy to follow.</p>
+        <p class="sec-sub">Useful notes on ads, content, offers, and strategy for businesses making their next marketing decision.</p>
       </div>
 
       <div class="blog-grid compact-blog-grid">
@@ -1713,7 +1808,7 @@
         </article>
 
         <article class="blog-card reveal d1">
-          <img class="blog-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard on a laptop showing campaign performance data" loading="lazy" decoding="async"/>
+          <img class="blog-img" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Marketing planning session with notes for improving an offer before increasing ad spend" loading="lazy" decoding="async"/>
           <div class="blog-meta">Paid Ads &middot; 4 min read</div>
           <h3>Before you increase ad spend, sharpen the offer.</h3>
           <p>Most campaigns need a cleaner message and stronger landing path before they need a bigger budget.</p>
@@ -1884,17 +1979,14 @@
         <!-- Left: links -->
         <div class="reveal">
           <div class="sec-tag">Contact</div>
-          <h2 class="contact-title">Let's build<br/><em>something</em><br/>together.</h2>
-          <p class="contact-intro">Tell us about your business. We'll recommend the right service and respond <span data-kh-text="responseTimeText">within 24 hours</span> with a clear next step.</p>
+          <h2 class="contact-title">Share the<br/><em>project</em><br/>details.</h2>
+          <p class="contact-intro">Use the form when you are ready to outline what you need. For quick questions, email or WhatsApp works too.</p>
           <div class="clks">
             <a href="#" class="clk" data-kh-href="emailHref" data-track="click_email" data-track-location="contact_email">
               <span class="clk-icon orange">&#9993;</span><span data-kh-text="contactEmail">Email us</span>
             </a>
             <a href="#" class="clk" target="_blank" rel="noopener noreferrer" data-kh-href="whatsappHref" data-track="click_whatsapp" data-track-location="contact_whatsapp">
               <span class="clk-icon green">&#128172;</span>WhatsApp for quick response
-            </a>
-            <a href="#" class="clk" target="_blank" rel="noopener noreferrer" data-kh-href="linkedinUrl">
-              <span class="clk-icon blue">in</span>LinkedIn
             </a>
             <a href="#" class="clk" target="_blank" rel="noopener noreferrer" data-kh-href="instagramUrl">
               <span class="clk-icon grad">IG</span>Instagram · <span data-kh-text="instagramHandle">@kahnec_withkyle</span>
@@ -1905,8 +1997,8 @@
         <!-- Right: form -->
         <div class="reveal d1">
           <div class="contact-form-card">
-            <div class="cf-head">Start a Digital Project</div>
-            <div class="cf-sub">Tell us what you need and we will recommend the right next step within 24 hours.</div>
+            <div class="cf-head">Project Enquiry</div>
+            <div class="cf-sub">Share the basics and we will follow up with the best next step.</div>
             <div class="contact-trust-row" aria-label="Enquiry trust points">
               <span>Response within 24 hours</span>
               <span>One off and monthly support available</span>
@@ -1918,6 +2010,11 @@
               data-lead-source="contact_form"
               data-referring-section="contact"
               data-track-submit="submit_contact_form">
+              <input type="hidden" name="recommended_service" data-quiz-field="recommended_service"/>
+              <input type="hidden" name="quiz_goal" data-quiz-field="quiz_goal"/>
+              <input type="hidden" name="quiz_stage" data-quiz-field="quiz_stage"/>
+              <input type="hidden" name="quiz_need" data-quiz-field="quiz_need"/>
+              <input type="hidden" name="quiz_timeline" data-quiz-field="quiz_timeline"/>
 
               <div>
                 <label class="flabel">Full name</label>
@@ -2025,7 +2122,7 @@
         <div>
           <div class="footer-col-title">Quick Links</div>
           <ul class="footer-links">
-            <li><a href="#start-here">Start Here</a></li>
+            <li><a href="#start-here">Goals</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#results">Results</a></li>
             <li><a href="blog/index.html">Blog</a></li>
