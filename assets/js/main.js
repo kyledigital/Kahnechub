@@ -1022,6 +1022,8 @@
     const backButton = root.querySelector('[data-match-back]');
     const nextButton = root.querySelector('[data-match-next]');
     const questionElement = root.querySelector('[data-match-question]');
+    const matchHint = root.querySelector('[data-match-hint]');
+    const selectedCount = root.querySelector('[data-match-selected-count]');
     const optionsElement = root.querySelector('[data-match-options]');
     const stepLabel = root.querySelector('[data-match-step-label]');
     const progress = root.querySelector('[data-match-progress]');
@@ -1032,6 +1034,7 @@
       {
         key: 'goal',
         question: 'What are you trying to do?',
+        allowMultiple: true,
         options: [
           ['google', 'Be found on Google'],
           ['youtube', 'Be seen on YouTube'],
@@ -1047,6 +1050,7 @@
       {
         key: 'stage',
         question: 'What stage are you at?',
+        allowMultiple: true,
         options: [
           ['advice', 'I need advice first'],
           ['offer', 'I already have an offer'],
@@ -1059,6 +1063,7 @@
       {
         key: 'need',
         question: 'What do you need most right now?',
+        allowMultiple: true,
         options: [
           ['plan', 'A clear plan'],
           ['campaign_setup', 'A campaign setup'],
@@ -1073,6 +1078,7 @@
       {
         key: 'timeline',
         question: 'How soon do you need help?',
+        allowMultiple: false,
         options: [
           ['asap', 'As soon as possible'],
           ['this_week', 'This week'],
@@ -1205,41 +1211,62 @@
       return option ? option[1] : '';
     }
 
+    function getAnswerValues(stepKey) {
+      const answer = answers[stepKey];
+      if (Array.isArray(answer)) {
+        return answer;
+      }
+      return answer ? [answer] : [];
+    }
+
+    function hasAnswer(stepKey, value) {
+      return getAnswerValues(stepKey).includes(value);
+    }
+
+    function getAnswerLabels(stepKey) {
+      return getAnswerValues(stepKey)
+        .map((value) => getOptionLabel(stepKey, value))
+        .filter(Boolean)
+        .join(', ');
+    }
+
     function getRecommendedResult() {
-      if (answers.goal === 'unsure') {
+      const goals = getAnswerValues('goal');
+
+      if (hasAnswer('goal', 'unsure') || !goals.length) {
         return results.strategy;
       }
 
-      if (answers.stage === 'monthly' || answers.need === 'monthly_support') {
-        if (answers.goal === 'social') {
+      if (hasAnswer('stage', 'monthly') || hasAnswer('need', 'monthly_support') || hasAnswer('goal', 'ongoing')) {
+        if (hasAnswer('goal', 'social')) {
           return results.social;
         }
-        if (answers.goal === 'ongoing') {
-          return results.ongoing;
-        }
+        return results.ongoing;
       }
 
-      if (answers.stage === 'running_ads' && answers.need === 'better_ads') {
-        if (answers.goal === 'social') {
+      if (hasAnswer('stage', 'running_ads') && hasAnswer('need', 'better_ads')) {
+        if (hasAnswer('goal', 'social')) {
           return results.social;
         }
-        if (answers.goal === 'youtube') {
+        if (hasAnswer('goal', 'youtube')) {
           return results.youtube;
         }
-        if (answers.goal === 'google') {
+        if (hasAnswer('goal', 'google')) {
           return results.google;
         }
       }
 
-      if ((answers.goal === 'leads' && answers.need === 'landing_page') || answers.goal === 'landing') {
-        return answers.goal === 'landing' ? results.landing : results.leads;
+      if ((hasAnswer('goal', 'leads') && hasAnswer('need', 'landing_page')) || hasAnswer('goal', 'landing')) {
+        return hasAnswer('goal', 'landing') ? results.landing : results.leads;
       }
 
-      if (answers.goal === 'content' && (answers.need === 'videos_content' || answers.need === 'video_editing')) {
+      if (hasAnswer('goal', 'content') && (hasAnswer('need', 'videos_content') || hasAnswer('need', 'video_editing'))) {
         return results.content;
       }
 
-      return results[answers.goal] || results.strategy;
+      const goalPriority = ['google', 'youtube', 'leads', 'social', 'content', 'landing', 'deck', 'ongoing'];
+      const primaryGoal = goalPriority.find((goal) => hasAnswer('goal', goal)) || goals[0];
+      return results[primaryGoal] || results.strategy;
     }
 
     function setQuizHiddenFields(result) {
@@ -1250,10 +1277,10 @@
 
       const values = {
         recommended_service: result.service,
-        quiz_goal: getOptionLabel('goal', answers.goal),
-        quiz_stage: getOptionLabel('stage', answers.stage),
-        quiz_need: getOptionLabel('need', answers.need),
-        quiz_timeline: getOptionLabel('timeline', answers.timeline)
+        quiz_goal: getAnswerLabels('goal'),
+        quiz_stage: getAnswerLabels('stage'),
+        quiz_need: getAnswerLabels('need'),
+        quiz_timeline: getAnswerLabels('timeline')
       };
 
       Object.keys(values).forEach((key) => {
@@ -1278,31 +1305,56 @@
 
     function renderStep() {
       const step = steps[currentStep];
-      const selectedValue = answers[step.key] || '';
+      const selectedValues = getAnswerValues(step.key);
+      const selectedLabel = selectedValues.length === 1 ? '1 selected' : `${selectedValues.length} selected`;
 
       setHelperBubbleCopy(helperBubbleCopy[currentStep] || helperBubbleCopy[0]);
       stepLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
       progress.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
       questionElement.textContent = step.question;
+      if (matchHint) {
+        matchHint.textContent = step.allowMultiple ? 'Choose one or more.' : 'Choose one.';
+      }
+      if (selectedCount) {
+        selectedCount.textContent = selectedValues.length ? selectedLabel : 'No selections yet';
+      }
       optionsElement.innerHTML = '';
 
       step.options.forEach(([value, label]) => {
+        const isSelected = selectedValues.includes(value);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `match-option${selectedValue === value ? ' is-selected' : ''}`;
-        button.textContent = label;
+        button.className = `match-option${isSelected ? ' is-selected' : ''}`;
+        button.innerHTML = `<span>${label}</span>`;
         button.dataset.matchValue = value;
-        button.setAttribute('aria-pressed', selectedValue === value ? 'true' : 'false');
+        button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
         button.addEventListener('click', () => {
-          answers[step.key] = value;
+          if (step.allowMultiple) {
+            const nextValues = getAnswerValues(step.key).slice();
+            const index = nextValues.indexOf(value);
+
+            if (value === 'unsure') {
+              answers[step.key] = index >= 0 ? [] : ['unsure'];
+            } else if (index >= 0) {
+              nextValues.splice(index, 1);
+              answers[step.key] = nextValues;
+            } else {
+              answers[step.key] = nextValues.filter((item) => item !== 'unsure').concat(value);
+            }
+          } else {
+            answers[step.key] = value;
+          }
+
           renderStep();
-          nextButton.focus();
+          if (!step.allowMultiple) {
+            nextButton.focus();
+          }
         });
         optionsElement.appendChild(button);
       });
 
       backButton.disabled = currentStep === 0;
-      nextButton.disabled = !answers[step.key];
+      nextButton.disabled = !getAnswerValues(step.key).length;
       nextButton.textContent = currentStep === steps.length - 1 ? 'See My Match' : 'Next';
     }
 
@@ -1386,7 +1438,7 @@
 
     if (nextButton) {
       nextButton.addEventListener('click', () => {
-        if (!answers[steps[currentStep].key]) {
+        if (!getAnswerValues(steps[currentStep].key).length) {
           return;
         }
 
