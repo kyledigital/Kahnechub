@@ -215,3 +215,5 @@
  .phase-site *, .phase-site *:before, .phase-site *:after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
 }
 
+.credential .credential-explainer { color:#5d5668; line-height:1.45; margin-top:5px; text-decoration:none; }
+
