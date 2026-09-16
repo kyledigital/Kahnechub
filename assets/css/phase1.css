@@ -16,8 +16,8 @@
 .skip-link { position:fixed; top:8px; left:12px; z-index:500; padding:12px 20px; color:#fff; background:#322154; transform:translateY(-150%); }
 .skip-link:focus { transform:none; }
 .phase-site .nav { top:0; padding:0; margin:0; border-radius:0; background:#fcfbfe; border-bottom:1px solid #e3deeb; box-shadow:none; backdrop-filter:none; }
-.phase-site .nav-inner { height:86px; max-width:1240px; margin:auto; padding:0 32px; gap:24px; border-radius:0; background:none; box-shadow:none; }
-.phase-site .logo-mark { width:172px; height:auto; max-height:60px; object-fit:contain; }
+.phase-site .nav-inner { height:92px; max-width:1240px; margin:auto; padding:0 32px; gap:24px; border-radius:0; background:none; box-shadow:none; }
+.phase-site .logo-mark { width:202px; height:auto; max-height:70px; object-fit:contain; }
 .phase-site .nav-links { display:flex; align-items:center; gap:28px; padding:0; background:none; border:0; border-radius:0; list-style:none; }
 .phase-site .nav-links a { color:#383142; font-size:.95rem; padding:12px 0; text-decoration:none; }
 .phase-site .nav-links a:hover { color:var(--accent); background:none; }
@@ -157,8 +157,8 @@
  .hero-portrait img { height:380px; }
 }
 @media (max-width:800px) {
- .phase-site .nav-inner { height:72px; }
- .phase-site .logo-mark { width:148px; max-height:52px; }
+ .phase-site .nav-inner { height:76px; }
+ .phase-site .logo-mark { width:168px; max-height:58px; }
  .phase-site .nav-toggle { display:block; }
  .phase-site .nav-right .desk { display:none; }
  .phase-site .nav-links { display:none; position:absolute; top:100%; left:16px; right:16px; width:auto; padding:14px 20px; background:#fff; border:1px solid #ded5e8; border-radius:8px; box-shadow:0 10px 24px #23193212; max-height:calc(100dvh - 88px); overflow:auto; }
