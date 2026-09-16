@@ -46,18 +46,18 @@ window.KH_CONFIG = {
   // Form endpoints can still be set directly, but form IDs above are easier to maintain.
   forms: {
     audit: {
-      subject: 'Free Audit Request - Kahnec Hub',
-      successMessage: 'Thanks, your free audit request is in. We will review it and reply within 48 hours.',
+      subject: 'Paid Audit Enquiry - Kahnec Hub',
+      successMessage: 'Thanks, your enquiry is in. Kyle will follow up to discuss the scope and fee before any audit work begins.',
       errorMessage: 'We could not send your audit request right now. Please try again or reach out by email.'
     },
     contact: {
       subject: 'New Service Enquiry - Kahnec Hub',
-      successMessage: 'Thanks, your enquiry is in. We will reply with next steps within 24 hours.',
+      successMessage: 'Thanks, your enquiry has been sent. Kyle will follow up with the next step.',
       errorMessage: 'We could not send your enquiry right now. Please try again or email us directly.'
     },
     popup: {
-      subject: 'Popup Free Audit Request - Kahnec Hub',
-      successMessage: 'Thanks, your audit request is in. We will follow up shortly.',
+      subject: 'Marketing Enquiry - Kahnec Hub',
+      successMessage: 'Thanks, your enquiry is in. Kyle will follow up to discuss an appropriate next step.',
       errorMessage: 'We could not send your popup request right now. Please try again in the main audit form.'
     },
     newsletter: {
@@ -67,3 +67,4 @@ window.KH_CONFIG = {
     }
   }
 };
+

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /portal/
+Disallow: /tools/
+Disallow: /docs/
+Disallow: /invoice.html
+
+Sitemap: https://kahnechub.com/sitemap.xml
+

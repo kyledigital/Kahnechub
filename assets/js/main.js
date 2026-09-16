@@ -106,7 +106,12 @@
       };
 
       window.gtag('js', new Date());
-      window.gtag('config', gaId);
+      window.gtag('config', gaId, {
+        page_location: window.location.origin + window.location.pathname,
+        page_referrer: safeReferrer(),
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false
+      });
       injectScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`);
     }
 
@@ -125,6 +130,70 @@
         { 'data-website-id': umamiWebsiteId }
       );
     }
+  }
+
+  function safeReferrer() {
+    try { return document.referrer ? new URL(document.referrer).origin : ''; }
+    catch { return ''; }
+  }
+
+  function campaignContext() {
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const params = new URLSearchParams(window.location.search);
+    let context = {};
+    try { context = JSON.parse(sessionStorage.getItem('kh_campaign') || '{}'); } catch {}
+    if (keys.some(key => params.has(key))) {
+      context = {};
+      keys.forEach(key => {
+        const value = params.get(key) || '';
+        // Accept campaign identifiers, not arbitrary query text or email addresses.
+        if (/^[a-zA-Z0-9_-]{1,80}$/.test(value)) context[key] = value;
+      });
+      try { sessionStorage.setItem('kh_campaign', JSON.stringify(context)); } catch {}
+    }
+    return Object.fromEntries(keys.filter(key => /^[a-zA-Z0-9_-]{1,80}$/.test(context[key] || '')).map(key => [key, context[key]]));
+  }
+
+  let analyticsAllowed = false;
+  let analyticsLoaded = false;
+  function initAnalyticsChoice(config) {
+    const configured = Boolean((config.integrations.analytics.googleAnalyticsId || '').trim());
+    let choice = '';
+    try { choice = localStorage.getItem('kh_analytics_choice') || ''; } catch {}
+    const enable = () => {
+      analyticsAllowed = true;
+      const id = config.integrations.analytics.googleAnalyticsId;
+      if (id) window['ga-disable-' + id] = false;
+      if (!analyticsLoaded) { initAnalytics(config); analyticsLoaded = true; }
+    };
+    if (configured && choice === 'accepted') enable();
+    const state = document.querySelector('[data-analytics-state]');
+    const updateState = () => {
+      if (state) state.textContent = !configured ? 'Google Analytics is not configured and is inactive.' : analyticsAllowed ? 'Optional Google Analytics is enabled for this browser.' : 'Optional Google Analytics is not enabled for this browser.';
+    };
+    updateState();
+    const privacyCopy = document.getElementById('analytics-privacy');
+    if (privacyCopy && configured) privacyCopy.textContent = 'Google Analytics is configured, but loads only if you accept optional analytics. It measures page visits and actions such as opening the scheduler or successfully sending an enquiry. Names, email addresses and form messages are not included in these events.';
+    function showChoice() {
+      if (!configured || document.querySelector('.analytics-notice')) { updateState(); return; }
+      const notice = document.createElement('section');
+      notice.className = 'analytics-notice'; notice.setAttribute('aria-label','Optional analytics');
+      notice.innerHTML = '<p>May I use optional Google Analytics to understand which pages and enquiry paths are useful? Form messages and contact details are not sent to analytics.</p><div class="p-actions"><button type="button" class="btn btn-dark" data-choice="accepted">Accept analytics</button><button type="button" class="btn btn-outline" data-choice="declined">Decline</button></div>';
+      notice.addEventListener('click', event => {
+        const button = event.target.closest('[data-choice]'); if (!button) return;
+        const next = button.dataset.choice;
+        try { localStorage.setItem('kh_analytics_choice',next); } catch {}
+        if (next === 'accepted') enable();
+        else {
+          analyticsAllowed = false;
+          window['ga-disable-' + config.integrations.analytics.googleAnalyticsId] = true;
+        }
+        notice.remove(); updateState();
+      });
+      document.body.appendChild(notice);
+    }
+    if (configured && !choice) showChoice();
+    document.querySelectorAll('[data-analytics-settings]').forEach(button => button.addEventListener('click',showChoice));
   }
 
   function getWhatsAppHref(config) {
@@ -216,22 +285,28 @@
   }
 
   function trackEvent(name, data) {
+    if (!analyticsAllowed) return;
+    // Never forward form values, full URLs, labels or arbitrary third-party data.
+    const allowed = ['location','lead_source','section','service','score','risk','channels','destination'];
+    const safeData = {};
+    allowed.forEach(key => {
+      const value = data && data[key];
+      if (typeof value === 'number') safeData[key] = value;
+      else if (typeof value === 'string' && /^[a-zA-Z0-9 _/&+-]{0,100}$/.test(value)) safeData[key] = value;
+    });
     try {
       if (typeof window.gtag === 'function') {
-        window.gtag('event', name, data || {});
+        window.gtag('event', name, safeData);
       }
 
       if (typeof window.plausible === 'function') {
-        window.plausible(name, { props: data || {} });
+        window.plausible(name, { props: safeData });
       }
 
       if (window.umami && typeof window.umami.track === 'function') {
-        window.umami.track(name, data || {});
+        window.umami.track(name, safeData);
       }
 
-      if (Array.isArray(window.dataLayer)) {
-        window.dataLayer.push({ event: name, ...(data || {}) });
-      }
     } catch {
       // Analytics is optional. Fail silently.
     }
@@ -247,10 +322,11 @@
       }
 
       trackEvent(trackedElement.dataset.track, {
-        href: trackedElement.getAttribute('href') || '',
-        label: trackedElement.textContent.trim(),
         location: trackedElement.dataset.trackLocation || ''
       });
+      if (trackedElement.classList.contains('js-book-call') && isExternalUrl(trackedElement.href)) {
+        trackEvent('scheduler_handoff', { destination: 'Calendly', location: trackedElement.dataset.trackLocation || '' });
+      }
     });
   }
 
@@ -262,9 +338,27 @@
       return;
     }
 
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    const setOpen = open => {
+      navLinks.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    navToggle.setAttribute('aria-controls', navLinks.id);
+    setOpen(false);
+    navToggle.addEventListener('click', () => setOpen(!navLinks.classList.contains('open')));
+    navLinks.addEventListener('click', event => {
+      const link = event.target.closest('a'); if (!link) return;
+      const wasOpen = navLinks.classList.contains('open'); setOpen(false);
+      const url = new URL(link.href, window.location.href);
+      const target = url.pathname === window.location.pathname && url.hash ? document.getElementById(url.hash.slice(1)) : null;
+      if (wasOpen && target) { target.setAttribute('tabindex','-1'); target.focus({preventScroll:true}); }
+      else if (wasOpen) navToggle.focus({preventScroll:true});
     });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && navLinks.classList.contains('open')) { setOpen(false); navToggle.focus(); }
+    });
+    document.addEventListener('click', event => { if (!event.target.closest('.nav')) setOpen(false); });
+    window.matchMedia('(min-width: 801px)').addEventListener('change', () => setOpen(false));
   }
 
   function setActiveServiceTab(tabName, shouldFocus) {
@@ -503,6 +597,8 @@
 
     document.querySelectorAll('.faq-ans.open').forEach((openAnswer) => {
       openAnswer.classList.remove('open');
+      openAnswer.hidden = true;
+      openAnswer.previousElementSibling.setAttribute('aria-expanded','false');
       const openIcon = openAnswer.previousElementSibling.querySelector('.faq-ico');
       if (openIcon) {
         openIcon.classList.remove('open');
@@ -511,6 +607,8 @@
 
     if (!isOpen) {
       answer.classList.add('open');
+      answer.hidden = false;
+      button.setAttribute('aria-expanded','true');
       if (icon) {
         icon.classList.add('open');
       }
@@ -579,6 +677,7 @@
     const option = Array.from(select.options).find((item) => normalizeOptionText(item.textContent) === normalText)
       || Array.from(select.options).find((item) => normalizeOptionText(item.textContent).includes(normalText));
 
+    if (select.type === 'hidden') { select.value = text; return; }
     if (option) {
       select.value = option.value || option.textContent;
       select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -594,7 +693,9 @@
     const formCard = form.closest('.contact-form-card');
 
     setSelectOptionByText(form.querySelector('[name="service"]'), service);
-    setSelectOptionByText(form.querySelector('[name="project_type"]'), projectType);
+    const typeField = form.querySelector('[name="project_type"]');
+    if (typeField && typeField.type === 'hidden') typeField.value = projectType;
+    else setSelectOptionByText(typeField, projectType);
 
     if (message && service && !message.value.trim()) {
       message.value = `I am interested in ${service}.`;
@@ -621,6 +722,15 @@
     }
 
     document.querySelectorAll('[data-prefill-service], [data-prefill-project-type]').forEach((link) => {
+      if (!form && link.tagName === 'A') {
+        const href = new URL(link.getAttribute('href'), window.location.href);
+        if (href.hash === '#contact') {
+          href.searchParams.set('service', link.dataset.prefillService || 'Not sure yet');
+          if (link.dataset.prefillProjectType) href.searchParams.set('project_type',link.dataset.prefillProjectType);
+          if (href.pathname.endsWith('/services.html')) href.pathname = href.pathname.replace(/services\.html$/, 'index.html');
+          link.setAttribute('href',href.pathname+href.search+href.hash);
+        }
+      }
       link.addEventListener('click', () => {
         applyContactPrefill(
           document.getElementById('contactForm'),
@@ -1009,6 +1119,214 @@
     });
   }
 
+  function initKahniRefresh() {
+    const prefersReducedMotion = window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+    const pullThreshold = 96;
+    const maxPull = 172;
+    let overlay = null;
+    let state = 'idle';
+    let startY = 0;
+    let pullY = 0;
+    let isPulling = false;
+    let resetTimer = 0;
+
+    function getNavigationType() {
+      const navigationEntry = window.performance
+        && typeof window.performance.getEntriesByType === 'function'
+        ? window.performance.getEntriesByType('navigation')[0]
+        : null;
+
+      if (navigationEntry && navigationEntry.type) {
+        return navigationEntry.type;
+      }
+
+      if (window.performance && window.performance.navigation && window.performance.navigation.type === 1) {
+        return 'reload';
+      }
+
+      return '';
+    }
+
+    function ensureOverlay() {
+      if (overlay) {
+        return overlay;
+      }
+
+      overlay = document.createElement('div');
+      overlay.className = 'kh-refresh';
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.innerHTML = `
+        <div class="kh-refresh__surface">
+          <span class="kh-refresh__ripple kh-refresh__ripple--1"></span>
+          <span class="kh-refresh__ripple kh-refresh__ripple--2"></span>
+          <span class="kh-refresh__ripple kh-refresh__ripple--3"></span>
+          <span class="kh-refresh__touch"></span>
+          <span class="kh-refresh__check"></span>
+          <img class="kh-refresh__kahni" src="assets/images/helpers/kahni-refresh-touch.png" alt="" decoding="async"/>
+        </div>
+      `;
+
+      const kahniImage = overlay.querySelector('.kh-refresh__kahni');
+      if (kahniImage) {
+        kahniImage.addEventListener('error', () => {
+          kahniImage.hidden = true;
+          overlay.classList.add('is-missing-art');
+        }, { once: true });
+      }
+
+      document.body.appendChild(overlay);
+      return overlay;
+    }
+
+    function setPull(distance) {
+      const currentOverlay = ensureOverlay();
+      const clampedPull = Math.max(0, Math.min(distance, maxPull));
+      const progress = Math.min(clampedPull / pullThreshold, 1);
+      pullY = clampedPull;
+      currentOverlay.style.setProperty('--kh-pull', `${clampedPull}px`);
+      currentOverlay.style.setProperty('--kh-line-scale', String(0.35 + (progress * 0.65)));
+      currentOverlay.style.setProperty('--kh-kahni-y', `${-18 + (progress * 18)}px`);
+      currentOverlay.style.setProperty('--kh-kahni-rotate', `${-4 + (progress * 4)}deg`);
+      currentOverlay.style.setProperty('--kh-touch-opacity', String(0.25 + (progress * 0.75)));
+      currentOverlay.style.setProperty('--kh-touch-scale', String(0.72 + (progress * 0.28)));
+      currentOverlay.style.setProperty('--kh-ripple-scale', String(0.45 + (progress * 0.55)));
+      currentOverlay.style.setProperty('--kh-ripple-opacity-1', String(progress * 0.72));
+      currentOverlay.style.setProperty('--kh-ripple-opacity-2', String(progress * 0.5));
+      currentOverlay.style.setProperty('--kh-ripple-opacity-3', String(progress * 0.36));
+      currentOverlay.classList.toggle('is-pulling', clampedPull > 3);
+      currentOverlay.classList.toggle('is-ready', clampedPull >= pullThreshold);
+    }
+
+    function resetPull() {
+      window.clearTimeout(resetTimer);
+      const currentOverlay = ensureOverlay();
+      currentOverlay.classList.remove('is-ready');
+      setPull(0);
+      resetTimer = window.setTimeout(() => {
+        currentOverlay.classList.remove('is-pulling');
+      }, 240);
+    }
+
+    function playKahniRefresh(shouldReload) {
+      if (state === 'refreshing') {
+        return;
+      }
+
+      state = 'refreshing';
+      window.clearTimeout(resetTimer);
+
+      const currentOverlay = ensureOverlay();
+      currentOverlay.style.setProperty('--kh-pull', `${maxPull}px`);
+      currentOverlay.style.setProperty('--kh-line-scale', '1');
+      currentOverlay.style.setProperty('--kh-kahni-y', '0px');
+      currentOverlay.style.setProperty('--kh-kahni-rotate', '0deg');
+      currentOverlay.style.setProperty('--kh-touch-opacity', '1');
+      currentOverlay.style.setProperty('--kh-touch-scale', '1');
+      currentOverlay.style.setProperty('--kh-ripple-scale', '1');
+      currentOverlay.style.setProperty('--kh-ripple-opacity-1', '0.72');
+      currentOverlay.style.setProperty('--kh-ripple-opacity-2', '0.5');
+      currentOverlay.style.setProperty('--kh-ripple-opacity-3', '0.36');
+      currentOverlay.classList.remove('is-pulling', 'is-ready');
+      currentOverlay.classList.add('is-refreshing');
+
+      if (typeof window.trackEvent === 'function') {
+        window.trackEvent('kahni_refresh', { trigger: shouldReload ? 'refresh' : 'page_load' });
+      }
+
+      if (!shouldReload) {
+        window.setTimeout(() => {
+          currentOverlay.classList.remove('is-refreshing');
+          state = 'idle';
+          resetPull();
+        }, prefersReducedMotion ? 450 : 980);
+        return;
+      }
+
+      try {
+        window.sessionStorage.setItem('kh_kahni_refresh_pending', '1');
+      } catch {
+        // Session storage is optional; the animation still works without it.
+      }
+
+      window.setTimeout(() => {
+        window.location.reload();
+      }, prefersReducedMotion ? 120 : 920);
+    }
+
+    function handleRefreshKey(event) {
+      const isRefreshKey = event.key === 'F5'
+        || ((event.ctrlKey || event.metaKey) && event.key && event.key.toLowerCase() === 'r');
+
+      if (!isRefreshKey || event.shiftKey || event.altKey) {
+        return;
+      }
+
+      event.preventDefault();
+      playKahniRefresh(true);
+    }
+
+    function handleTouchStart(event) {
+      if (state === 'refreshing' || event.touches.length !== 1 || window.scrollY > 0) {
+        return;
+      }
+
+      startY = event.touches[0].clientY;
+      pullY = 0;
+      isPulling = false;
+    }
+
+    function handleTouchMove(event) {
+      if (state === 'refreshing' || event.touches.length !== 1 || window.scrollY > 0) {
+        return;
+      }
+
+      const deltaY = event.touches[0].clientY - startY;
+      if (deltaY <= 0) {
+        return;
+      }
+
+      isPulling = true;
+      event.preventDefault();
+      setPull(deltaY * 0.56);
+    }
+
+    function handleTouchEnd() {
+      if (!isPulling) {
+        return;
+      }
+
+      isPulling = false;
+
+      if (pullY >= pullThreshold) {
+        playKahniRefresh(true);
+        return;
+      }
+
+      resetPull();
+    }
+
+    let pendingRefresh = false;
+    try {
+      pendingRefresh = window.sessionStorage.getItem('kh_kahni_refresh_pending') === '1';
+      window.sessionStorage.removeItem('kh_kahni_refresh_pending');
+    } catch {
+      pendingRefresh = false;
+    }
+
+    if (!pendingRefresh && getNavigationType() === 'reload') {
+      window.setTimeout(() => playKahniRefresh(false), 180);
+    }
+
+    document.addEventListener('keydown', handleRefreshKey);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchcancel', handleTouchEnd);
+    window.kahniRefresh = () => playKahniRefresh(true);
+  }
+
   function initProjectMatch() {
     const root = document.querySelector('[data-project-match]');
     if (!root) {
@@ -1360,6 +1678,10 @@
 
     function renderResult() {
       const result = getRecommendedResult();
+      if (result.href === '#contact' && !document.getElementById('contactForm')) {
+        result.href = 'index.html?service=' + encodeURIComponent(result.prefillService || result.service) + '#contact';
+      }
+      if (result.secondaryHref === '#audit') result.secondaryHref = 'index.html#audit';
       setQuizHiddenFields(result);
       setHelperBubbleCopy('Here&rsquo;s your best next move.');
 
@@ -1505,13 +1827,68 @@
   function appendLeadMetadata(formData, options) {
     formData.set('lead_source', options.leadSource);
     formData.set('referring_section', options.referringSection);
-    formData.set('page_url', window.location.href);
+    formData.set('page_url', window.location.origin + window.location.pathname);
     formData.set('page_title', document.title);
     formData.set('submitted_at', new Date().toISOString());
 
     if (document.referrer) {
-      formData.set('referrer', document.referrer);
+      formData.set('referrer', safeReferrer());
     }
+    Object.entries(campaignContext()).forEach(([key,value]) => formData.set(key,value));
+  }
+
+  function captureCrmLeadLocally(formData, options) {
+    if (window.KahnecOS && typeof window.KahnecOS.savePublicLeadFromFormData === 'function') {
+      return window.KahnecOS.savePublicLeadFromFormData(formData, options);
+    }
+
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    const timestamp = data.submitted_at || new Date().toISOString();
+    const lead = {
+      id: `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      name: data.name || '',
+      email: data.email || '',
+      business_name: data.business || data.business_name || '',
+      phone: data.phone || '',
+      service_interest: data.service || data.recommended_service || '',
+      project_type: data.project_type || '',
+      budget_range: data.budget || '',
+      timeline: data.timeline || '',
+      message: data.message || '',
+      lead_source: data.lead_source || options.leadSource,
+      referring_section: data.referring_section || options.referringSection,
+      recommended_service: data.recommended_service || '',
+      quiz_goal: data.quiz_goal || '',
+      quiz_stage: data.quiz_stage || '',
+      quiz_need: data.quiz_need || '',
+      quiz_timeline: data.quiz_timeline || '',
+      estimator_budget: data.estimator_budget || '',
+      estimator_campaign_type: data.estimator_campaign_type || '',
+      estimator_impressions_low: data.estimator_impressions_low || '',
+      estimator_impressions_high: data.estimator_impressions_high || '',
+      estimator_clicks_low: data.estimator_clicks_low || '',
+      estimator_clicks_high: data.estimator_clicks_high || '',
+      estimator_reach_low: data.estimator_reach_low || '',
+      estimator_reach_high: data.estimator_reach_high || '',
+      status: 'New',
+      created_at: timestamp,
+      updated_at: timestamp
+    };
+
+    try {
+      const key = 'kahnecOsPublicLeads';
+      const leads = JSON.parse(localStorage.getItem(key) || '[]');
+      leads.unshift(lead);
+      localStorage.setItem(key, JSON.stringify(leads.slice(0, 200)));
+    } catch {
+      // Local CRM storage is helpful, but the public form should still submit.
+    }
+
+    return lead;
   }
 
   async function submitLeadForm(form, config) {
@@ -1534,6 +1911,9 @@
       leadSource,
       referringSection
     });
+
+    // Public enquiries are delivered through Formspree; do not save personal
+    // details in the visitor's local CRM/demo storage.
 
     if (formConfig.subject) {
       formData.set('_subject', formConfig.subject);
@@ -2116,12 +2496,21 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const config = getConfig();
-    initAnalytics(config);
+    campaignContext();
+    initAnalyticsChoice(config);
     applySiteConfig(config);
     initTracking();
     initNav();
     initServiceTabs();
     initProgressiveAccordions();
+    document.querySelectorAll('.faq-btn').forEach((button,index) => {
+      const answer = button.nextElementSibling;
+      if (!answer) return;
+      answer.id = answer.id || 'faq-answer-' + index;
+      button.setAttribute('aria-controls',answer.id);
+      button.setAttribute('aria-expanded','false');
+      answer.hidden = true;
+    });
     initMotionClasses();
     initReveal();
     initCounters();
@@ -2129,9 +2518,11 @@
     initEnquiryPrefill();
     initProjectMatch();
     initKahniIntro();
+    initKahniRefresh();
     initCampaignEstimator();
     initLeadForms(config);
     initPopup();
     initChatbot(config);
   });
 })();
+
