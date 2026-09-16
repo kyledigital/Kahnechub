@@ -216,4 +216,6 @@
 }
 
 .credential .credential-explainer { color:#5d5668; line-height:1.45; margin-top:5px; text-decoration:none; }
+.credential-badge-link { flex-shrink:0; }
+.credential-link { color:var(--accent); text-decoration:underline; }
 
