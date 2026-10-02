@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#fcf4ef}canvas{display:block}</style><script type="importmap">{"imports":{"three":"/qa-tooling/node_modules/three/build/three.module.js"}}</script></head><body>
+<script type="module">
+import * as THREE from '/qa-tooling/node_modules/three/build/three.module.js';
+import {RoundedBoxGeometry} from '/qa-tooling/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js';
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setSize(720,476);renderer.setPixelRatio(1);renderer.shadowMap.enabled=false;renderer.setClearColor('#fcf4ef');renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.18;document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-4.5,4.5,2.97,-2.97,.1,100);camera.position.set(5.5,5.2,12);camera.lookAt(0,1.7,0);
+scene.add(new THREE.HemisphereLight('#fff7e8','#8f7c91',3));
+const key=new THREE.DirectionalLight('#fff5de',4.2);key.position.set(-3,9,7);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-6,right:6,top:6,bottom:-6,near:.1,far:24});key.shadow.normalBias=.03;key.shadow.bias=-.0001;key.shadow.radius=5;scene.add(key);
+const fill=new THREE.DirectionalLight('#d4dcff',1.6);fill.position.set(6,4,-3);scene.add(fill);
+const mat=(color,roughness=.48,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+const cream=mat('#fff7e4'),violet=mat('#655295'),dark=mat('#392d50'),mint=mat('#82bba8'),gold=mat('#e9b95e',.28,.25),white=mat('#fffdf5'),thread=mat('#679a89',.7),peach=mat('#e9b098');
+function mesh(geometry,material,parent=scene){const m=new THREE.Mesh(geometry,material);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function box(w,h,d,material,parent,x=0,y=0,z=0,r=.08){const m=mesh(new RoundedBoxGeometry(w,h,d,3,r),material,parent);m.position.set(x,y,z);return m}
+function tube(points,radius,material,parent){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),36,radius,7,false),material,parent)}
+const ground=mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshBasicMaterial({color:'#fcf4ef',toneMapped:false}));ground.rotation.x=-Math.PI/2;ground.position.y=-.65;
+// Soft contact shadows use a small reusable texture instead of costly shadow-map passes.
+const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=128;const ctx=shadowCanvas.getContext('2d'),gradient=ctx.createRadialGradient(64,64,0,64,64,64);gradient.addColorStop(0,'rgba(91,73,94,.22)');gradient.addColorStop(.4,'rgba(91,73,94,.09)');gradient.addColorStop(1,'rgba(91,73,94,0)');ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);const shadowTexture=new THREE.CanvasTexture(shadowCanvas),shadows=[];
+function contactShadow(width,depth){const m=mesh(new THREE.PlaneGeometry(width,depth),new THREE.MeshBasicMaterial({map:shadowTexture,transparent:true,depthWrite:false,toneMapped:false}));m.rotation.x=-Math.PI/2;m.position.y=-.642;shadows.push(m);return m}
+contactShadow(1.2,1.2);contactShadow(1.6,1.2);contactShadow(1.4,1.1);contactShadow(1,1);contactShadow(2.4,1.6);contactShadow(2.7,1.7);
+// Original dimensional idea objects: a lightbulb, a photograph and a conversation.
+const bulb=new THREE.Group();scene.add(bulb);mesh(new THREE.SphereGeometry(.28,40,24),gold,bulb).scale.set(1,1.12,1);box(.25,.21,.24,cream,bulb,0,-.32,0,.025);for(let i=0;i<3;i++){const ring=mesh(new THREE.TorusGeometry(.14,.016,8,24),dark,bulb);ring.rotation.x=Math.PI/2;ring.position.y=-.27-i*.06}box(.13,.07,.12,dark,bulb,0,-.47,0,.02);
+const photo=new THREE.Group();scene.add(photo);box(.91,.82,.16,cream,photo,0,0,0,.07);box(.75,.56,.025,mint,photo,0,.065,.094,.035);const hill=mesh(new THREE.ConeGeometry(.25,.4,3),violet,photo);hill.position.set(-.09,.03,.12);hill.rotation.z=-.15;hill.scale.z=.08;const sun=mesh(new THREE.SphereGeometry(.075,20,12),gold,photo);sun.position.set(.2,.22,.135);sun.scale.z=.3;box(.35,.035,.025,peach,photo,-.14,-.28,.095,.012);
+const bubble=new THREE.Group();scene.add(bubble);box(.85,.52,.2,violet,bubble,0,0,0,.13);const tail=mesh(new THREE.ConeGeometry(.13,.23,3),violet,bubble);tail.position.set(-.2,-.28,0);tail.rotation.z=Math.PI;tail.scale.z=.6;for(let i=0;i<3;i++){const dot=mesh(new THREE.SphereGeometry(.047,16,10),cream,bubble);dot.position.set(-.19+i*.19,0,.13);dot.scale.z=.4}
+const sketch=new THREE.Group();scene.add(sketch);box(.53,.65,.09,white,sketch);for(let i=0;i<3;i++)box(.3-i*.045,.035,.012,i===0?gold:mint,sketch,-.025,.15-i*.13,.055,.009);
+// A real mesh basket: tapered curved strands behind a solid oval rim.
+const net=new THREE.Group();scene.add(net);const rim=mesh(new THREE.TorusGeometry(.9,.045,12,96),gold,net);rim.scale.y=1.08;
+for(let i=-6;i<=6;i++){
+ const a=i/7,extent=Math.sqrt(1-a*a);
+ const vertical=[],horizontal=[];
+ for(let j=0;j<=24;j++){const b=-extent+2*extent*j/24;const depth=-.85*(1-a*a-b*b);vertical.push(new THREE.Vector3(a*.9,b*.972,depth));horizontal.push(new THREE.Vector3(b*.9,a*.972,depth))}
+ tube(vertical,.011,thread,net);tube(horizontal,.011,thread,net);
+}
+tube([new THREE.Vector3(-.57,-.74,0),new THREE.Vector3(-1.07,-1.23,0),new THREE.Vector3(-1.5,-1.69,0)],.065,gold,net);
+tube([new THREE.Vector3(-1.28,-1.46,0),new THREE.Vector3(-1.55,-1.75,0)],.087,violet,net);
+net.rotation.set(-.16,.13,-.18);
+// The collected ideas resolve into a tangible, deliberately designed browser card.
+const website=new THREE.Group();scene.add(website);website.position.set(2.05,1.9,-.2);website.rotation.set(-.04,-.17,.05);
+box(2.12,2.5,.22,cream,website,0,0,0,.12);box(1.96,.29,.06,violet,website,0,1.045,.15,.055);
+for(let i=0;i<3;i++){const dot=mesh(new THREE.SphereGeometry(.035,14,10),cream,website);dot.position.set(-.8+i*.12,1.05,.2);dot.scale.z=.4}
+box(.62,.055,.02,white,website,.3,1.05,.195,.012);
+box(1.7,.34,.035,mint,website,0,.61,.15,.035);box(.9,.045,.015,dark,website,-.25,.65,.177,.009);box(.6,.028,.015,white,website,-.4,.55,.177,.009);
+const content=new THREE.Group();website.add(content);box(.78,.69,.035,peach,content,-.46,.03,.15,.04);box(.78,.69,.035,mint,content,.46,.03,.15,.04);box(1.7,.32,.035,violet,content,0,-.58,.15,.04);box(.9,.035,.02,cream,content,-.23,-.57,.18,.012);box(.68,.2,.035,gold,content,-.51,-.96,.15,.035);
+const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)},lerp=(a,b,t)=>a+(b-a)*t;
+const ideas=[bulb,photo,bubble],start=[[-2.85,2.75,.05],[-1.52,2.45,.1],[-.35,2.9,-.15]],inside=[[-.35,.38,.08],[.26,.05,.09],[-.3,-.32,.14]],end=[[1.47,2.56,.1],[1.52,1.93,.04],[2.51,1.93,.03]];
+window.drawFrame=time=>{
+ const catchPhase=ease((time-1.6)/3.1),transfer=ease((time-5.2)/2.5);
+ net.position.set(lerp(-1.95,-.68,catchPhase),lerp(1.55,2.3,catchPhase),.48);net.rotation.z=lerp(-.32,.12,catchPhase);net.rotation.y=.13+Math.sin(time*.6)*.035;
+ for(let i=0;i<3;i++){
+  const idea=ideas[i],gather=ease((time-(2.0+i*.42))/1.65),shift=ease((time-(5.2+i*.28))/1.8);
+  const drift=new THREE.Vector3(start[i][0]+Math.sin(time*.55+i)*.11,start[i][1]+Math.sin(time*.7+i)*.13,start[i][2]);
+  const caught=net.localToWorld(new THREE.Vector3(...inside[i]));const destination=new THREE.Vector3(...end[i]);idea.position.copy(drift.lerp(caught,gather).lerp(destination,shift));
+  idea.rotation.set(.04+Math.sin(time*.45+i)*.12,lerp(-.14,-.17,shift),lerp(Math.sin(time*.48+i)*.15,.05,shift));idea.scale.setScalar(lerp(1,i===0?.48:.7,shift));
+ }
+ sketch.position.set(-3.25,1.2+Math.sin(time*.65)*.1,-.5);sketch.rotation.set(-.12,.25,-.16+Math.sin(time*.5)*.06);
+ content.scale.setScalar(lerp(.94,1,transfer));website.scale.setScalar(lerp(.94,1,transfer));website.rotation.z=lerp(.075,.05,transfer);
+ [bulb,photo,bubble,sketch,net,website].forEach((object,i)=>{shadows[i].position.x=object.position.x+.2;shadows[i].position.z=object.position.z});
+ renderer.render(scene,camera);
+};
+window.drawFrame(0);window.sceneReady=true;
+window.recordScene=async()=>{
+ const stream=renderer.domElement.captureStream(24),mime=['video/webm;codecs=vp9','video/webm;codecs=vp8'].find(t=>MediaRecorder.isTypeSupported(t));
+ const recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:950000}),chunks=[];
+ recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+ const done=new Promise(resolve=>recorder.onstop=resolve);let startTime;
+ recorder.start();await new Promise(resolve=>{function frame(now){if(!startTime)startTime=now;const seconds=(now-startTime)/1000;window.drawFrame(Math.min(seconds,9));if(seconds<9.5)requestAnimationFrame(frame);else resolve()}requestAnimationFrame(frame)});recorder.stop();await done;stream.getTracks().forEach(t=>t.stop());
+ const blob=new Blob(chunks,{type:mime});const buffer=new Uint8Array(await blob.arrayBuffer());let binary='';for(let i=0;i<buffer.length;i+=8192)binary+=String.fromCharCode(...buffer.subarray(i,i+8192));return {mime,size:blob.size,base64:btoa(binary)};
+};
+</script></body></html>

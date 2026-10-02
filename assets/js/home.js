@@ -1,20 +1,23 @@
 (() => {
   'use strict';
-  const motionButton = document.getElementById('motionToggle');
+  const motionButtons = Array.from(document.querySelectorAll('.motion-toggle'));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let motionPaused = reducedMotion.matches;
   let updateReachMotion = () => {};
+  let updateIdeasMotion = () => {};
+  let pauseIdeasForReach = () => {};
   const setMotionState = () => {
     document.body.classList.toggle('motion-paused',motionPaused);
-    if (motionButton) {
-      motionButton.setAttribute('aria-pressed',String(motionPaused));
-      motionButton.querySelector('.motion-toggle-label').textContent = motionPaused ? 'Resume page motion' : 'Pause page motion';
-      motionButton.hidden = reducedMotion.matches;
-    }
+    motionButtons.forEach(button => {
+      button.setAttribute('aria-pressed',String(motionPaused));
+      button.querySelector('.motion-toggle-label').textContent = motionPaused ? 'Resume page motion' : 'Pause page motion';
+      button.hidden = reducedMotion.matches;
+    });
     updateReachMotion();
+    updateIdeasMotion();
   };
   setMotionState();
-  if (motionButton) motionButton.addEventListener('click',() => {motionPaused=!motionPaused;setMotionState()});
+  motionButtons.forEach(button => button.addEventListener('click',() => {motionPaused=!motionPaused;setMotionState()}));
   reducedMotion.addEventListener('change',() => {motionPaused=reducedMotion.matches;setMotionState()});
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -117,6 +120,7 @@
     let visible = false;
     const play = () => {
       if (motionPaused || reducedMotion.matches || !visible) return;
+      pauseIdeasForReach();
       reachFigure.classList.remove('is-playing');
       void reachFigure.offsetWidth;
       reachFigure.classList.add('is-playing');
@@ -152,5 +156,70 @@
       reachObserver.observe(reachFigure);
     }
     updateReachMotion();
+  }
+  const ideasFigure = document.querySelector('[data-ideas-illustration]');
+  if (ideasFigure) {
+    const video = ideasFigure.querySelector('[data-ideas-video]');
+    const replay = ideasFigure.querySelector('[data-ideas-replay]');
+    const status = ideasFigure.querySelector('[data-ideas-status]');
+    const saveData = navigator.connection && navigator.connection.saveData;
+    let visible = false, started = false, complete = false, failed = !video.canPlayType('video/webm'), requested = false;
+    replay.hidden = false;
+    const releaseReach = () => { if (reachFigure) reachFigure.classList.remove('ideas-active'); };
+    const pause = () => { video.pause(); releaseReach(); };
+    const play = () => {
+      if (failed || motionPaused || reducedMotion.matches || !visible || document.hidden) return;
+      requested = true;
+      if (!video.hasAttribute('src')) video.src = 'assets/media/ideas-capture.webm';
+      video.play().catch(() => {
+        requested = false;
+        ideasFigure.dataset.motionState = 'still';
+        status.textContent = 'Press Play to view the scene.';
+      });
+    };
+    updateIdeasMotion = () => {
+      const still = motionPaused || reducedMotion.matches || failed;
+      replay.disabled = still;
+      status.textContent = reducedMotion.matches || failed ? 'Still illustration shown' : motionPaused ? 'Motion paused' : '';
+      if (still || !visible || document.hidden) {
+        pause();
+        ideasFigure.dataset.motionState = reducedMotion.matches || failed || !started || complete ? 'still' : 'paused';
+      } else if (!complete && (requested || (!started && !saveData))) play();
+    };
+    pauseIdeasForReach = () => {
+      pause();
+      if (started && !complete) ideasFigure.dataset.motionState = 'paused';
+    };
+    replay.addEventListener('click',() => {
+      if (replay.disabled) return;
+      complete = false;
+      video.currentTime = 0;
+      play();
+    });
+    video.addEventListener('playing',() => {
+      started = true;
+      ideasFigure.dataset.motionState = 'playing';
+      replay.textContent = 'Replay idea-catching scene';
+      status.textContent = '';
+      if (reachFigure) reachFigure.classList.add('ideas-active');
+    });
+    video.addEventListener('pause',releaseReach);
+    video.addEventListener('ended',() => {
+      complete = true;
+      ideasFigure.dataset.motionState = 'complete';
+      releaseReach();
+    });
+    video.addEventListener('error',() => {
+      failed = true;
+      updateIdeasMotion();
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        visible = entries.some(entry => entry.isIntersecting);
+        updateIdeasMotion();
+      },{threshold:.35}).observe(ideasFigure);
+    }
+    document.addEventListener('visibilitychange',updateIdeasMotion);
+    updateIdeasMotion();
   }
 })();
