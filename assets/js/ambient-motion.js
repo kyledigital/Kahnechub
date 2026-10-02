@@ -7,7 +7,8 @@
   const updateActivity = () => {
     const ideas = document.querySelector('[data-ideas-illustration]');
     const reach = document.querySelector('[data-reach-illustration]');
-    const focal = (ideas && ideas.dataset.motionState === 'playing') || (reach && reach.dataset.motionState === 'playing' && !reach.classList.contains('motion-idle'));
+    const story = Array.from(document.querySelectorAll('[data-service-story]')).some(figure => figure.dataset.motionState === 'playing' && !figure.classList.contains('story-idle') && !figure.classList.contains('story-suspended'));
+    const focal = story || (ideas && ideas.dataset.motionState === 'playing') || (reach && reach.dataset.motionState === 'playing' && !reach.classList.contains('motion-idle'));
     if (document.body.classList.contains('ambient-focal') !== !!focal) document.body.classList.toggle('ambient-focal',!!focal);
     document.body.classList.toggle('ambient-hidden',document.hidden);
     activeFeedback.forEach(animation => {
@@ -35,7 +36,7 @@
   }
   const observer = new MutationObserver(updateActivity);
   observer.observe(document.body,{attributes:true,attributeFilter:['class']});
-  document.querySelectorAll('[data-ideas-illustration],[data-reach-illustration]').forEach(figure => observer.observe(figure,{attributes:true,attributeFilter:['data-motion-state','class']}));
+  document.querySelectorAll('[data-ideas-illustration],[data-reach-illustration],[data-service-story]').forEach(figure => observer.observe(figure,{attributes:true,attributeFilter:['data-motion-state','class']}));
   document.addEventListener('visibilitychange',updateActivity);
   reduced.addEventListener('change',updateActivity);
   const preview = document.getElementById('project-image');
