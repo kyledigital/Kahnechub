@@ -1,0 +1,11 @@
+tools/ai4animationpy/
+phase1-review/
+audit-2026-09-16/
+*.npz
+*.pt
+*.fbx
+*.glb
+*.gif
+output/
+docs/
+README.md

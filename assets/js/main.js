@@ -697,8 +697,9 @@
     if (typeField && typeField.type === 'hidden') typeField.value = projectType;
     else setSelectOptionByText(typeField, projectType);
 
-    if (message && service && !message.value.trim()) {
+    if (message && service && (!message.value.trim() || message.value === message.dataset.servicePrefill)) {
       message.value = `I am interested in ${service}.`;
+      message.dataset.servicePrefill = message.value;
       message.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
