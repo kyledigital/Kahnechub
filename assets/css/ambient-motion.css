@@ -1,0 +1,44 @@
+/* Small, bounded forms in section spacing; copy and controls keep their own space. */
+.ambient-section { position:relative; isolation:isolate; }
+.ambient-section>.shell { position:relative; z-index:1; }
+.ambient-accent { position:absolute; top:0; right:max(32px,calc((100% - 1200px)/2)); width:230px; height:50px; overflow:hidden; pointer-events:none; z-index:0; }
+.ambient-form { position:absolute; display:block; --turn:-8deg; --end-turn:8deg; --shift-x:12px; --shift-y:-5px; --duration:10s; transform:rotate(var(--turn)); }
+.ambient-disc { width:66px; height:66px; border-radius:50%; background:#eac468; left:28px; top:18px; --turn:0deg; --end-turn:0deg; --duration:11s; }
+.ambient-arch { width:118px; height:118px; border:20px solid #adc7dc; border-radius:50%; right:10px; top:0; --shift-x:-12px; --shift-y:5px; --duration:13s; }
+.ambient-tile { width:70px; height:70px; border-radius:20px; background:#b8d9cd; left:12px; top:18px; --turn:-15deg; --end-turn:3deg; }
+.ambient-pebble { width:50px; height:62px; border-radius:50% 50% 42% 58%; background:#b8d9cd; right:40px; top:18px; --duration:12s; }
+.accent-work { right:auto; left:max(32px,calc((100% - 1200px)/2)); }
+.accent-work .ambient-disc { background:#f5d184; }
+.accent-work .ambient-arch { border-color:#b8cfe2; }
+.accent-services .ambient-disc { left:auto; right:24px; width:54px; height:54px; }
+.accent-learning { width:250px; }
+.accent-learning .ambient-disc { left:18px; width:54px; height:54px; }
+.accent-learning .ambient-arch { right:15px; border-width:17px; }
+.accent-about { right:auto; left:max(32px,calc((100% - 1200px)/2)); }
+.accent-about .ambient-arch { left:8px; right:auto; border-color:#c9bcde; width:105px; height:105px; border-width:17px; }
+.accent-contact .ambient-arch { border-color:#adc7dc; top:4px; }
+.ambient-ready .ambient-entered .ambient-form { animation:ambient-drift var(--duration) ease-in-out 1 both; animation-play-state:paused; }
+.ambient-ready .ambient-in-view .ambient-form { animation-play-state:running; }
+.ambient-ready .hero .shape { animation-iteration-count:1; animation-fill-mode:both; }
+.ambient-ready .ambient-arriving { animation:ambient-arrive .6s ease-out 1 both; }
+.ambient-ready .service-panel:not([hidden]) { animation:ambient-panel .22s ease-out 1 both; }
+.ambient-ready .project-choice[aria-pressed=true]:after { animation:ambient-confirm .28s ease-out 1; }
+.project-visit-button span { display:inline-block; transition:transform .2s ease-out; }
+.project-visit-button:is(:hover,:focus-visible) span { transform:translate(2px,-2px); }
+body:is(.motion-paused,.ambient-focal,.ambient-hidden) .ambient-form,
+body:is(.motion-paused,.ambient-focal,.ambient-hidden) .ambient-arriving,
+body:is(.motion-paused,.ambient-focal,.ambient-hidden) .service-panel,
+body:is(.motion-paused,.ambient-focal,.ambient-hidden) .project-choice:after,
+body:is(.ambient-focal,.ambient-hidden) .shape { animation-play-state:paused!important; }
+.ambient-hidden .reach-illustration * { animation-play-state:paused!important; }
+.motion-paused .project-visit-button span { transition:none; transform:none; }
+@keyframes ambient-drift {
+  from { transform:translate3d(0,0,0) rotate(var(--turn)); }
+  to { transform:translate3d(var(--shift-x),var(--shift-y),0) rotate(var(--end-turn)); }
+}
+@keyframes ambient-arrive { from { transform:translate3d(0,7px,0); } to { transform:translate3d(0,0,0); } }
+@keyframes ambient-panel { from { transform:translate3d(0,3px,0); } to { transform:translate3d(0,0,0); } }
+@keyframes ambient-confirm { 0%,100% { transform:scale(1); } 50% { transform:scale(1.18); } }
+@media(max-width:850px) { .ambient-accent { width:190px; right:24px; height:36px; } .accent-work,.accent-about { left:24px; right:auto; } .ambient-arch { width:95px; height:95px; border-width:16px; } .ambient-disc { width:52px; height:52px; top:15px; } .ambient-tile { width:54px; height:54px; top:15px; border-radius:16px; } }
+@media(max-width:650px) { .ambient-accent { width:165px; height:32px; right:20px; } .accent-work,.accent-about { left:20px; right:auto; } .ambient-disc { left:8px; width:44px; height:44px; } .ambient-arch { right:3px; } .ambient-pebble { width:39px; height:46px; right:18px; top:15px; } .accent-services .ambient-disc { right:14px; width:42px; height:42px; } .accent-about .ambient-arch { width:86px; height:86px; border-width:14px; } }
+@media(prefers-reduced-motion:reduce) { .ambient-form { animation:none!important; } .project-visit-button span { transition:none; transform:none!important; } }
