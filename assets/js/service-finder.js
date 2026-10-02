@@ -20,6 +20,7 @@
     ['discovery','More people need to find me'],
     ['learning','I need better training materials'],
     ['ai','My team needs practical AI skills'],
+    ['custom','I have a custom creative project'],
     ['unsure',"I'm not sure where to start"]
   ];
   const questions = {
@@ -28,6 +29,7 @@
     discovery:{title:'Where can interested people go now?',options:[['ready','A website I am happy with'],['improve','A website that needs improving'],['social','Mostly social media or WhatsApp'],['unsure','I need help choosing an enquiry route']]},
     learning:{title:'What do you have to work with?',options:[['material','Existing training material'],['knowledge','Product knowledge to organise'],['idea','A new team training idea'],['unsure','I am not sure yet']]},
     ai:{title:'What would help your team?',options:[['content','Creating and checking content'],['workflow','Repeatable everyday workflows'],['start','Getting started with AI'],['unsure','I am not sure yet']]},
+    custom:{title:'What do you have in mind?',options:[['journals','A journal or workbook'],['resource','A digital resource or tool'],['idea','Another creative idea'],['unsure','I would like to talk it through']]},
     unsure:{title:'Where does the business feel stuck?',options:[['enquiries','Helping people understand and contact us'],['visibility','Getting noticed'],['team','Helping the team learn or work better'],['unsure','I would rather talk it through']]}
   };
   const timings = ['I am exploring options','Within the next few months','I have a date in mind'];
@@ -45,6 +47,7 @@
     route:{title:'Plan your enquiry route',reason:'We can discuss how your profiles, WhatsApp and any future website should work together before choosing content or ads.',service:'Marketing Foundations',proof:'asher'},
     learning:{title:'Scope an interactive learning project',reason:'We can shape your material into useful guides, scenarios or practice activities, with the scope agreed first.',service:'Interactive Learning Materials',proof:'learning'},
     ai:{title:'Shape a practical AI workshop',reason:'A hands-on session can focus on your team’s actual tasks, checking outputs and using judgement.',service:'Practical AI Training',proof:'kyle'},
+    custom:{title:'Discuss a custom creative project',reason:'We can start with who it is for and what it needs to do, then agree the content, format, deliverables and quote.',service:'Custom Creative Project',proof:'kyle'},
     conversation:{title:'Start with a discovery conversation',reason:'A short conversation about your business can help us agree what to look at first, without choosing a package now.',service:'Discovery conversation',proof:'kyle'}
   };
   const recommend = () => {
@@ -52,6 +55,7 @@
     if (state.goal === 'existing') return recommendations.review;
     if (state.goal === 'learning') return recommendations.learning;
     if (state.goal === 'ai') return recommendations.ai;
+    if (state.goal === 'custom') return recommendations.custom;
     if (state.goal === 'discovery') return state.situation === 'ready' ? recommendations.promotion : state.situation === 'improve' ? recommendations.review : recommendations.route;
     return recommendations.conversation;
   };
