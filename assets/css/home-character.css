@@ -235,3 +235,25 @@ footer { background:#242c2d; }
  .service-choice-cue { margin-bottom:14px; }
  .service-explorer[data-active-service] .service-panels { padding-top:6px; }
 }
+
+/* Keep opening the real site separate from choosing a screenshot preview. */
+.project-choice-cue { color:#ede6ff; font-size:13px; line-height:1.5; }
+.project-visit-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.project-visit-bar p { min-width:0; }
+.project-preview-label { display:block; font-size:11px; color:#ede6ff; margin-bottom:4px; }
+.project-visit-bar strong { display:block; font-size:21px; line-height:1.25; color:#fffaf2; }
+.project-visit-action { flex-shrink:0; text-align:center; }
+.project-visit-button { background:#f5d184; color:#35254d; border:1px solid #f5d184; padding:12px 18px; min-height:48px; font-size:14px; gap:10px; }
+.project-visit-button:hover { background:#fff5d7; border-color:#fff5d7; color:#35254d; }
+.project-visit-button:focus-visible { outline:3px solid #fff5d7; outline-offset:4px; }
+.project-tab-note { display:block; font-size:11px; color:#ede6ff; margin-top:6px; }
+@media(max-width:850px) {
+ .project-visit-bar { gap:12px; }
+ .project-visit-bar strong { font-size:18px; }
+ .project-visit-button { padding:12px; }
+}
+@media(max-width:650px) {
+ .project-visit-bar { margin-bottom:16px; }
+ .project-preview-label { font-size:10px; }
+ .project-visit-bar strong { font-size:18px; }
+}

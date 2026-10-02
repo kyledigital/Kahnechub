@@ -40,10 +40,10 @@
       document.getElementById('project-description').textContent = project.description;
       document.getElementById('project-contribution').textContent = project.contribution;
       document.getElementById('project-domain').textContent = project.domain;
+      document.getElementById('project-name').textContent = project.name;
       const link = document.getElementById('project-link');
       link.href = project.url;
-      link.textContent = 'Visit ' + project.name;
-      link.setAttribute('aria-label','Visit ' + project.name + ' (opens in a new tab)');
+      link.setAttribute('aria-label','Visit website: ' + project.name + ' (opens in a new tab)');
       image.src = 'assets/images/projects/' + selected + '-' + device + '.webp';
       if (device === 'desktop') {
         image.srcset = 'assets/images/projects/' + selected + '-desktop-720.webp 720w, assets/images/projects/' + selected + '-desktop.webp 1440w';
