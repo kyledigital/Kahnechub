@@ -673,11 +673,14 @@
       return;
     }
 
-    const normalText = normalizeOptionText(text);
-    const option = Array.from(select.options).find((item) => normalizeOptionText(item.textContent) === normalText)
-      || Array.from(select.options).find((item) => normalizeOptionText(item.textContent).includes(normalText));
-
     if (select.type === 'hidden') { select.value = text; return; }
+    const normalText = normalizeOptionText(text);
+    const options = Array.from(select.options || []);
+    let option = options.find((item) => normalizeOptionText(item.value) === normalText || normalizeOptionText(item.textContent) === normalText)
+      || options.find((item) => normalizeOptionText(item.textContent).includes(normalText));
+    if (!option && select.id === 'contact-service') {
+      option = document.createElement('option'); option.value = String(text).slice(0,160); option.textContent = option.value; option.dataset.specificEnquiry = 'true'; select.append(option);
+    }
     if (option) {
       select.value = option.value || option.textContent;
       select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -686,6 +689,7 @@
 
   function applyContactPrefill(form, service, projectType) {
     if (service === 'Ongoing Website Promotion') service = 'Paid Advertising & Strategy';
+    if (['Flexible Marketing Support','Marketing Partner','Monthly Marketing Support'].includes(service)) service = 'Ongoing Marketing Support';
     if (!form) {
       return;
     }
@@ -1122,6 +1126,12 @@
   }
 
   function initKahniRefresh() {
+    // The homepage uses its own visual system and native browser refresh.
+    // The legacy refresh overlay is styled only by the supporting-page CSS.
+    if (document.body.classList.contains('hub-home')) {
+      return;
+    }
+
     const prefersReducedMotion = window.matchMedia
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false;
@@ -1415,7 +1425,7 @@
         copy: 'Best for search visibility, campaign setup, account reviews, and ongoing Google Ads support.',
         why: 'You want more search visibility and need a clearer campaign path before spending more.',
         nextStep: 'Book a Google Ads session or view the service page.',
-        price: 'from JMD $12,000',
+        price: 'quoted by scope',
         cta: 'View Google Ads Help',
         href: 'google-ads-help.html'
       },
@@ -1424,7 +1434,7 @@
         copy: 'Best for building awareness with video campaigns and getting your business in front of more people.',
         why: 'You want video visibility, so the best route is a Google Ads conversation focused on YouTube campaign direction.',
         nextStep: 'Send an enquiry and we can shape the right YouTube Ads starting point.',
-        price: 'from JMD $12,000',
+        price: 'quoted by scope',
         cta: 'Ask About YouTube Ads',
         href: '#contact',
         prefillService: 'Google Ads Walkthrough',
@@ -1435,7 +1445,7 @@
         copy: 'Best for combining a clear landing page with Google or Meta campaign support.',
         why: 'You want more enquiries, so the next move is to tighten the route from attention to action.',
         nextStep: 'Start with a clear landing page or campaign enquiry.',
-        price: 'from JMD $30,000',
+        price: 'quoted by scope',
         cta: 'Start Lead Generation Enquiry',
         href: '#contact',
         prefillService: 'Landing Page Setup',
@@ -1456,7 +1466,7 @@
         copy: 'Best for short form videos, content shoots, and social ready assets.',
         why: 'You need content you can actually post, so a compact batch of brand assets is the strongest starting point.',
         nextStep: 'Send a content enquiry and we can shape the shoot or asset list.',
-        price: 'from JMD $25,000',
+        price: 'quoted by scope',
         cta: 'Ask About Brand Content Kit',
         href: '#contact',
         prefillService: 'Brand Content Kit',
@@ -1467,7 +1477,7 @@
         copy: 'Best for launches, offers, lead forms, WhatsApp enquiries, and simple service pages.',
         why: 'You need somewhere focused to send traffic, explain the offer, and collect enquiries.',
         nextStep: 'Request a landing page and share the offer you want to promote.',
-        price: 'from JMD $30,000',
+        price: 'quoted by scope',
         cta: 'Request a Landing Page',
         href: '#contact',
         prefillService: 'Landing Page Setup',
@@ -1478,7 +1488,7 @@
         copy: 'Best for pitch decks, reports, proposals, internal meetings, and business presentations.',
         why: 'You need to turn rough notes or ideas into a deck that is easier to present and understand.',
         nextStep: 'View the deck service page and share the deck you need cleaned up or built.',
-        price: 'from JMD $15,000',
+        price: 'quoted by scope',
         cta: 'View Deck Design',
         href: 'presentation-deck-design.html'
       },
@@ -1498,7 +1508,7 @@
         copy: 'Best if you need help deciding what to fix, build, or promote first.',
         why: 'You are still deciding the best move, so clarity should come before more spend.',
         nextStep: 'Book a strategy session or start with an audit.',
-        price: 'from JMD $8,500',
+        price: 'quoted by scope',
         cta: 'Book a Strategy Session',
         href: 'strategy-call.html#contact',
         secondaryCta: 'Start with an Audit',
@@ -1697,7 +1707,7 @@
           <ul>
             <li><strong>Why this fits:</strong> ${result.why}</li>
             <li><strong>Best next step:</strong> ${result.nextStep}</li>
-            <li><strong>Starting price:</strong> ${result.price}</li>
+            <li><strong>Scope and quote:</strong> ${result.price}</li>
           </ul>
           <div class="match-result-actions">
             <a class="match-result-primary" href="${result.href}" data-match-primary>${result.cta} &rarr;</a>

@@ -67,7 +67,8 @@
   selection(document.querySelector('.service-choices'),'[aria-selected=true]',['aria-selected']);
   selection(document.querySelector('.project-choices'),'[aria-pressed=true]',['aria-pressed']);
   selection(document.querySelector('.device-choices'),'[aria-pressed=true]',['aria-pressed']);
-  const controls = '.button,.btn,.nav-toggle,.project-choice,.device-choices button,.service-choices button,.story-replay,.reach-replay,.ideas-replay,.finder-close,.finder-secondary,.quick-whatsapp';
+  document.querySelectorAll('[data-spring-choices]').forEach(container=>selection(container,'[aria-selected=true]',['aria-selected']));
+  const controls = '.button,.btn,.nav-toggle,.project-choice,.device-choices button,.service-choices button,.story-replay,.reach-replay,.ideas-replay,.finder-close,.finder-secondary,.quick-whatsapp,[data-partner-control]';
   const presses = new WeakMap();
   let pressed;
   const release = () => { if (pressed) presses.get(pressed).set([1]); pressed = null; };

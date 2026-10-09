@@ -106,7 +106,7 @@
       if (tab) tab.focus({preventScroll:true});
     }));
     const applyServiceHash = () => {
-      const panel = {'#ai-training':'ai','#foundations':'marketing','#support':'marketing','#meta-ads':'marketing','#audit':'marketing'}[location.hash];
+      const panel = {'#ai-training':'ai','#learning-work':'learning','#foundations':'marketing','#support':'marketing','#meta-ads':'marketing','#audit':'marketing'}[location.hash];
       if (panel) show(panel);
     };
     applyServiceHash();

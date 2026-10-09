@@ -15,15 +15,14 @@
   const emptyState = () => ({step:1,goal:'',situation:'',support:false,timing:'',notes:'',draft:'',draftKey:'',draftEdited:false,stale:false});
   let state = emptyState();
   const goals = [
-    ['new','I need my first website'],
-    ['existing','My website needs improving'],
-    ['discovery','I need Meta or Google Ads'],
-    ['learning','I need better training materials'],
-    ['ai','My team needs practical AI skills'],
-    ['custom','I have a custom creative project'],
+    ['partner','Ongoing marketing support'],
+    ['discovery','Paid advertising'],
+    ['creative','A creative or digital project'],
     ['unsure',"I'm not sure where to start"]
   ];
   const questions = {
+    partner:{title:'Where would ongoing support help most?',options:[['planning','Planning and prioritising the marketing'],['production','Creating content consistently'],['campaigns','Managing campaigns and reporting'],['connected','Bringing the work together']]},
+    creative:{title:'What kind of project do you have in mind?',options:[['new','A new website'],['existing','A review of my current website'],['production','Photography, video or audio'],['learning','Interactive training materials'],['ai','Practical AI training'],['custom','A journal, workbook or another idea']]},
     new:{title:'Where do your enquiries come from now?',options:[['referrals','Mostly referrals'],['social','Social media'],['launch','I am preparing to launch'],['mixed','A mix of places']]},
     existing:{title:'What needs to work better?',options:[['services','Explaining my services'],['mobile','The mobile experience'],['contact','Making it easier to get in touch'],['unsure','I am not sure yet']]},
     discovery:{title:'Where could your ads lead?',options:[['ready','A website I am happy with'],['improve','A website that needs improving'],['social','Mostly social media or WhatsApp'],['unsure','I need help choosing an enquiry route']]},
@@ -41,6 +40,8 @@
     kyle:{name:'Kyle Hector',description:'Explore the work and background of the person you would work with.',image:'assets/images/kyle-hector-400.webp',url:'https://kylehector.com'}
   };
   const recommendations = {
+    partner:{title:'Plan ongoing marketing support',reason:'We can bring planning, production, campaigns and reporting together around agreed priorities and capacity.',service:'Ongoing Marketing Support',proof:'kyle'},
+    production:{title:'Discuss a content production project',reason:'We can agree the story, format, production needs and review process for your photography, video or audio.',service:'Creative & Digital Projects',proof:'kyle'},
     website:{title:'A first website',reason:'I can help organise your services and build a clear route to calls and enquiries.',service:'Website Design & Development',proof:'vwplus'},
     review:{title:'Start with a website review',reason:'Let’s understand what is working and what needs improving before deciding on targeted updates or a rebuild.',service:'Existing Website Review',proof:'decorators'},
     promotion:{title:'Paid advertising and strategy',reason:'I can plan and manage Meta or Google Ads, working with your existing website and agreeing what to track.',service:'Paid Advertising & Strategy',proof:'kyle'},
@@ -51,6 +52,8 @@
     conversation:{title:'Start with a discovery conversation',reason:'A short conversation about your business can help us agree what to look at first, without choosing a package now.',service:'Discovery conversation',proof:'kyle'}
   };
   const recommend = () => {
+    if (state.goal === 'partner') return recommendations.partner;
+    if (state.goal === 'creative') return ({new:recommendations.website,existing:recommendations.review,production:recommendations.production,learning:recommendations.learning,ai:recommendations.ai,custom:recommendations.custom})[state.situation];
     if (state.goal === 'new') return recommendations.website;
     if (state.goal === 'existing') return recommendations.review;
     if (state.goal === 'learning') return recommendations.learning;
@@ -70,7 +73,7 @@
     const goal = goals.find(([value]) => value === state.goal)[1];
     const situation = questions[state.goal].options.find(([value]) => value === state.situation)[1];
     const lines = ['Hi Kyle, I used the Kahnec Hub service guide.','',`My goal: ${goal}.`,`My situation: ${situation}.`,`Suggested starting point: ${recommend().title}.`];
-    if (state.support && ['new','existing'].includes(state.goal)) lines.push('I would also like to discuss content or ads.');
+    if (state.support && state.goal === 'creative') lines.push('I would also like to discuss ongoing marketing support.');
     if (state.timing) lines.push(`Timing: ${state.timing}.`);
     if (state.notes.trim()) lines.push('',`A little context: ${state.notes.trim()}`);
     lines.push('','Could we discuss what fits my business and the scope?');
@@ -109,7 +112,7 @@
       content.querySelectorAll('[name=finder-goal]').forEach(input => {input.checked=input.value===state.goal});
     } else if (state.step === 2) {
       const question = questions[state.goal];
-      content.innerHTML = `<h3 id="finder-question" class="finder-question" tabindex="-1">${question.title}</h3>` + radioGroup('finder-situation',question.options,question.title) + (['new','existing'].includes(state.goal) ? '<label class="finder-extra"><input type="checkbox" id="finder-support">Also discuss content or ads <span>(optional)</span></label>' : '') + '<div class="finder-field"><label for="finder-timing">Timing <span>(optional)</span></label><select id="finder-timing"><option value="">No timing to add</option>' + timings.map(timing => `<option>${timing}</option>`).join('') + '</select></div><div class="finder-field"><label for="finder-notes">Anything Kyle should know? <span>(optional)</span></label><textarea id="finder-notes" rows="2" maxlength="600" aria-describedby="finder-notes-hint"></textarea><p id="finder-notes-hint" class="finder-hint">A sentence about your business is enough. Up to 600 characters.</p></div>';
+      content.innerHTML = `<h3 id="finder-question" class="finder-question" tabindex="-1">${question.title}</h3>` + radioGroup('finder-situation',question.options,question.title) + (state.goal === 'creative' ? '<label class="finder-extra"><input type="checkbox" id="finder-support">Also discuss ongoing marketing support <span>(optional)</span></label>' : '') + '<div class="finder-field"><label for="finder-timing">Timing <span>(optional)</span></label><select id="finder-timing"><option value="">No timing to add</option>' + timings.map(timing => `<option>${timing}</option>`).join('') + '</select></div><div class="finder-field"><label for="finder-notes">Anything Kyle should know? <span>(optional)</span></label><textarea id="finder-notes" rows="2" maxlength="600" aria-describedby="finder-notes-hint"></textarea><p id="finder-notes-hint" class="finder-hint">A sentence about your business is enough. Up to 600 characters.</p></div>';
       content.querySelectorAll('[name=finder-situation]').forEach(input => {input.checked=input.value===state.situation});
       const support = document.getElementById('finder-support');if (support) support.checked = state.support;
       document.getElementById('finder-timing').value = state.timing;
