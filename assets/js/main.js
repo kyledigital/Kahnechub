@@ -1166,7 +1166,7 @@
           <span class="kh-refresh__ripple kh-refresh__ripple--3"></span>
           <span class="kh-refresh__touch"></span>
           <span class="kh-refresh__check"></span>
-          <img class="kh-refresh__kahni" src="assets/images/helpers/kahni-refresh-touch.png" alt="" decoding="async"/>
+          <img class="kh-refresh__kahni" src="assets/images/helpers/kahnec-helper-support.png" alt="" decoding="async"/>
         </div>
       `;
 

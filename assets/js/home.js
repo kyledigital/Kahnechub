@@ -168,7 +168,7 @@
     const releaseReach = () => { if (reachFigure) reachFigure.classList.remove('ideas-active'); };
     const pause = () => { video.pause(); releaseReach(); };
     const play = () => {
-      if (failed || motionPaused || reducedMotion.matches || !visible || document.hidden) return;
+      if (failed || motionPaused || reducedMotion.matches || !visible || document.hidden || document.documentElement.classList.contains('finder-open')) return;
       requested = true;
       if (!video.hasAttribute('src')) video.src = 'assets/media/ideas-capture.webm';
       video.play().catch(() => {
@@ -181,7 +181,7 @@
       const still = motionPaused || reducedMotion.matches || failed;
       replay.disabled = still;
       status.textContent = reducedMotion.matches || failed ? 'Still illustration shown' : motionPaused ? 'Motion paused' : '';
-      if (still || !visible || document.hidden) {
+      if (still || !visible || document.hidden || document.documentElement.classList.contains('finder-open')) {
         pause();
         ideasFigure.dataset.motionState = reducedMotion.matches || failed || !started || complete ? 'still' : 'paused';
       } else if (!complete && (requested || (!started && !saveData))) play();
@@ -220,6 +220,7 @@
       },{threshold:.35}).observe(ideasFigure);
     }
     document.addEventListener('visibilitychange',updateIdeasMotion);
+    new MutationObserver(updateIdeasMotion).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
     updateIdeasMotion();
   }
 })();
