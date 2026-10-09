@@ -17,7 +17,7 @@
   const goals = [
     ['new','I need my first website'],
     ['existing','My website needs improving'],
-    ['discovery','More people need to find me'],
+    ['discovery','I need Meta or Google Ads'],
     ['learning','I need better training materials'],
     ['ai','My team needs practical AI skills'],
     ['custom','I have a custom creative project'],
@@ -26,7 +26,7 @@
   const questions = {
     new:{title:'Where do your enquiries come from now?',options:[['referrals','Mostly referrals'],['social','Social media'],['launch','I am preparing to launch'],['mixed','A mix of places']]},
     existing:{title:'What needs to work better?',options:[['services','Explaining my services'],['mobile','The mobile experience'],['contact','Making it easier to get in touch'],['unsure','I am not sure yet']]},
-    discovery:{title:'Where can interested people go now?',options:[['ready','A website I am happy with'],['improve','A website that needs improving'],['social','Mostly social media or WhatsApp'],['unsure','I need help choosing an enquiry route']]},
+    discovery:{title:'Where could your ads lead?',options:[['ready','A website I am happy with'],['improve','A website that needs improving'],['social','Mostly social media or WhatsApp'],['unsure','I need help choosing an enquiry route']]},
     learning:{title:'What do you have to work with?',options:[['material','Existing training material'],['knowledge','Product knowledge to organise'],['idea','A new team training idea'],['unsure','I am not sure yet']]},
     ai:{title:'What would help your team?',options:[['content','Creating and checking content'],['workflow','Repeatable everyday workflows'],['start','Getting started with AI'],['unsure','I am not sure yet']]},
     custom:{title:'What do you have in mind?',options:[['journals','A journal or workbook'],['resource','A digital resource or tool'],['idea','Another creative idea'],['unsure','I would like to talk it through']]},
@@ -43,8 +43,8 @@
   const recommendations = {
     website:{title:'A first website',reason:'I can help organise your services and build a clear route to calls and enquiries.',service:'Website Design & Development',proof:'vwplus'},
     review:{title:'Start with a website review',reason:'Let’s understand what is working and what needs improving before deciding on targeted updates or a rebuild.',service:'Existing Website Review',proof:'decorators'},
-    promotion:{title:'Content and advertising',reason:'With a suitable website in place, useful posts and focused ads can help people find you and take the next step.',service:'Ongoing Website Promotion',proof:'vwplus'},
-    route:{title:'Plan your enquiry route',reason:'We can discuss how your profiles, WhatsApp and any future website should work together before choosing content or ads.',service:'Marketing Foundations',proof:'asher'},
+    promotion:{title:'Paid advertising and strategy',reason:'I can plan and manage Meta or Google Ads, working with your existing website and agreeing what to track.',service:'Paid Advertising & Strategy',proof:'kyle'},
+    route:{title:'Paid advertising and strategy',reason:'We can plan the ads and decide where enquiries should go. I’ll flag any changes needed to that route before the campaign starts.',service:'Paid Advertising & Strategy',proof:'kyle'},
     learning:{title:'Scope an interactive learning project',reason:'We can shape your material into useful guides, scenarios or practice activities, with the scope agreed first.',service:'Interactive Learning Materials',proof:'learning'},
     ai:{title:'Shape a practical AI workshop',reason:'A hands-on session can focus on your team’s actual tasks, checking outputs and using judgement.',service:'Practical AI Training',proof:'kyle'},
     custom:{title:'Discuss a custom creative project',reason:'We can start with who it is for and what it needs to do, then agree the content, format, deliverables and quote.',service:'Custom Creative Project',proof:'kyle'},
@@ -56,7 +56,7 @@
     if (state.goal === 'learning') return recommendations.learning;
     if (state.goal === 'ai') return recommendations.ai;
     if (state.goal === 'custom') return recommendations.custom;
-    if (state.goal === 'discovery') return state.situation === 'ready' ? recommendations.promotion : state.situation === 'improve' ? recommendations.review : recommendations.route;
+    if (state.goal === 'discovery') return state.situation === 'ready' ? recommendations.promotion : recommendations.route;
     return recommendations.conversation;
   };
   const bounded = (value,limit) => {

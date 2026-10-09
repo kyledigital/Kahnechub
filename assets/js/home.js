@@ -26,9 +26,9 @@
     document.querySelectorAll('.hero,.work-section,.learning-section,.contact-section').forEach(section => observer.observe(section));
   }
   const projects = {
-    vwplus: {contribution:'Website design and build, with a guided service enquiry.',name:'VWPlus',title:'Find the right workshop conversation.',description:'Service exploration and a guided enquiry help drivers explain their car and what needs attention.',url:'https://vwplus-website.vercel.app/',domain:'vwplus-website.vercel.app'},
-    decorators: {contribution:'Website design and build, with a visual service guide.',name:'New Best Decorators',title:'Picture the possibilities. Start an estimate.',description:'A visual service guide brings drapes, blinds and furnishings together, with a clear route to an estimate.',url:'https://newbestdecorators.kahnec.com/',domain:'newbestdecorators.kahnec.com'},
-    asher: {contribution:'Website design and build, with a vehicle and date-based enquiry.',name:'Asher’s Fleet',title:'Find a car. Start the rental conversation.',description:'A vehicle showcase and date-based enquiry help visitors explain their plans and check availability with the team.',url:'https://ashers-fleet.vercel.app/',domain:'ashers-fleet.vercel.app'}
+    vwplus: {contribution:'Website design and build, with a guided service enquiry.',name:'VWPlus',title:'A website for an automotive workshop.',description:'I built a service guide and enquiry form so drivers can explain their car and what needs attention.',url:'https://vwplus-website.vercel.app/',domain:'vwplus-website.vercel.app'},
+    decorators: {contribution:'Website design and build, with a visual service guide.',name:'New Best Decorators',title:'A website for interiors and furnishings.',description:'I brought drapes, blinds and furnishings into a visual service guide, with a route to request an estimate.',url:'https://newbestdecorators.kahnec.com/',domain:'newbestdecorators.kahnec.com'},
+    asher: {contribution:'Website design and build, with a vehicle and date-based enquiry.',name:'Asher’s Fleet',title:'A website for car rental and leasing.',description:'I built a vehicle showcase and date-based enquiry so visitors can share their plans and ask the team about availability.',url:'https://ashers-fleet.vercel.app/',domain:'ashers-fleet.vercel.app'}
   };
   const explorer = document.querySelector('[data-project-explorer]');
   if (explorer) {

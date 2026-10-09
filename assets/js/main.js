@@ -685,6 +685,7 @@
   }
 
   function applyContactPrefill(form, service, projectType) {
+    if (service === 'Ongoing Website Promotion') service = 'Paid Advertising & Strategy';
     if (!form) {
       return;
     }
