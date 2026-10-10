@@ -21,15 +21,15 @@
     ['unsure',"I'm not sure where to start"]
   ];
   const questions = {
-    partner:{title:'Where would ongoing support help most?',options:[['planning','Planning and prioritising the marketing'],['production','Creating content consistently'],['campaigns','Managing campaigns and reporting'],['connected','Bringing the work together']]},
-    creative:{title:'What kind of project do you have in mind?',options:[['new','A new website'],['existing','A review of my current website'],['production','Photography, video or audio'],['learning','Interactive training materials'],['ai','Practical AI training'],['custom','A journal, workbook or another idea']]},
+    partner:{title:'Where would ongoing support help most?',options:[['ideas','Finding content opportunities and campaign ideas'],['planning','Planning and prioritising the marketing'],['production','Creating content consistently'],['campaigns','Managing campaigns and reporting'],['connected','Bringing the work together']]},
+    creative:{title:'What kind of project do you have in mind?',options:[['concept','Content ideas, campaign concepts or creative direction'],['new','A new website'],['existing','A review of my current website'],['production','Photography, video or audio'],['learning','Interactive training materials'],['ai','Practical AI training'],['custom','A journal, workbook or another idea']]},
     new:{title:'Where do your enquiries come from now?',options:[['referrals','Mostly referrals'],['social','Social media'],['launch','I am preparing to launch'],['mixed','A mix of places']]},
     existing:{title:'What needs to work better?',options:[['services','Explaining my services'],['mobile','The mobile experience'],['contact','Making it easier to get in touch'],['unsure','I am not sure yet']]},
     discovery:{title:'Where could your ads lead?',options:[['ready','A website I am happy with'],['improve','A website that needs improving'],['social','Mostly social media or WhatsApp'],['unsure','I need help choosing an enquiry route']]},
     learning:{title:'What do you have to work with?',options:[['material','Existing training material'],['knowledge','Product knowledge to organise'],['idea','A new team training idea'],['unsure','I am not sure yet']]},
     ai:{title:'What would help your team?',options:[['content','Creating and checking content'],['workflow','Repeatable everyday workflows'],['start','Getting started with AI'],['unsure','I am not sure yet']]},
     custom:{title:'What do you have in mind?',options:[['journals','A journal or workbook'],['resource','A digital resource or tool'],['idea','Another creative idea'],['unsure','I would like to talk it through']]},
-    unsure:{title:'Where does the business feel stuck?',options:[['enquiries','Helping people understand and contact us'],['visibility','Getting noticed'],['team','Helping the team learn or work better'],['unsure','I would rather talk it through']]}
+    unsure:{title:'Where does the business feel stuck?',options:[['idea','Launching something or finding a story to tell'],['enquiries','Helping people understand and contact us'],['visibility','Getting noticed'],['team','Helping the team learn or work better'],['unsure','I would rather talk it through']]}
   };
   const timings = ['I am exploring options','Within the next few months','I have a date in mind'];
   const proof = {
@@ -40,6 +40,8 @@
     kyle:{name:'Kyle Hector',description:'Explore the work and background of the person you would work with.',image:'assets/images/kyle-hector-400.webp',url:'https://kylehector.com'}
   };
   const recommendations = {
+    concept:{title:'Develop your creative strategy and concept',reason:'We can find a content opportunity, shape the story and picture your campaign before production. The scope can include messaging, a moodboard, storyboard or creative brief.',service:'Creative Strategy & Concept Development',proof:'kyle'},
+    partnerIdeas:{title:'Plan ongoing marketing support',reason:'Creative strategy can be part of your ongoing support: finding content opportunities, developing campaign ideas and connecting the direction to production and advertising.',service:'Ongoing Marketing Support',proof:'kyle'},
     partner:{title:'Plan ongoing marketing support',reason:'We can bring planning, production, campaigns and reporting together around agreed priorities and capacity.',service:'Ongoing Marketing Support',proof:'kyle'},
     production:{title:'Discuss a content production project',reason:'We can agree the story, format, production needs and review process for your photography, video or audio.',service:'Creative & Digital Projects',proof:'kyle'},
     website:{title:'A first website',reason:'I can help organise your services and build a clear route to calls and enquiries.',service:'Website Design & Development',proof:'vwplus'},
@@ -52,8 +54,9 @@
     conversation:{title:'Start with a discovery conversation',reason:'A short conversation about your business can help us agree what to look at first, without choosing a package now.',service:'Discovery conversation',proof:'kyle'}
   };
   const recommend = () => {
-    if (state.goal === 'partner') return recommendations.partner;
-    if (state.goal === 'creative') return ({new:recommendations.website,existing:recommendations.review,production:recommendations.production,learning:recommendations.learning,ai:recommendations.ai,custom:recommendations.custom})[state.situation];
+    if (state.goal === 'partner') return state.situation === 'ideas' ? recommendations.partnerIdeas : recommendations.partner;
+    if (state.goal === 'creative') return ({concept:recommendations.concept,new:recommendations.website,existing:recommendations.review,production:recommendations.production,learning:recommendations.learning,ai:recommendations.ai,custom:recommendations.custom})[state.situation];
+    if (state.goal === 'unsure' && state.situation === 'idea') return recommendations.concept;
     if (state.goal === 'new') return recommendations.website;
     if (state.goal === 'existing') return recommendations.review;
     if (state.goal === 'learning') return recommendations.learning;

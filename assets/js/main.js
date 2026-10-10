@@ -433,6 +433,15 @@
     });
 
     setActiveServiceTab(tabs[0].dataset.tab, false);
+    const activateCreativeLink = () => {
+      if (window.location.hash !== '#creative-strategy') return;
+      const creativeCard = document.querySelector('#panel-content #creative-strategy');
+      if (!creativeCard) return;
+      setActiveServiceTab('content', false);
+      window.requestAnimationFrame(() => creativeCard.scrollIntoView({ block: 'start' }));
+    };
+    activateCreativeLink();
+    window.addEventListener('hashchange', activateCreativeLink);
   }
 
   function openAccordionPanel(panelId) {
@@ -1371,6 +1380,7 @@
           ['leads', 'Get more leads'],
           ['social', 'Improve social media visibility'],
           ['content', 'Get content to post'],
+          ['concept', 'Develop content ideas or a campaign concept'],
           ['landing', 'Build a landing page'],
           ['deck', 'Create a deck or proposal'],
           ['ongoing', 'Get ongoing marketing support'],
@@ -1383,6 +1393,7 @@
         allowMultiple: true,
         options: [
           ['advice', 'I need advice first'],
+          ['launch', 'I am launching something'],
           ['offer', 'I already have an offer'],
           ['running_ads', 'I am already running ads'],
           ['have_content', 'I have footage or content already'],
@@ -1396,6 +1407,7 @@
         allowMultiple: true,
         options: [
           ['plan', 'A clear plan'],
+          ['creative_direction', 'Creative direction'],
           ['campaign_setup', 'A campaign setup'],
           ['better_ads', 'Better ads'],
           ['landing_page', 'A landing page'],
@@ -1420,6 +1432,17 @@
     ];
 
     const results = {
+      concept: {
+        service: 'Creative Strategy & Concept Development',
+        copy: 'Find a content opportunity, develop a campaign idea and visualise the direction before production.',
+        why: 'You need a story or creative direction to turn an early thought or launch into a clear concept.',
+        nextStep: 'Share the challenge, audience and any thoughts you already have. We can agree a focused creative brief.',
+        price: 'quoted by scope',
+        cta: 'Let’s Develop Your Idea',
+        href: '#contact',
+        prefillService: 'Creative Strategy & Concept Development',
+        prefillProjectType: 'Project based work'
+      },
       google: {
         service: 'Google Ads Help',
         copy: 'Best for search visibility, campaign setup, account reviews, and ongoing Google Ads support.',
@@ -1572,6 +1595,11 @@
           return results.social;
         }
         return results.ongoing;
+      }
+
+      if (hasAnswer('goal', 'concept') || hasAnswer('need', 'creative_direction')
+        || (hasAnswer('stage', 'launch') && !hasAnswer('need', 'landing_page') && !hasAnswer('need', 'campaign_setup'))) {
+        return results.concept;
       }
 
       if (hasAnswer('stage', 'running_ads') && hasAnswer('need', 'better_ads')) {
@@ -1727,6 +1755,13 @@
         }
         if (result.prefillProjectType) {
           primaryCta.dataset.prefillProjectType = result.prefillProjectType;
+        }
+        if (result.href === '#contact' && !document.getElementById('contactForm')) {
+          const enquiry = new URL('index.html', window.location.href);
+          enquiry.searchParams.set('service', result.prefillService || result.service);
+          if (result.prefillProjectType) enquiry.searchParams.set('project_type', result.prefillProjectType);
+          enquiry.hash = 'contact';
+          primaryCta.href = enquiry.pathname + enquiry.search + enquiry.hash;
         }
 
         primaryCta.addEventListener('click', () => {
@@ -2118,7 +2153,7 @@
     const chatFlow = [
       {
         msg: 'What do you need help with right now?',
-        choices: ['Quick advice / audit', 'Google or Meta ads', 'Deck or presentation', 'Landing page', 'Content shoot or editing', 'Monthly support']
+        choices: ['Creative ideas or campaign direction', 'Quick advice / audit', 'Google or Meta ads', 'Deck or presentation', 'Landing page', 'Content shoot or editing', 'Monthly support']
       },
       {
         msg: 'How soon do you need this?',
@@ -2134,6 +2169,10 @@
       const need = chatAnswers.need || '';
       const budget = chatAnswers.budget || '';
       const timeline = chatAnswers.timeline || '';
+
+      if (/creative|concept|content ideas|campaign idea|launch/i.test(need)) {
+        return '<strong>Creative Strategy &amp; Concept Development</strong> is a useful starting point. We can find the angle, picture the idea and agree a working creative brief before production.';
+      }
 
       if (need.includes('Deck')) {
         return 'A <strong>presentation deck project</strong> looks like the right path. Send the goal, deadline, and any rough notes you already have.';
@@ -2164,6 +2203,8 @@
 
     function getLeadService() {
       const need = chatAnswers.need || '';
+
+      if (/creative|concept|content ideas|campaign idea|launch/i.test(need)) return 'Creative Strategy & Concept Development';
 
       if (need.includes('Deck')) return 'Presentation Deck Design';
       if (need.includes('Landing')) return 'Landing Page Setup';

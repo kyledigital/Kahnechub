@@ -23,8 +23,11 @@
   const primary=bindTabs(document.querySelector('[data-partner-tabs]'));
   const process=bindTabs(document.querySelector('[data-process-tabs]'));
   const proof=bindTabs(document.querySelector('[data-proof-tabs]'));
+  bindTabs(document.querySelector('[data-concept-tabs]'));
   document.querySelectorAll('[data-primary-service]').forEach(link=>link.addEventListener('click',event=>{
     if(!primary)return;
+    if(location.hash==='#how-we-work'){const details=document.getElementById('marketing-process-details');if(details)details.open=true;document.getElementById('how-we-work')?.scrollIntoView({block:'start'});}
+    if(location.hash==='#ideas-title'){const details=document.getElementById('idea-net-details');if(details)details.open=true;document.getElementById('ideas-title')?.scrollIntoView({block:'start'});}
     const tab=document.getElementById('offer-tab-'+link.dataset.primaryService);if(!tab)return;
     event.preventDefault();primary.show(tab);history.replaceState(null,'','#services');document.getElementById('services').scrollIntoView({block:'start'});tab.focus({preventScroll:true});
   }));
@@ -46,7 +49,7 @@
   const figure=document.querySelector('[data-partner-flow]');
   if(!figure)return;
   const replay=figure.querySelector('[data-flow-replay]'),status=figure.querySelector('[data-flow-status]'),caption=figure.querySelector('[data-flow-caption]');
-  const descriptions={photography:'Photography gives your business a genuine visual starting point.',content:'Content turns the brief and your material into a clear story for the audience.',advertising:'Advertising connects that story with relevant people and an agreed next step.',enquiries:'A clear enquiry route helps interested people explain what they need.',insights:'Reporting and enquiry records help guide the next decisions.'};
+  const descriptions={ideation:'I find the angle, shape the story and develop ideas that give content a clear purpose.',photography:'Capture professional visuals that help people see the business differently.',content:'Turn ideas and raw material into useful videos, stories and creative assets.',advertising:'Take the message to relevant audiences through the right digital channels.',enquiries:'Create clear opportunities for people to connect with the business.',insights:'Use available performance data to understand what worked and guide the next move.'};
   let visible=false,played=false;
   const paused=()=>reduced.matches||document.hidden||document.body.classList.contains('motion-paused')||document.documentElement.classList.contains('finder-open');
   const play=()=>{if(paused()||!visible)return;played=true;figure.classList.remove('flow-playing');void figure.offsetWidth;figure.classList.add('flow-playing');figure.dataset.motionState='playing'};
