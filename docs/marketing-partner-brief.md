@@ -76,3 +76,15 @@ Rendered desktop/mobile screenshots were reviewed after fixes. The original desk
 ### Authentic assets to add
 
 Supply a short founder introduction video, actual photography/video/interview examples and approved campaign or reporting screenshots with the role and client context. A 30–60 second founder clip and selected production stills would make the broader offer more tangible. The founder video slot is reserved in the source and hidden until a real asset is supplied; there is no empty public player. Confirm permissions and any outcome claims when selecting additional portfolio material.
+
+## Authorised publication and sharing correction — 10 October 2026
+
+The user explicitly authorised publication with “push updates live” and identified the misleading VW Plus WhatsApp preview. The earlier production homepage used the portfolio screenshot as `og:image`; the new release uses a dedicated Kahnec sharing card across all twelve public routes.
+
+The card is `assets/images/kahnec-marketing-partner-share.png` (1200 × 630 PNG). It contains the existing Kahnec logo, the marketing-partner headline and authentic Kyle portrait. Its editable source is `docs/social-share-card.html`; render at 1200 × 630 with local fonts and images loaded. The render helper used for this release is `output/render-social-card.cjs`.
+
+Open Graph image URL, type, dimensions and description are explicit. Twitter image, title and description match each page's Open Graph metadata. Page-specific titles and canonical URLs remain intact. The new image filename also avoids reusing the old portfolio-image URL. Existing WhatsApp messages and platform caches are outside the website's control.
+
+The release check at `output/playwright/qa-release.cjs` verifies all twelve pages' metadata, PNG dimensions and content hash, matching release assets, desktop/mobile interactions, the service guide, enquiry prefills and a mocked form submission. Use `KAHNEC_QA_URL=https://kahnechub.com/` for deployed verification. Reports are written to `output/playwright/local-release/` or `output/playwright/live-release/`. No real test messages or enquiries are sent.
+
+Publication uses a normal fast-forward push through the existing main/GitHub Pages flow. Fetch before pushing, preserve concurrent changes and the original checkout's uncommitted work, and do not change DNS or force-push.
