@@ -1,43 +1,45 @@
-/* Meta Ads and Google Ads: offer, process and paid-media work. Colour and type tokens live in studio.css; motion in motion.css. */
-.ads{padding:88px 0 0}
-.ads-head{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:60px}
-.ads-head h2{font-size:62px;letter-spacing:-.055em;line-height:1.05;margin-top:22px;text-wrap:balance}
-.ads-lede{justify-self:end;max-width:430px}
-.ads-lede p{font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:22px}
-.ads-label{font-size:11px;text-transform:uppercase;letter-spacing:.13em;line-height:1.5;font-weight:500;color:var(--violet);margin-top:64px}
-.ads :is(h4,dl,dd,figure){margin:0}
-.ads h4{font-weight:500}
-
-/* The campaign rail: four steps on one line. */
-.ads-steps{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;position:relative}
-.ads-steps::before,.ads-steps::after{content:'';position:absolute;top:4px;inset-inline:0;border-top:1px solid var(--line)}
-.ads-steps::after{top:3px;border-top:2px solid var(--violet);transform-origin:left;scale:1 1}
-.ads-steps li{position:relative;padding-top:32px}
-.ads-steps li::before{content:'';position:absolute;z-index:1;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 5px var(--paper)}
-.ads-steps li>span{font-size:11px;color:var(--violet)}
-.ads-steps h4{font-size:22px;letter-spacing:-.025em;line-height:1.2;margin:8px 0 10px}
-.ads-steps p{font-size:14px;line-height:1.6;color:var(--muted);max-width:300px}
-
-/* Two pieces of work, each read the same way: objective, what I did, what was delivered. */
-.ads-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px;margin-top:24px}
-.ads-case{min-width:0}
-.ads-media{display:block;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;background:#0d1421}
-.ads-media img{width:100%;height:100%;object-fit:cover;object-position:top}
-.ads-media>span{position:absolute;left:12px;bottom:12px;display:flex;gap:20px;background:var(--paper);color:var(--ink);padding:9px 12px;font-size:11px;border-radius:3px}
-.ads-case-media figcaption{font-size:11px;line-height:1.5;color:var(--muted);padding-top:10px}
-.ads-case-copy{padding-top:20px}
-.ads-case-type{font-size:11px;text-transform:uppercase;letter-spacing:.13em;line-height:1.5;font-weight:500;color:var(--violet)}
-.ads-case-type span{display:inline-block;margin-left:10px;padding-left:12px;border-left:1px solid var(--line);font-weight:400;letter-spacing:.04em;text-transform:none;font-size:12px;color:var(--muted)}
-.ads-case h4{font-size:30px;letter-spacing:-.035em;line-height:1.15;margin:10px 0 18px}
-.ads-case dl{border-top:1px solid var(--line)}
-.ads-case dl>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
-.ads-case dt{font-size:11px;text-transform:uppercase;letter-spacing:.1em;line-height:1.5;color:var(--muted);padding-top:3px}
-.ads-case dd{font-size:14px;line-height:1.6}
-.ads-case .text-link{margin-top:12px}
-.ads-foot{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-.ads-foot a{color:var(--ink)}
-
-@media(max-width:1190px){.ads-head{gap:44px}.ads-head h2{font-size:48px}.ads-steps{gap:22px}.ads-steps h4{font-size:20px}.ads-case h4{font-size:26px}.ads-case dl>div{grid-template-columns:92px minmax(0,1fr);gap:12px}}
-@media(max-width:900px){.ads{padding-top:72px}.ads-head{display:block}.ads-head h2{font-size:46px}.ads-lede{max-width:560px;margin-top:22px}.ads-label{margin-top:52px}.ads-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 28px}.ads-steps::before,.ads-steps::after{display:none}.ads-steps li{border-top:1px solid var(--line);padding-top:28px}.ads-steps li::before{top:-5px}.ads-steps p{max-width:none}.ads-case-type span{display:block;margin:4px 0 0;padding:0;border:0}.ads-case dl>div{grid-template-columns:1fr;gap:2px}}
-@media(max-width:760px){.ads{padding-top:54px}.ads-head h2{font-size:40px;margin-top:18px}.ads-lede{max-width:none;margin-top:20px}.ads-lede p{font-size:15px}.ads-label{margin-top:44px}.ads-steps{grid-template-columns:1fr;gap:26px}.ads-cases{grid-template-columns:1fr;gap:44px}.ads-case h4{font-size:26px}.ads-case dl>div{grid-template-columns:92px minmax(0,1fr);gap:12px}.ads-media>span{left:8px;bottom:8px;padding:7px 9px;font-size:10px}.ads-foot{display:block;margin-top:36px;font-size:13px}.ads-foot a{margin-top:8px;font-size:13px}}
-@media(max-width:360px){.ads-head h2{font-size:36px}.ads-case dl>div{grid-template-columns:1fr;gap:2px}}
+.ads { padding-block: clamp(50px,7vw,104px) 0; }
+.campaign-lead { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); align-items:center; gap:clamp(32px,5vw,88px); }
+.campaign-intro h2 { font-size:clamp(44px,5.5vw,84px); line-height:.98; letter-spacing:-.061em; margin:20px 0 22px; }
+.campaign-intro > p:not(.edition-kicker) { max-width:32ch; color:var(--muted); font-size:clamp(16px,1.4vw,20px); line-height:1.5; }
+.campaign-intro .primary { margin-top:24px; }
+.campaign-film, .report-copy { min-width:0; }
+.campaign-poster { position:relative; display:block; width:100%; overflow:hidden; border-radius:5px; background:#101819; }
+.campaign-poster img { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+.film-action { position:absolute; inset:auto auto 14px 14px; display:flex; align-items:center; gap:9px; padding:8px 13px; background:var(--paper); border-radius:30px; color:var(--ink); font-size:12px; font-weight:550; }
+.film-action > span:last-child { padding-left:8px; border-left:1px solid #cfc4d2; font-variant-numeric:tabular-nums; }
+.play-triangle { width:0; height:0; border-block:4px solid transparent; border-left:7px solid currentColor; }
+.campaign-caption { border-bottom:1px solid var(--line); padding:18px 0 22px; display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.campaign-caption h3 { margin:5px 0 0; font-size:clamp(22px,2.05vw,32px); letter-spacing:-.045em; line-height:1.1; }
+.campaign-caption h3 em { color:#917da8; font-weight:350; }
+.campaign-caption > p, .report-copy > p:not(.edition-kicker) { line-height:1.5; font-size:16px; color:var(--muted); }
+.campaign-caption .edition-link { display:table; margin-top:7px; }
+.campaign-report { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); align-items:center; gap:clamp(22px,6vw,100px); margin-top:clamp(34px,6vw,88px); }
+.report-art { margin:0; display:grid; place-items:center; background:#ddd8e9; padding:clamp(24px,4vw,60px); border-radius:5px; overflow:hidden; }
+.report-paper { width:min(100%,432px); background:#202e52; border-radius:3px; overflow:hidden; box-shadow:0 12px 26px #241e2e24; }
+.report-top { background:#273453; display:flex; align-items:center; padding:8px 6%; border-bottom:1px solid #71819b; }
+.report-top img { display:block; width:clamp(48px,6vw,78px); height:auto; }
+.report-detail { display:block; width:67%; height:auto; margin:5% 7% 6%; }
+.report-copy h3 { font-size:clamp(34px,4.5vw,68px); line-height:.98; letter-spacing:-.055em; margin:16px 0 20px; font-weight:500; }
+.report-copy > p:not(.edition-kicker) { max-width:39ch; }
+.report-copy .edition-link { margin-top:18px; }
+.campaign-process { border-block:1px solid var(--line); margin-top:clamp(32px,5vw,78px); padding:19px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.campaign-process ol { padding:0; margin:0; display:flex; list-style:none; gap:0; flex-wrap:wrap; }
+.campaign-process li { font-size:14px; }
+.campaign-process li+li::before { content:' / '; color:#8e7b9f; margin-inline:9px; }
+@media (max-width: 760px) {
+  .campaign-lead,.campaign-report { grid-template-columns:minmax(0,1fr); }
+  .campaign-lead { gap:28px; }
+  .campaign-intro h2 { font-size:clamp(40px,10.8vw,64px); margin:12px 0; }
+  .campaign-intro .primary { margin-top:16px; min-height:46px; }
+  .campaign-poster { width:calc(100% + 2 * var(--edition-gutter)); margin-inline:calc(-1 * var(--edition-gutter)); border-radius:0; }
+  .campaign-caption { grid-template-columns:1fr; gap:8px; padding:16px 0 20px; }
+  .campaign-caption h3 { font-size:27px; }
+  .campaign-caption > p { max-width:34ch; }
+  .campaign-report { gap:17px; margin-top:30px; }
+  .report-art { padding:21px 10%; }
+  .report-paper { max-width:345px; }
+  .report-copy h3 { margin:8px 0 10px; }
+  .report-copy .edition-link { margin-top:9px; }
+  .campaign-process { flex-wrap:wrap; gap:9px 24px; }
+}
