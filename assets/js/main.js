@@ -8,7 +8,7 @@
     businessName: 'Kahnec Hub',
     founderName: 'Kyle Hector',
     bookingLink: '',
-    fallbackBookingHref: 'index.html?service=Strategy%20Call&project_type=Need%20advice%20first#contact',
+    fallbackBookingHref: 'contact.html?service=Strategy%20Call&project_type=Need%20advice%20first#contact',
     responseTimeText: 'within 24 hours',
     contact: {
       email: '',
@@ -361,7 +361,7 @@
     window.matchMedia('(min-width: 801px)').addEventListener('change', () => setOpen(false));
   }
 
-  function setActiveServiceTab(tabName, shouldFocus) {
+  function setActiveServiceTab(tabName, shouldFocus, revealPanel = false) {
     const tabs = Array.from(document.querySelectorAll('[data-tab]'));
     const panels = Array.from(document.querySelectorAll('[data-tab-panel]'));
 
@@ -387,6 +387,11 @@
 
     if (shouldFocus) {
       activeTab.focus({ preventScroll: true });
+    }
+    if (revealPanel) {
+      const activePanel=panels.find(panel=>panel.dataset.tabPanel===activeTabName);
+      const disclosure=activePanel && activePanel.closest('details');
+      if (disclosure) disclosure.open=true;
     }
   }
 
@@ -428,7 +433,7 @@
 
     document.querySelectorAll('[data-open-tab]').forEach((link) => {
       link.addEventListener('click', () => {
-        setActiveServiceTab(link.dataset.openTab, false);
+        setActiveServiceTab(link.dataset.openTab, false, true);
       });
     });
 
@@ -742,7 +747,7 @@
         if (href.hash === '#contact') {
           href.searchParams.set('service', link.dataset.prefillService || 'Not sure yet');
           if (link.dataset.prefillProjectType) href.searchParams.set('project_type',link.dataset.prefillProjectType);
-          if (href.pathname.endsWith('/services.html')) href.pathname = href.pathname.replace(/services\.html$/, 'index.html');
+          if (!href.pathname.endsWith('/contact.html')) href.pathname = href.pathname.replace(/[^/]*$/, 'contact.html');
           link.setAttribute('href',href.pathname+href.search+href.hash);
         }
       }
@@ -1719,9 +1724,10 @@
     function renderResult() {
       const result = getRecommendedResult();
       if (result.href === '#contact' && !document.getElementById('contactForm')) {
-        result.href = 'index.html?service=' + encodeURIComponent(result.prefillService || result.service) + '#contact';
+        result.href = 'contact.html?service=' + encodeURIComponent(result.prefillService || result.service)
+          + (result.prefillProjectType ? '&project_type=' + encodeURIComponent(result.prefillProjectType) : '') + '#contact';
       }
-      if (result.secondaryHref === '#audit') result.secondaryHref = 'index.html#audit';
+      if (result.secondaryHref === '#audit') result.secondaryHref = 'paid-advertising.html#audit';
       setQuizHiddenFields(result);
       setHelperBubbleCopy('Here&rsquo;s your best next move.');
 
@@ -1757,7 +1763,7 @@
           primaryCta.dataset.prefillProjectType = result.prefillProjectType;
         }
         if (result.href === '#contact' && !document.getElementById('contactForm')) {
-          const enquiry = new URL('index.html', window.location.href);
+          const enquiry = new URL('contact.html', window.location.href);
           enquiry.searchParams.set('service', result.prefillService || result.service);
           if (result.prefillProjectType) enquiry.searchParams.set('project_type', result.prefillProjectType);
           enquiry.hash = 'contact';
@@ -1766,7 +1772,7 @@
 
         primaryCta.addEventListener('click', () => {
           if (result.openTab) {
-            setActiveServiceTab(result.openTab, false);
+            setActiveServiceTab(result.openTab, false, true);
           }
           if (result.href === '#contact') {
             applyResultToContact(result);
@@ -2265,7 +2271,7 @@
           // Session storage is optional.
         }
 
-        window.location.href = 'index.html#contact';
+        window.location.href = 'contact.html#contact';
         return;
       }
 

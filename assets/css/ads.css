@@ -1,0 +1,43 @@
+/* Meta Ads and Google Ads: offer, process and paid-media work. Colour and type tokens live in studio.css; motion in motion.css. */
+.ads{padding:88px 0 0}
+.ads-head{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:60px}
+.ads-head h2{font-size:62px;letter-spacing:-.055em;line-height:1.05;margin-top:22px;text-wrap:balance}
+.ads-lede{justify-self:end;max-width:430px}
+.ads-lede p{font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:22px}
+.ads-label{font-size:11px;text-transform:uppercase;letter-spacing:.13em;line-height:1.5;font-weight:500;color:var(--violet);margin-top:64px}
+.ads :is(h4,dl,dd,figure){margin:0}
+.ads h4{font-weight:500}
+
+/* The campaign rail: four steps on one line. */
+.ads-steps{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;position:relative}
+.ads-steps::before,.ads-steps::after{content:'';position:absolute;top:4px;inset-inline:0;border-top:1px solid var(--line)}
+.ads-steps::after{top:3px;border-top:2px solid var(--violet);transform-origin:left;scale:1 1}
+.ads-steps li{position:relative;padding-top:32px}
+.ads-steps li::before{content:'';position:absolute;z-index:1;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 5px var(--paper)}
+.ads-steps li>span{font-size:11px;color:var(--violet)}
+.ads-steps h4{font-size:22px;letter-spacing:-.025em;line-height:1.2;margin:8px 0 10px}
+.ads-steps p{font-size:14px;line-height:1.6;color:var(--muted);max-width:300px}
+
+/* Two pieces of work, each read the same way: objective, what I did, what was delivered. */
+.ads-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px;margin-top:24px}
+.ads-case{min-width:0}
+.ads-media{display:block;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;background:#0d1421}
+.ads-media img{width:100%;height:100%;object-fit:cover;object-position:top}
+.ads-media>span{position:absolute;left:12px;bottom:12px;display:flex;gap:20px;background:var(--paper);color:var(--ink);padding:9px 12px;font-size:11px;border-radius:3px}
+.ads-case-media figcaption{font-size:11px;line-height:1.5;color:var(--muted);padding-top:10px}
+.ads-case-copy{padding-top:20px}
+.ads-case-type{font-size:11px;text-transform:uppercase;letter-spacing:.13em;line-height:1.5;font-weight:500;color:var(--violet)}
+.ads-case-type span{display:inline-block;margin-left:10px;padding-left:12px;border-left:1px solid var(--line);font-weight:400;letter-spacing:.04em;text-transform:none;font-size:12px;color:var(--muted)}
+.ads-case h4{font-size:30px;letter-spacing:-.035em;line-height:1.15;margin:10px 0 18px}
+.ads-case dl{border-top:1px solid var(--line)}
+.ads-case dl>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ads-case dt{font-size:11px;text-transform:uppercase;letter-spacing:.1em;line-height:1.5;color:var(--muted);padding-top:3px}
+.ads-case dd{font-size:14px;line-height:1.6}
+.ads-case .text-link{margin-top:12px}
+.ads-foot{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.ads-foot a{color:var(--ink)}
+
+@media(max-width:1190px){.ads-head{gap:44px}.ads-head h2{font-size:48px}.ads-steps{gap:22px}.ads-steps h4{font-size:20px}.ads-case h4{font-size:26px}.ads-case dl>div{grid-template-columns:92px minmax(0,1fr);gap:12px}}
+@media(max-width:900px){.ads{padding-top:72px}.ads-head{display:block}.ads-head h2{font-size:46px}.ads-lede{max-width:560px;margin-top:22px}.ads-label{margin-top:52px}.ads-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 28px}.ads-steps::before,.ads-steps::after{display:none}.ads-steps li{border-top:1px solid var(--line);padding-top:28px}.ads-steps li::before{top:-5px}.ads-steps p{max-width:none}.ads-case-type span{display:block;margin:4px 0 0;padding:0;border:0}.ads-case dl>div{grid-template-columns:1fr;gap:2px}}
+@media(max-width:760px){.ads{padding-top:54px}.ads-head h2{font-size:40px;margin-top:18px}.ads-lede{max-width:none;margin-top:20px}.ads-lede p{font-size:15px}.ads-label{margin-top:44px}.ads-steps{grid-template-columns:1fr;gap:26px}.ads-cases{grid-template-columns:1fr;gap:44px}.ads-case h4{font-size:26px}.ads-case dl>div{grid-template-columns:92px minmax(0,1fr);gap:12px}.ads-media>span{left:8px;bottom:8px;padding:7px 9px;font-size:10px}.ads-foot{display:block;margin-top:36px;font-size:13px}.ads-foot a{margin-top:8px;font-size:13px}}
+@media(max-width:360px){.ads-head h2{font-size:36px}.ads-case dl>div{grid-template-columns:1fr;gap:2px}}

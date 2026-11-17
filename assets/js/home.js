@@ -107,7 +107,7 @@
     }));
     const applyServiceHash = () => {
       const panel = {'#ai-training':'ai','#learning-work':'learning','#foundations':'marketing','#support':'marketing','#meta-ads':'marketing','#audit':'marketing'}[location.hash];
-      if (panel) show(panel);
+      if (panel && tabs.some(button=>button.dataset.servicePanel===panel)) show(panel);
     };
     applyServiceHash();
     window.addEventListener('hashchange',applyServiceHash);

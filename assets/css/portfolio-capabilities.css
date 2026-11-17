@@ -1,0 +1,57 @@
+.standalone-work .case-ledger-expanded { grid-template-columns:1fr 1fr; gap:32px; }
+.case-ledger-expanded .case-side { grid-template-columns:1fr; gap:32px; }
+.case-ledger-expanded .case-side article,.case-ledger-expanded .case-side article:first-child { padding:26px 0 0; border-top:1px solid #8c729e; }
+.refill-hope-case .case-image-link img,.brand-camp-case .case-image-link img { aspect-ratio:1.6; object-fit:contain; object-position:center; background:#e5ddd7; }
+.case-media { border-top:1px solid #d9ccdf; margin-top:18px; }
+.case-media summary { cursor:pointer; min-height:48px; display:flex; align-items:center; justify-content:space-between; gap:16px; color:#574089; font-size:.94rem; list-style:none; }
+.case-media summary::-webkit-details-marker { display:none; }
+.case-media summary:after { content:'+'; font-size:1.25rem; }
+.case-media[open] summary:after { content:'−'; }
+.case-media ul { list-style:none; padding:0; margin:4px 0 14px; }
+.case-media a { display:inline-flex; gap:10px; align-items:center; min-height:44px; padding:6px 0; color:#574089; font-size:.9rem; line-height:1.5; text-underline-offset:4px; }
+.partner-home .case-media p { font-size:.82rem; }
+.proof-ai-video { padding:36px; border-radius:20px; background:#fcf7ee; }
+.ai-work-layout { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+.partner-home .ai-work-copy .eyebrow { color:#715584; }
+.partner-home .ai-work-copy h3 { margin:14px 0 20px; color:#342352; font-size:2.15rem; line-height:1.15; letter-spacing:-.025em; }
+.partner-home .ai-work-copy p:not(.eyebrow),.ai-work-copy dd { color:#65586d; font-size:1rem; line-height:1.65; }
+.ai-work-copy dl { display:grid; gap:6px; margin:22px 0 16px; }
+.ai-work-copy dt { color:#715584; font-size:.85rem; font-weight:500; }
+.ai-work-copy dd { margin:0 0 12px; }
+.ai-reel-list { color:#342352; }
+.partner-home .ai-reel-heading { color:#342352; font-size:1rem; font-weight:500; margin:0 0 16px; }
+.ai-reel-list ol { list-style:none; padding:0; margin:0; }
+.ai-reel-list li { border-top:1px solid #d9ccdf; }
+.ai-reel-list li:last-child { border-bottom:1px solid #d9ccdf; }
+.ai-reel-list a { display:flex; align-items:center; gap:16px; min-height:100px; padding:18px 4px; color:#342352; text-decoration:none; }
+.ai-reel-number { color:#715584; font-size:.85rem; font-variant-numeric:tabular-nums; }
+.ai-reel-text { flex:1; min-width:0; }
+.ai-reel-text strong { display:block; font-size:1.03rem; line-height:1.4; font-weight:500; }
+.ai-reel-text>span { display:block; color:#65586d; font-size:.85rem; margin-top:5px; }
+.ai-reel-list svg { width:32px; height:32px; flex:none; color:#574089; }
+.ai-reel-list a:hover .ai-reel-text strong { text-decoration:underline; text-underline-offset:4px; }
+.partner-home .ai-reel-note { color:#65586d; font-size:.85rem; line-height:1.6; margin:18px 0 0; }
+.ai-creative-section { background:#dfebe3; }
+.ai-creative-layout { display:grid; grid-template-columns:1fr 1fr; gap:58px; align-items:start; }
+.partner-home .ai-creative-section .eyebrow { color:#37594c; }
+.partner-home .ai-creative-section h2 { margin:16px 0 22px; color:#342352; font-size:2.65rem; line-height:1.1; letter-spacing:-.03em; }
+.partner-home .ai-creative-section p:not(.eyebrow) { color:#43584a; font-size:1rem; line-height:1.65; }
+.partner-home .ai-creative-section .ai-creative-context { margin-top:18px; font-size:.9rem; }
+.ai-creative-scope { border-top:1px solid #adc3b3; padding-top:22px; }
+.partner-home .ai-creative-section .scope-list { margin:18px 0 24px; }
+.ai-creative-actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px 24px; margin-top:26px; }
+.proof-choices button:focus-visible,.ai-reel-list a:focus-visible { outline:3px solid #ad8240; outline-offset:3px; }
+@media(max-width:850px) {
+ .ai-work-layout,.ai-creative-layout { grid-template-columns:1fr; gap:32px; }
+ .standalone-work .case-ledger-expanded { grid-template-columns:1fr; }
+ .ai-reel-list a { min-height:88px; }
+}
+@media(max-width:650px) {
+ .standalone-work .proof-choices button { flex:1 1 0; min-width:0; padding:10px 8px; font-size:.8rem; line-height:1.4; min-height:58px; }
+ .case-ledger-expanded .case-side { grid-template-columns:1fr; gap:0; }
+ .proof-ai-video { padding:24px; }
+ .partner-home .ai-work-copy h3 { font-size:1.9rem; }
+ .ai-reel-list a { gap:12px; }
+ .ai-reel-text strong { font-size:.95rem; }
+ .partner-home .ai-creative-section h2 { font-size:2.15rem; }
+}
