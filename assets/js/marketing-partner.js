@@ -35,6 +35,10 @@
   }));
   const applyHash=()=>{
     if(location.hash==='#ai-video'&&proof){const tab=document.getElementById('proof-tab-ai-video');if(tab){proof.show(tab);document.getElementById('ai-video')?.scrollIntoView({block:'start'});}}
+    if (location.hash === '#proof-websites' && proof) {
+      proof.show(document.getElementById('proof-tab-websites'));
+      document.getElementById('proof-websites').scrollIntoView({block:'start'});
+    }
     if(location.hash==='#how-we-work'){const details=document.getElementById('marketing-process-details');if(details)details.open=true;document.getElementById('how-we-work')?.scrollIntoView({block:'start'});}
     if(location.hash==='#ideas-title'){const details=document.getElementById('idea-net-details');if(details)details.open=true;document.getElementById('ideas-title')?.scrollIntoView({block:'start'});}
     if(['#ai-training','#learning-work','#support','#foundations','#meta-ads','#audit','#custom-projects','#specialist-services'].includes(location.hash)){const disclosure=document.getElementById('specialist-details');if(disclosure)disclosure.open=true;}

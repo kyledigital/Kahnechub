@@ -1,0 +1,97 @@
+.site-pages .standalone-work .proof-websites { padding: 0; background: transparent; }
+
+.website-board {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.5rem, 3.4vw, 3.6rem) clamp(1.6rem, 4.2vw, 4.5rem);
+  border-radius: .6rem;
+  overflow: clip;
+  background: radial-gradient(circle at 1px 1px, #dcc6ff25 .9px, transparent 1.2px) 0 0 / 19px 19px,
+    linear-gradient(135deg, #30203f, #49315e);
+}
+.website-board::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  width: 125%; height: 42%; left: -12%; top: 29%;
+  border: 1px solid #dcd2ed42; border-radius: 50%; rotate: -21deg;
+}
+.website-tools {
+  position: absolute; top: clamp(1rem, 2vw, 1.8rem); left: clamp(1.5rem, 3vw, 3rem);
+  z-index: 2; display: flex; align-items: center; gap: .35rem;
+}
+.website-tools .intro-motion-toggle { border: 0; background: transparent; color: var(--edition-citron); cursor: pointer; }
+.website-tools .intro-motion-toggle:focus-visible { outline-color: var(--edition-paper); }
+.website-format {
+  display: none; min-width: 0; padding: 3px; margin: 0; gap: 3px;
+  color: var(--edition-paper); background: #291d36; border: 1px solid #9c87ae; border-radius: 5px;
+}
+@supports selector(:has(:checked)) { .website-format { display: flex; } }
+.website-format input { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; }
+.website-format label {
+  display: grid; place-items: center; padding: 0 .85rem; min-height: 40px;
+  border-radius: 3px; cursor: pointer; font: 550 .9rem/1 var(--studio-font);
+}
+.website-format input:checked + label { color: var(--edition-ink); background: var(--edition-citron); }
+.website-format input:focus-visible + label { outline: 2px solid var(--edition-paper); outline-offset: 1px; }
+
+.website-cards {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center; column-gap: clamp(2.4rem, 5.2vw, 5.3rem); row-gap: clamp(2rem, 3.1vw, 3.2rem);
+}
+.website-print {
+  position: relative; min-width: 0; transform: rotate(var(--paper-angle));
+  padding: clamp(5px, .65vw, 9px); border-radius: 6px;
+  background: var(--edition-paper); color: var(--edition-ink);
+  box-shadow: 0 3px 5px #190e2638, 0 13px 26px #190e265e;
+}
+.website-vwplus {
+  grid-column: 1; grid-row: 1 / 3; margin-block-start: 2rem;
+  --paper-angle: -2.5deg; --art-ink: #b7a4d1; --card-travel-y: 7px; --card-period: 5.2s;
+}
+.website-decorators {
+  grid-column: 2; grid-row: 1; width: 87%; justify-self: end;
+  --paper-angle: 3deg; --art-ink: #d9c6b9; --card-period: 6.2s; --card-direction: -1; --card-delay: -5s;
+}
+.website-asher {
+  grid-column: 2; grid-row: 2; width: 94%; justify-self: start;
+  --paper-angle: -1.6deg; --art-ink: #abc6b9; --card-period: 5.8s; --card-delay: -8s;
+}
+.website-print > a { display: block; border-radius: 3px; color: inherit; text-decoration: none; }
+.website-print:has(a:is(:hover,:focus-visible)) { outline: 3px solid var(--edition-citron); outline-offset: 1px; }
+.website-print > a:focus-visible { outline: 2px solid var(--edition-ink); outline-offset: 1px; }
+
+.website-art {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 3px;
+  aspect-ratio: 1.63; background: var(--art-ink);
+}
+.website-art img { position: absolute; height: auto; box-shadow: 0 4px 10px #20192445; }
+.website-desktop { width: 82%; left: 4%; top: 6%; border-radius: 3px; }
+.website-mobile { width: 23%; right: 4%; bottom: 5%; border: 2px solid #29232f; border-radius: 6px; }
+.website-board:has(#web-mobile:checked) .website-art { aspect-ratio: 1.38; }
+.website-board:has(#web-mobile:checked) .website-desktop { width: 60%; left: -9%; top: 22%; opacity: .55; }
+.website-board:has(#web-mobile:checked) .website-mobile { height: 93%; width: auto; right: 22%; bottom: 3%; }
+
+.website-caption {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .4rem 1rem;
+  padding: clamp(.65rem, 1vw, 1.05rem) clamp(.45rem, .65vw, .75rem) .55rem;
+}
+.site-pages .website-caption h3 {
+  margin: 0; font: 550 clamp(1.25rem, 2.15vw, 2rem)/1.08 var(--studio-font);
+  letter-spacing: -.045em; color: var(--edition-ink);
+}
+.site-pages .website-caption p {
+  grid-column: 1 / -1; max-width: 44ch; margin: 0;
+  font: 400 clamp(1rem, 1.25vw, 1.15rem)/1.37 var(--studio-font); color: var(--edition-muted);
+}
+.website-visit {
+  display: grid; place-items: center; width: 1.85rem; aspect-ratio: 1;
+  border-radius: 50%; background: var(--edition-citron); color: var(--edition-ink); font: 600 1.1rem/1 var(--studio-font);
+}
+@media (max-width: 720px) {
+  .website-board { padding: 1rem clamp(1rem, 4.5vw, 1.9rem) 1.7rem; }
+  .website-tools { position: relative; top: auto; left: auto; width: fit-content; margin-bottom: 1.45rem; }
+  .website-cards { grid-template-columns: minmax(0, 1fr); gap: 1.65rem; }
+  .website-print { grid-column: 1; grid-row: auto; width: 95%; margin: 0; --card-travel-y: 2.5px; }
+  .website-vwplus { --paper-angle: -1.3deg; }
+  .website-decorators { --paper-angle: 1.5deg; }
+  .website-asher { --paper-angle: -.8deg; }
+}

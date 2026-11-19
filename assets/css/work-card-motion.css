@@ -1,0 +1,47 @@
+@media (prefers-reduced-motion: no-preference) {
+  .standalone-work {
+    --card-travel-x: 2.5px;
+    --card-travel-y: 5.5px;
+    --card-angle: .65deg;
+  }
+
+  [data-background-motion="running"] .standalone-work:not(.motion-idle) {
+    --work-motion-state: running;
+  }
+
+  .standalone-work :is(.case-ledger article, .ai-reel-list li, .website-print) {
+    animation: work-card-float var(--card-period, 5.4s) ease-in-out var(--card-delay, -1.8s)
+      infinite alternate var(--work-motion-state, paused);
+  }
+  .standalone-work :is(.case-feature, .ai-reel-list li):nth-child(even),
+  .standalone-work .case-side {
+    --card-direction: -1;
+    --card-period: 6.1s;
+    --card-delay: -4.8s;
+  }
+  .standalone-work :is(.case-feature, .ai-reel-list li):nth-child(3) {
+    --card-period: 5.8s;
+    --card-delay: -7.5s;
+  }
+  .standalone-work .ai-reel-list li:nth-child(4) { --card-delay: -9s; }
+
+  .standalone-work :is(article, .ai-reel-list li):is(:focus-within, :active),
+  .standalone-work article:has(details[open]) { --work-motion-state: paused; }
+  @media (hover: hover) and (pointer: fine) {
+    .standalone-work :is(article, .ai-reel-list li):hover { --work-motion-state: paused; }
+  }
+  @media (max-width: 760px) {
+    .standalone-work { --card-travel-x: 1px; --card-travel-y: 2.5px; --card-angle: .35deg; }
+  }
+
+  @keyframes work-card-float {
+    from {
+      translate: calc(-1 * var(--card-direction, 1) * var(--card-travel-x)) var(--card-travel-y);
+      rotate: calc(-1 * var(--card-direction, 1) * var(--card-angle));
+    }
+    to {
+      translate: calc(var(--card-direction, 1) * var(--card-travel-x)) calc(-1 * var(--card-travel-y));
+      rotate: calc(var(--card-direction, 1) * var(--card-angle));
+    }
+  }
+}
