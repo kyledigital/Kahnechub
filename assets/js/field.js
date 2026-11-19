@@ -4,9 +4,9 @@
   // Its logic comes from the Kahnec mark: points, with a few joined by lines. Decorative only.
   const holder = document.querySelector('.studio-field');
   const canvas = holder && holder.querySelector('canvas');
-  const toggle = document.querySelector('.field-toggle');
-  if (!canvas || !canvas.getContext) return;
-  const context = canvas.getContext('2d');
+  const toggles = document.querySelectorAll('[data-background-toggle]');
+  if (!canvas && !toggles.length) return;
+  const context = canvas?.getContext('2d');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const small = matchMedia('(max-width: 760px)');
   const CYCLE = 20000; // one full undulation, in milliseconds
@@ -87,24 +87,30 @@
   }
   function sync() {
     const run = shouldRun();
-    holder.dataset.state = run ? 'running' : 'still';
+    if (holder) holder.dataset.state = run ? 'running' : 'still';
     if (run && !frame) { last = performance.now(); frame = requestAnimationFrame(tick); }
     if (!run && frame) { cancelAnimationFrame(frame); frame = 0; }
-    if (toggle) {
-      toggle.hidden = reduceMotion.matches; // nothing to pause when the field is already still
-      toggle.textContent = paused ? 'Play background' : 'Pause background';
+    const still = paused || reduceMotion.matches || document.hidden;
+    document.documentElement.dataset.backgroundMotion = still ? 'paused' : 'running';
+    const label = paused ? 'Resume ambient motion' : 'Pause ambient motion';
+    for (const toggle of toggles) {
+      toggle.hidden = reduceMotion.matches;
+      toggle.textContent = label;
+      toggle.title = label;
     }
   }
 
-  if (toggle) toggle.addEventListener('click', () => {
+  for (const toggle of toggles) toggle.addEventListener('click', () => {
     paused = !paused;
     try { sessionStorage.setItem('kahnecField', paused ? 'paused' : 'running'); } catch (error) { /* storage is optional */ }
     sync();
   });
-  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(holder); else addEventListener('resize', resize);
-  if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) resize(); sync(); }).observe(holder); else visible = true;
   document.addEventListener('visibilitychange', sync);
   reduceMotion.addEventListener('change', sync);
-  resize();
+  if (context) {
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(holder); else addEventListener('resize', resize);
+    if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) resize(); sync(); }).observe(holder); else visible = true;
+    resize();
+  }
   sync();
 })();

@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const videos = {"national-v9": {"title": "National Value Pack", "category": "Brand campaign", "duration": "0:32", "group": "brand"}, "commerce-short": {"title": "Shop closed. Still selling.", "category": "Commerce campaign", "duration": "0:30", "group": "brand"}, "cyber": {"title": "Enersave · Cyber Monday", "category": "Promotional video", "duration": "0:20", "group": "brand"}, "plant-a": {"title": "Arbor Day · Plant Fair", "category": "Social animation · Film 01", "duration": "0:36", "group": "animation", "portrait": true}, "plant-b": {"title": "Arbor Day · Plant Fair", "category": "Social animation · Film 02", "duration": "0:39", "group": "animation", "portrait": true}, "gift": {"title": "Enersave · Gift Pays Back", "category": "Seasonal animation", "duration": "0:30", "group": "animation"}, "yello": {"title": "Yello Commerce", "category": "Product film", "duration": "1:00", "group": "brand"}, "enersave": {"title": "Enersave · Two Dads", "category": "Animated explainer", "duration": "0:30", "group": "animation"}, "signal": {"title": "Signal Flo", "category": "Brand motion", "duration": "0:55", "group": "animation", "portrait": true}, "antigua": {"title": "Life in Antigua", "category": "Travel film", "duration": "1:02", "group": "stories", "portrait": true}, "hummingbird": {"title": "Hummingbird", "category": "Nature storytelling", "duration": "1:29", "group": "stories", "portrait": true}};
+  const videos = {"kahnec-studio-showreel": {"title": "Kahnec studio showreel", "category": "Studio portfolio", "duration": "0:43"}, "national-v9": {"title": "National Value Pack", "category": "Brand campaign", "duration": "0:32", "group": "brand"}, "commerce-short": {"title": "Shop closed. Still selling.", "category": "Commerce campaign", "duration": "0:30", "group": "brand"}, "cyber": {"title": "Enersave · Cyber Monday", "category": "Promotional video", "duration": "0:20", "group": "brand"}, "plant-a": {"title": "Arbor Day · Plant Fair", "category": "Social animation · Film 01", "duration": "0:36", "group": "animation", "portrait": true}, "plant-b": {"title": "Arbor Day · Plant Fair", "category": "Social animation · Film 02", "duration": "0:39", "group": "animation", "portrait": true}, "gift": {"title": "Enersave · Gift Pays Back", "category": "Seasonal animation", "duration": "0:30", "group": "animation"}, "yello": {"title": "Yello Commerce", "category": "Product film", "duration": "1:00", "group": "brand"}, "enersave": {"title": "Enersave · Two Dads", "category": "Animated explainer", "duration": "0:30", "group": "animation"}, "signal": {"title": "Signal Flo", "category": "Brand motion", "duration": "0:55", "group": "animation", "portrait": true}, "antigua": {"title": "Life in Antigua", "category": "Travel film", "duration": "1:02", "group": "stories", "portrait": true}, "hummingbird": {"title": "Hummingbird", "category": "Nature storytelling", "duration": "1:29", "group": "stories", "portrait": true}};
   const dialog=document.querySelector('#video-dialog'),slot=document.querySelector('#player-slot');
   let trigger=null;
   document.querySelectorAll('[data-video]').forEach(button=>button.addEventListener('click',()=>{
@@ -91,7 +91,13 @@
   // A drag never opens a project.
   stage.addEventListener('click',e=>{if(moved&&e.detail!==0){e.preventDefault();e.stopImmediatePropagation();moved=false;}},true);
   // Nothing responds while the gallery is off screen, the tab is hidden, or the layout or motion preference changes.
-  if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{stageVisible=entry.isIntersecting;if(!stageVisible)clearPointer();}).observe(stage);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      stageVisible = entry.isIntersecting;
+      stage.toggleAttribute('data-offscreen', !stageVisible);
+      if (!stageVisible) clearPointer();
+    }).observe(stage);
+  }
   document.addEventListener('visibilitychange',()=>{if(document.hidden)reset();});
   reduceMotion.addEventListener('change',reset);narrow.addEventListener('change',reset);
 

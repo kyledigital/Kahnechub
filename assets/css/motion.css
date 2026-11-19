@@ -1,7 +1,7 @@
 /* Kahnec motion system. One vocabulary for the whole page:
    rise (text arrives), settle (work lands), wipe (media is revealed), spring (things let go).
    Everything spatial sits inside prefers-reduced-motion:no-preference, so the reduced-motion page is static.
-   Only transform-family properties, opacity and clip-path move. Nothing loops. */
+   Only transform-family properties, opacity and clip-path move. */
 :root{
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-in-out:cubic-bezier(.65,0,.35,1);
@@ -18,6 +18,7 @@
 /* Gallery depth. Nearer work travels further when the pointer or a drag moves the table. */
 .project-3{--depth:1.3;--order:0;--from-y:46px}
 .project-0{--depth:.85;--order:1;--from-x:-34px;--from-y:26px;--from-r:-3deg}
+.project-6{--depth:.8;--order:2;--from-y:26px;--from-r:-2deg}
 .project-1{--depth:.6;--order:2;--from-x:38px;--from-y:22px;--from-r:4deg}
 .project-2{--depth:1.1;--order:3;--from-x:-40px;--from-y:34px;--from-r:-4deg}
 .project-4{--depth:.95;--order:4;--from-x:-22px;--from-y:48px;--from-r:3deg}
@@ -50,13 +51,71 @@ nav a,.text-link,.capability-cta,.capability-footer a,footer a{transition:color 
   .intro>.eyebrow,.intro-copy,.intro-detail,.intro>.primary,.person{animation:rise-in .64s var(--ease-out) backwards;animation-delay:calc(var(--opening,0s) + var(--order,0)*var(--stagger))}
   .intro-copy{--order:2}.intro-detail{--order:3}.intro>.primary{--order:4}.person{--order:5}
   .work-heading{animation:fade-in .6s ease-out calc(var(--opening,0s) + .26s) backwards}
-  .stage>.project{animation:settle-in .76s var(--ease-out) backwards;animation-delay:calc(var(--opening,0s) + .3s + var(--order,0)*var(--stagger))}
+  .stage > .project {
+    --project-entrance: settle-in .76s var(--ease-out) calc(var(--opening,0s) + .3s + var(--order,0)*var(--stagger)) backwards;
+    animation: var(--project-entrance);
+  }
   .gallery-controls{animation:fade-in .6s ease-out calc(var(--opening,0s) + .85s) backwards}
 
   /* 2. Living gallery. Pointer follow is eased; a drag tracks directly; release springs home. */
   .project{transition:translate .5s var(--ease-out)}
   .stage.dragging .project{transition:none}
   .stage.settling .project{transition:translate .9s var(--ease-spring)}
+
+  /* The whole card floats, including its caption and hit area. Pointer and drag still own translate. */
+  @supports (animation-composition: add) {
+    .gallery .stage {
+      --float-width: 4.5px;
+      --float-height: 9px;
+      --float-angle: 1.35deg;
+    }
+    .gallery .stage > .project {
+      --float-x: calc(var(--float-width) * var(--depth, 1) * var(--float-direction, 1));
+      --float-y: calc(var(--float-height) * var(--depth, 1));
+      --float-duration: calc(3.5s + 1.8s * var(--depth, 1));
+      --float-delay: calc(-1.65s * var(--order, 0) - 2s * var(--depth, 1));
+      --project-float: project-float var(--float-duration) ease-in-out var(--float-delay) infinite alternate var(--float-state, var(--ambient-state, paused));
+      animation: var(--project-entrance), var(--project-float);
+      animation-composition: replace, add;
+    }
+    .gallery .project:nth-child(even) { --float-direction: -1; }
+    .gallery :is(.project-0, .project-2, .project-5) {
+      --float-tilt: calc(var(--float-angle) * var(--float-direction, 1));
+    }
+    .gallery .stage:is(.dragging, [data-offscreen]),
+    .gallery .project:is(:focus-visible, :active) { --float-state: paused; }
+    @media (hover: hover) and (pointer: fine) {
+      .gallery .project:hover { --float-state: paused; }
+    }
+    @media (max-width: 760px) {
+      .gallery .stage { --float-width: 1.6px; --float-height: 3.5px; --float-angle: .6deg; }
+    }
+    @keyframes project-float {
+      from { transform: translate(calc(-1 * var(--float-x)), var(--float-y)) rotate(calc(-1 * var(--float-tilt, 0deg))); }
+      to { transform: translate(var(--float-x), calc(-1 * var(--float-y))) rotate(var(--float-tilt, 0deg)); }
+    }
+  }
+
+  /* Scroll displacement adds to the entrance and idle motion on its own timeline. */
+  @supports (animation-timeline: view()) and (animation-range: entry) and (animation-composition: add) {
+    .gallery .stage {
+      view-timeline: --gallery-scroll block;
+      --gallery-travel: 72px;
+    }
+    .gallery .stage > .project {
+      animation: var(--project-entrance), var(--project-float), gallery-drift auto linear both;
+      animation-timeline: auto, auto, --gallery-scroll;
+      animation-range: normal, normal, entry 72% exit 82%;
+      animation-composition: replace, add, add;
+    }
+    @keyframes gallery-drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(calc((1 - var(--depth, 1)) * var(--gallery-travel))); }
+    }
+    @media (max-width: 760px) {
+      .gallery .stage { --gallery-travel: 18px; }
+    }
+  }
 
   /* 5. Details: buttons lift slightly, and press back down. */
   .primary:active{scale:.985;box-shadow:none}
