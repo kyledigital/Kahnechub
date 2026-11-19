@@ -1486,7 +1486,7 @@
         nextStep: 'Review the social and content support options.',
         price: 'by scope',
         cta: 'See Social and Content Help',
-        href: '#services',
+        href: '#panel-monthly-support',
         openTab: 'monthly-support'
       },
       content: {

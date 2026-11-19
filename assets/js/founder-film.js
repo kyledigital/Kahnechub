@@ -1,6 +1,6 @@
 (() => {
-  const trigger = document.querySelector('.founder-film-link');
-  const dialog = document.getElementById('founder-film-player');
+  const trigger = document.querySelector('[data-project-film], .founder-film-link');
+  const dialog = document.getElementById(trigger?.dataset.projectFilm || 'founder-film-player');
   if (!trigger || !dialog) return;
 
   const preview = trigger.querySelector('.founder-film-loop');
@@ -47,7 +47,7 @@
     error.hidden = true;
     dialog.showModal();
     syncPreview();
-    player.poster = 'assets/video-review/signal-800.webp';
+    if (!player.hasAttribute('poster')) player.poster = 'assets/video-review/signal-800.webp';
     player.src = trigger.href;
     player.play().catch(() => { /* Native controls also support manual playback. */ });
   });
