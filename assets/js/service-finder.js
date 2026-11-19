@@ -37,7 +37,7 @@
     decorators:{name:'New Best Decorators',description:'A visual service guide with a route to an estimate.',image:'assets/images/projects/decorators-desktop-720.webp',url:'https://newbestdecorators.kahnec.com/'},
     asher:{name:"Asher's Fleet",description:'A vehicle showcase with a clear enquiry route.',image:'assets/images/projects/asher-desktop-720.webp',url:'https://ashers-fleet.vercel.app/'},
     learning:{name:'Yello Academy',description:'Ongoing prototype, developed in my role at Yello Media Group.',image:'assets/images/projects/sales-academy.webp',url:'https://yello-media-stakeholder-report.vercel.app/training'},
-    kyle:{name:'Kyle Hector',description:'Explore the work and background of the person you would work with.',image:'assets/images/kyle-hector-400.webp',url:'https://kylehector.com'}
+    kyle:{name:'Kyle Hector',description:'Explore the work and background of the person you would work with.',image:'assets/images/kyle-hector-open-avatar.webp',url:'https://kylehector.com'}
   };
   const recommendations = {
     concept:{title:'Develop your creative strategy and concept',reason:'We can find a content opportunity, shape the story and picture your campaign before production. The scope can include messaging, a moodboard, storyboard or creative brief.',service:'Creative Strategy & Concept Development',proof:'kyle'},

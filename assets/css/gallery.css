@@ -156,6 +156,19 @@
 .opening .project p, .opening .caption, .opening .gallery-help,
 .opening .founder-certificate small, .opening .founder-certificate .verify-text { color: var(--gallery-light); }
 .opening .studio-signature, .opening .list .project { border-color: #d7c4eb50; }
+.opening .studio-signature > img {
+  width: clamp(3.6rem, 5vw, 4.75rem);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--edition-lilac);
+}
+.opening .studio-signature .founder-certificate { gap: .55rem; margin-top: .35rem; }
+.opening .studio-signature .founder-certificate img { width: 2.25rem; height: 2.25rem; }
+.opening .studio-signature .founder-certificate strong { font-size: .92rem; }
+.opening .studio-signature .founder-certificate small,
+.opening .studio-signature .verify-text { font-size: .82rem; }
+.opening .studio-signature .verify-text { color: var(--edition-citron); }
 .opening :is(a, button):focus-visible { outline-color: var(--edition-citron); }
 .opening .view-switch { background: #291e3a; border-color: #ac94bd; }
 .opening .view-switch button { color: var(--edition-paper); }
