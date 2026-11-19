@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const panel = document.getElementById('proof-ai-video');
+  const panel = document.querySelector('[data-reel-previews], #proof-ai-video');
   if (!panel) return;
 
   const root = document.documentElement;
@@ -23,7 +23,7 @@
   async function play(item, explicit) {
     stop();
     if (document.hidden || panel.hidden) return;
-    if (!explicit && (reduced.matches || root.dataset.backgroundMotion !== 'running' || navigator.connection?.saveData)) return;
+    if (!explicit && (reduced.matches || root.dataset.backgroundMotion === 'paused' || navigator.connection?.saveData)) return;
 
     const { card, video, button, title } = item;
     const attempt = { ...item };
