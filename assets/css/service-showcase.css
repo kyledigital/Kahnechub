@@ -17,12 +17,6 @@
   letter-spacing: -.06em;
 }
 #services-title em { font-style: normal; color: var(--edition-citron); }
-.service-showcase-head p {
-  max-width: 48ch;
-  margin: .75rem 0 0;
-  color: #eddfec;
-  font: 400 var(--type-body)/1.45 var(--studio-font);
-}
 .service-match-link {
   flex: none;
   display: inline-flex;
@@ -164,9 +158,9 @@
 }
 @media (max-width: 40rem) {
   .service-showcase { padding-top: 1.45rem; }
-  .service-showcase-head { display: block; margin-bottom: .8rem; }
-  .service-showcase-head p { max-width: 34ch; margin-top: .55rem; }
-  .service-match-link { margin-top: .15rem; }
+  .service-showcase-head { display: block; margin-bottom: 1.4rem; }
+  /* The guide opens directly below the three examples on small screens. */
+  .service-match-link { display: none; }
   .pair-info h2 a { line-height: 1.1; }
   .pair-info h2 a span { white-space: nowrap; }
   .pair-info p { line-height: 1.32; }

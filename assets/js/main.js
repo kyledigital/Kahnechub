@@ -1371,8 +1371,6 @@
     const optionsElement = root.querySelector('[data-match-options]');
     const stepLabel = root.querySelector('[data-match-step-label]');
     const progress = root.querySelector('[data-match-progress]');
-    const helperBubble = root.querySelector('[data-match-helper-bubble]');
-    const inlineHelper = root.querySelector('[data-match-inline-helper]');
 
     const steps = [
       {
@@ -1383,13 +1381,13 @@
           ['google', 'Be found on Google'],
           ['youtube', 'Be seen on YouTube'],
           ['leads', 'Get more leads'],
-          ['social', 'Improve social media visibility'],
+          ['social', 'Reach more people on social media'],
           ['content', 'Get content to post'],
-          ['concept', 'Develop content ideas or a campaign concept'],
+          ['concept', 'Plan a campaign or content idea'],
           ['landing', 'Build a landing page'],
-          ['deck', 'Create a deck or proposal'],
-          ['ongoing', 'Get ongoing marketing support'],
-          ['unsure', 'I am not sure yet']
+          ['deck', 'Make a pitch deck or proposal'],
+          ['ongoing', 'Get monthly marketing help'],
+          ['unsure', 'Not sure yet']
         ]
       },
       {
@@ -1398,17 +1396,17 @@
         allowMultiple: true,
         options: [
           ['advice', 'I need advice first'],
-          ['launch', 'I am launching something'],
-          ['offer', 'I already have an offer'],
-          ['running_ads', 'I am already running ads'],
-          ['have_content', 'I have footage or content already'],
+          ['launch', 'Planning a launch'],
+          ['offer', 'My offer is ready'],
+          ['running_ads', 'Already running ads'],
+          ['have_content', 'I have content or footage'],
           ['built', 'I need something built'],
           ['monthly', 'I need monthly help']
         ]
       },
       {
         key: 'need',
-        question: 'What do you need most right now?',
+        question: 'What would help most?',
         allowMultiple: true,
         options: [
           ['plan', 'A clear plan'],
@@ -1439,129 +1437,83 @@
     const results = {
       concept: {
         service: 'Creative Strategy & Concept Development',
-        copy: 'Find a content opportunity, develop a campaign idea and visualise the direction before production.',
-        why: 'You need a story or creative direction to turn an early thought or launch into a clear concept.',
-        nextStep: 'Share the challenge, audience and any thoughts you already have. We can agree a focused creative brief.',
-        price: 'quoted by scope',
-        cta: 'Let’s Develop Your Idea',
+        copy: 'I’ll help you choose a campaign idea and sketch the brief before you spend on production.',
+        cta: 'Discuss a campaign idea',
         href: '#contact',
         prefillService: 'Creative Strategy & Concept Development',
         prefillProjectType: 'Project based work'
       },
       google: {
         service: 'Google Ads Help',
-        copy: 'Best for search visibility, campaign setup, account reviews, and ongoing Google Ads support.',
-        why: 'You want more search visibility and need a clearer campaign path before spending more.',
-        nextStep: 'Book a Google Ads session or view the service page.',
-        price: 'quoted by scope',
-        cta: 'View Google Ads Help',
+        copy: 'I can review your Google Ads account, set up a search campaign or manage one month to month.',
+        cta: 'Explore Google Ads help',
         href: 'google-ads-help.html'
       },
       youtube: {
-        service: 'YouTube Ads Support via Google Ads Help',
-        copy: 'Best for building awareness with video campaigns and getting your business in front of more people.',
-        why: 'You want video visibility, so the best route is a Google Ads conversation focused on YouTube campaign direction.',
-        nextStep: 'Send an enquiry and we can shape the right YouTube Ads starting point.',
-        price: 'quoted by scope',
-        cta: 'Ask About YouTube Ads',
+        service: 'YouTube ads',
+        copy: 'I can help you plan a YouTube campaign and set it up in Google Ads.',
+        cta: 'Ask about YouTube ads',
         href: '#contact',
         prefillService: 'Google Ads Walkthrough',
         prefillProjectType: 'Need advice first'
       },
       leads: {
         service: 'Lead Generation Setup',
-        copy: 'Best for combining a clear landing page with Google or Meta campaign support.',
-        why: 'You want more enquiries, so the next move is to tighten the route from attention to action.',
-        nextStep: 'Start with a clear landing page or campaign enquiry.',
-        price: 'quoted by scope',
-        cta: 'Start Lead Generation Enquiry',
+        copy: 'I can build a landing page for your offer and connect it to your Google or Meta ads.',
+        cta: 'Discuss lead generation',
         href: '#contact',
         prefillService: 'Landing Page Setup',
         prefillProjectType: 'Project based work'
       },
       social: {
         service: 'Meta Ads and Content Support',
-        copy: 'Best for Facebook and Instagram campaigns, creative direction, and content support.',
-        why: 'You want better social visibility, so the best fit is support across Meta Ads, creative direction, and content.',
-        nextStep: 'Review the social and content support options.',
-        price: 'by scope',
-        cta: 'See Social and Content Help',
+        copy: 'I can plan your Facebook and Instagram posts and manage the ads that run alongside them.',
+        cta: 'See monthly support',
         href: '#panel-monthly-support',
         openTab: 'monthly-support'
       },
       content: {
         service: 'Brand Content Kit',
-        copy: 'Best for short form videos, content shoots, and social ready assets.',
-        why: 'You need content you can actually post, so a compact batch of brand assets is the strongest starting point.',
-        nextStep: 'Send a content enquiry and we can shape the shoot or asset list.',
-        price: 'quoted by scope',
-        cta: 'Ask About Brand Content Kit',
+        copy: 'One shoot can give you a batch of short videos and posts for your calendar.',
+        cta: 'Discuss a content kit',
         href: '#contact',
         prefillService: 'Brand Content Kit',
         prefillProjectType: 'Project based work'
       },
       landing: {
         service: 'Landing Page Setup',
-        copy: 'Best for launches, offers, lead forms, WhatsApp enquiries, and simple service pages.',
-        why: 'You need somewhere focused to send traffic, explain the offer, and collect enquiries.',
-        nextStep: 'Request a landing page and share the offer you want to promote.',
-        price: 'quoted by scope',
-        cta: 'Request a Landing Page',
+        copy: 'Give people one page to read about your offer and send an enquiry by form or WhatsApp.',
+        cta: 'Discuss a landing page',
         href: '#contact',
         prefillService: 'Landing Page Setup',
         prefillProjectType: 'Project based work'
       },
       deck: {
         service: 'Presentation Deck Design',
-        copy: 'Best for pitch decks, reports, proposals, internal meetings, and business presentations.',
-        why: 'You need to turn rough notes or ideas into a deck that is easier to present and understand.',
-        nextStep: 'View the deck service page and share the deck you need cleaned up or built.',
-        price: 'quoted by scope',
-        cta: 'View Deck Design',
+        copy: 'I can shape your notes and slides into a pitch, report or proposal.',
+        cta: 'See deck design',
         href: 'presentation-deck-design.html'
       },
       ongoing: {
         service: 'Ongoing Marketing Support',
-        copy: 'Best for monthly help with ads, content planning, reporting, and next steps.',
-        why: 'You need consistent support rather than a one off fix, so monthly marketing support is the better path.',
-        nextStep: 'Ask about monthly support and share what you want help with first.',
-        price: 'by scope',
-        cta: 'Ask About Monthly Support',
+        copy: 'We’ll plan the month together. I can make the content, run the ads and report on the work.',
+        cta: 'Discuss monthly support',
         href: '#contact',
         prefillService: 'Ongoing Marketing Support',
         prefillProjectType: 'Monthly support'
       },
       strategy: {
         service: 'Strategy Session or Marketing Audit',
-        copy: 'Best if you need help deciding what to fix, build, or promote first.',
-        why: 'You are still deciding the best move, so clarity should come before more spend.',
-        nextStep: 'Book a strategy session or start with an audit.',
-        price: 'quoted by scope',
-        cta: 'Book a Strategy Session',
+        copy: 'Bring the marketing question you want to work through, or ask me to review the work already running.',
+        cta: 'Book a strategy session',
         href: 'strategy-call.html#contact',
-        secondaryCta: 'Start with an Audit',
+        secondaryCta: 'Ask about an audit',
         secondaryHref: '#audit'
       }
     };
 
     const answers = {};
     let currentStep = 0;
-
-    const helperBubbleCopy = [
-      'What are you trying to grow?',
-      'Nice. I&rsquo;m learning what your business needs.',
-      'Almost there. Let&rsquo;s narrow it down.',
-      'Got it. Let&rsquo;s find your best move.'
-    ];
-
-    function setHelperBubbleCopy(copy) {
-      if (helperBubble) {
-        helperBubble.innerHTML = copy;
-      }
-      if (inlineHelper) {
-        inlineHelper.innerHTML = copy;
-      }
-    }
 
     function getOptionLabel(stepKey, value) {
       const step = steps.find((item) => item.key === stepKey);
@@ -1669,9 +1621,7 @@
     function renderStep() {
       const step = steps[currentStep];
       const selectedValues = getAnswerValues(step.key);
-      const selectedLabel = selectedValues.length === 1 ? '1 selected' : `${selectedValues.length} selected`;
 
-      setHelperBubbleCopy(helperBubbleCopy[currentStep] || helperBubbleCopy[0]);
       stepLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
       progress.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
       questionElement.textContent = step.question;
@@ -1679,7 +1629,7 @@
         matchHint.textContent = step.allowMultiple ? 'Choose one or more.' : 'Choose one.';
       }
       if (selectedCount) {
-        selectedCount.textContent = selectedValues.length ? selectedLabel : 'No selections yet';
+        selectedCount.textContent = step.allowMultiple && selectedValues.length ? `${selectedValues.length} selected` : '';
       }
       optionsElement.innerHTML = '';
 
@@ -1718,7 +1668,7 @@
 
       backButton.disabled = currentStep === 0;
       nextButton.disabled = !getAnswerValues(step.key).length;
-      nextButton.textContent = currentStep === steps.length - 1 ? 'See My Match' : 'Next';
+      nextButton.textContent = currentStep === steps.length - 1 ? 'See my match' : 'Next';
     }
 
     function renderResult() {
@@ -1729,25 +1679,18 @@
       }
       if (result.secondaryHref === '#audit') result.secondaryHref = 'paid-advertising.html#audit';
       setQuizHiddenFields(result);
-      setHelperBubbleCopy('Here&rsquo;s your best next move.');
 
       quiz.hidden = true;
       resultContainer.hidden = false;
       resultContainer.innerHTML = `
         <div class="match-result-card">
-          <span class="match-result-label">You unlocked your best next move.</span>
           <h3>${result.service}</h3>
           <p>${result.copy}</p>
-          <ul>
-            <li><strong>Why this fits:</strong> ${result.why}</li>
-            <li><strong>Best next step:</strong> ${result.nextStep}</li>
-            <li><strong>Scope and quote:</strong> ${result.price}</li>
-          </ul>
           <div class="match-result-actions">
             <a class="match-result-primary" href="${result.href}" data-match-primary>${result.cta} &rarr;</a>
             ${result.secondaryCta ? `<a class="match-result-secondary" href="${result.secondaryHref}">${result.secondaryCta}</a>` : ''}
           </div>
-          <button type="button" class="match-retake" data-match-retake>Retake Match</button>
+          <button type="button" class="match-retake" data-match-retake>Start again</button>
         </div>
       `;
 
