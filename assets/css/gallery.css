@@ -151,25 +151,25 @@
 .opening h1 em, .opening .eyebrow { color: var(--edition-lilac); }
 .opening .intro > .eyebrow, .opening .work-heading .eyebrow { color: var(--edition-citron); }
 .opening h1 em::after { inset-block-end: .005em; block-size: .115em; }
-.opening .intro-actions .edition-link, .opening .meet-name,
-.opening .founder-certificate, .opening .project { color: var(--edition-paper); }
-.opening .project p, .opening .caption, .opening .gallery-help,
-.opening .founder-certificate small, .opening .founder-certificate .verify-text { color: var(--gallery-light); }
-.opening .studio-signature, .opening .list .project { border-color: #d7c4eb50; }
-.opening .studio-signature > img {
+.opening .intro-actions .edition-link, .closing .meet-name,
+.closing .founder-certificate, .opening .project { color: var(--edition-paper); }
+.opening .project p, .opening .caption, .opening .gallery-help { color: var(--gallery-light); }
+.closing .founder-certificate small { color: var(--edition-lilac); }
+.closing .studio-signature, .opening .list .project { border-color: #d7c4eb50; }
+.closing .studio-signature > img {
   width: clamp(3.6rem, 5vw, 4.75rem);
   height: auto;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--edition-lilac);
 }
-.opening .studio-signature .founder-certificate { gap: .55rem; margin-top: .35rem; }
-.opening .studio-signature .founder-certificate img { width: 2.25rem; height: 2.25rem; }
-.opening .studio-signature .founder-certificate strong { font-size: .92rem; }
-.opening .studio-signature .founder-certificate small,
-.opening .studio-signature .verify-text { font-size: .82rem; }
-.opening .studio-signature .verify-text { color: var(--edition-citron); }
-.opening :is(a, button):focus-visible { outline-color: var(--edition-citron); }
+.closing .studio-signature .founder-certificate { gap: .55rem; margin-top: .35rem; }
+.closing .studio-signature .founder-certificate img { width: 2.25rem; height: 2.25rem; }
+.closing .studio-signature .founder-certificate strong { font-size: .92rem; }
+.closing .studio-signature .founder-certificate small,
+.closing .studio-signature .verify-text { font-size: .82rem; }
+.closing .studio-signature .verify-text { color: var(--edition-citron); }
+.closing .studio-signature a:focus-visible, .opening :is(a, button):focus-visible { outline-color: var(--edition-citron); }
 .opening .view-switch { background: #291e3a; border-color: #ac94bd; }
 .opening .view-switch button { color: var(--edition-paper); }
 .opening .view-switch button[aria-pressed="true"] { background: var(--edition-citron); color: var(--edition-ink); }
